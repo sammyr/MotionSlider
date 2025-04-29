@@ -8,7 +8,13 @@
 #include <QString>
 #include <QVBoxLayout>
 #include <QToolBar>
+#include <QAction>
+#include <QSlider>
 #include <QAudioOutput> // Für Audio-Unterstützung
+#include <QPixmap>
+#include <QToolButton>
+#include <QClipboard>
+#include <QGuiApplication>
 
 class MediaViewerPanel : public QWidget {
     Q_OBJECT
@@ -36,18 +42,45 @@ public:
     
 private:
     // UI-Komponenten
-    QStackedWidget* stackedWidget;
-    QLabel* imageLabel;
-    QVideoWidget* videoWidget;
-    QMediaPlayer* mediaPlayer;
-    QAudioOutput* audioOutput; // Für die Tonwiedergabe
-    QVBoxLayout* mainLayout;
-    QToolBar* mediaToolBar;
-    
+    QStackedWidget* stackedWidget = nullptr;
+    QLabel* imageLabel = nullptr;
+    QVideoWidget* videoWidget = nullptr;
+    QMediaPlayer* mediaPlayer = nullptr;
+    QAudioOutput* audioOutput = nullptr; // Für die Tonwiedergabe
+    QVBoxLayout* mainLayout = nullptr;
+    QToolBar* mediaToolBar = nullptr;
+    QAction* playPauseAction = nullptr;
+    QAction* stopAction = nullptr;
+    QAction* prevAction = nullptr;
+    QAction* nextAction = nullptr;
+    QAction* screenshotAction = nullptr;
+    QAction* copyImageAction = nullptr;
+    QAction* loopAction = nullptr; // Loop-Button für Endlosschleife
+    QSlider* volumeSlider = nullptr;
+    QSlider* positionSlider = nullptr; // Für Video-Position
+    QWidget* volumeWidget = nullptr; // Für Slider-Einbettung
+
     // Bilddaten
     QPixmap originalPixmap;
-    double zoomFactor;
-    
+    double zoomFactor = 1.0;
+    QString currentFilePath;
+    bool videoLoopEnabled = false; // Status für Loop-Funktion
+
     // UI initialisieren
-    void setupUI();
+    void setupUI(double volumeValue = 0.7);
+    void setupVideoToolbar();
+    void setupImageToolbar();
+    void clearToolbar();
+
+private slots:
+    void onPlayPause();
+    void onStop();
+    void onPrev();
+    void onNext();
+    void onScreenshot();
+    void onCopyImage();
+    void onVolumeChanged(int value);
+    void onLoopToggled(bool checked);
+    void onMediaStateChanged(QMediaPlayer::PlaybackState state);
+    void onMediaStatusChanged(QMediaPlayer::MediaStatus status);
 };

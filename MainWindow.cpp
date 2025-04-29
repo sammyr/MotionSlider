@@ -22,6 +22,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QColor>
+#include <QStringList> // Für Navigation History
 
 #include "NameShortenDelegate.h"
 #include "ThumbnailDelegate.h"
@@ -33,6 +34,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    historyIndex = -1;
     // Menü
     QMenu *fileMenu = menuBar()->addMenu(tr("&Datei"));
     fileMenu->addAction(tr("&Öffnen..."), this, &MainWindow::openFile);
@@ -52,31 +54,122 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *toolbarLayout = new QHBoxLayout;
     // Padding links
     toolbarLayout->addSpacing(5);
+    backButton = new QToolButton;
+    backButton->setIcon(style->standardIcon(QStyle::SP_ArrowBack));
+    backButton->setToolTip("Zurück");
+    backButton->setAutoRaise(true);
+    backButton->setIconSize(QSize(40,40));
+    backButton->setFixedSize(50, 50);
+    toolbarLayout->addWidget(backButton);
+    forwardButton = new QToolButton;
+    forwardButton->setIcon(style->standardIcon(QStyle::SP_ArrowForward));
+    forwardButton->setToolTip("Vorwärts");
+    forwardButton->setAutoRaise(true);
+    forwardButton->setIconSize(QSize(40,40));
+    forwardButton->setFixedSize(50, 50);
+    toolbarLayout->addWidget(forwardButton);
+    // Up-Button: Einen Ordner nach oben navigieren
+    upButton = new QToolButton;
+    upButton->setIcon(style->standardIcon(QStyle::SP_FileDialogToParent));
+    upButton->setToolTip("Nach oben");
+    upButton->setAutoRaise(true);
+    upButton->setIconSize(QSize(32,32));
+    upButton->setFixedSize(36,36);
+    toolbarLayout->addWidget(upButton);
+    connect(upButton, &QToolButton::clicked, this, &MainWindow::onUpButtonClicked);
     driveComboBox = new QComboBox;
-    // Laufwerke eintragen
+    driveComboBox->setFixedHeight(32);
+    driveComboBox->setIconSize(QSize(24,24));
+    // Laufwerke eintragen mit Festplattensymbol
     const auto drives = QDir::drives();
+    QIcon hddIcon = style->standardIcon(QStyle::SP_DriveHDIcon);
     for (const QFileInfo &drive : drives) {
-        driveComboBox->addItem(drive.absoluteFilePath());
+        driveComboBox->addItem(hddIcon, drive.absoluteFilePath());
     }
 
-
     toolbarLayout->addWidget(driveComboBox);
-    upButton = new QToolButton;
-    // Ordner-hoch-Icon: Versuche eigenes Icon, sonst fallback auf Windows-Standard
-    // Gelbes Ordner-Icon für Up-Button
-    QIcon folderUpIcon = style->standardIcon(QStyle::SP_DirOpenIcon);
-    upButton->setIcon(folderUpIcon);
-    upButton->setToolTip("Eine Ebene nach oben");
-    upButton->setAutoRaise(true);
-    toolbarLayout->addWidget(upButton);
+    
+    // Pfadfeld
     pathEdit = new QLineEdit;
     pathEdit->setReadOnly(false);
+    pathEdit->setMinimumHeight(32);
     toolbarLayout->addWidget(pathEdit, 1);
+    
+    // Sortierungsauswahlbox hinzufügen
+    QComboBox* sortComboBox = new QComboBox();
+    sortComboBox->setFixedHeight(32);
+    sortComboBox->addItem("Name", "name");
+    sortComboBox->addItem("Datum", "date");
+    sortComboBox->addItem("Größe", "size");
+    sortComboBox->addItem("Typ", "type");
+    
+    // Aktuellen Sortierwert aus den Einstellungen laden
+    QString currentSort = "name"; // Standardwert
+    QFile configFile1("build/program-settings.json");
+    if(configFile1.open(QIODevice::ReadOnly)) {
+        QJsonDocument configDoc = QJsonDocument::fromJson(configFile1.readAll());
+        QJsonObject configObj = configDoc.object();
+        
+        if(configObj.contains("sortOrder"))
+            currentSort = configObj["sortOrder"].toString();
+            
+        configFile1.close();
+    }
+    
+    // Index basierend auf dem aktuellen Sortierwert setzen
+    int sortIndex = 0;
+    if (currentSort == "date") sortIndex = 1;
+    else if (currentSort == "size") sortIndex = 2;
+    else if (currentSort == "type") sortIndex = 3;
+    sortComboBox->setCurrentIndex(sortIndex);
+    
+    // Verbinde Signal mit Slot zum Speichern der Sortierung
+    connect(sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this, sortComboBox](int index) {
+        QString sortValue = sortComboBox->itemData(index).toString();
+        
+        // Speichere die Sortierung in der Konfigurationsdatei
+        QFile configFile3("build/program-settings.json");
+        if(configFile3.open(QIODevice::ReadOnly)) {
+            QJsonDocument configDoc = QJsonDocument::fromJson(configFile3.readAll());
+            QJsonObject configObj = configDoc.object();
+            
+            // Aktualisiere den Sortierwert
+            configObj["sortOrder"] = sortValue;
+            
+            // Erstelle ein neues QJsonDocument mit dem aktualisierten Objekt
+            QJsonDocument updatedDoc(configObj);
+            
+            configFile3.close();
+            
+            // Schreibe die aktualisierte Konfiguration zurück
+            if(configFile3.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+                configFile3.write(updatedDoc.toJson(QJsonDocument::Indented));
+                configFile3.close();
+                
+                qDebug() << "Sortierung gespeichert:" << sortValue;
+            }
+        }
+        
+        // Aktualisiere die Sortierung in der Ansicht
+        if (sortValue == "name") {
+            folderContentModel->sort(0, Qt::AscendingOrder); // Nach Name sortieren
+        } else if (sortValue == "date") {
+            folderContentModel->sort(3, Qt::DescendingOrder); // Nach Datum sortieren (neueste zuerst)
+        } else if (sortValue == "size") {
+            folderContentModel->sort(1, Qt::DescendingOrder); // Nach Größe sortieren (größte zuerst)
+        } else if (sortValue == "type") {
+            folderContentModel->sort(2, Qt::AscendingOrder); // Nach Typ sortieren
+        }
+    });
+    
+    toolbarLayout->addWidget(sortComboBox);
+    
     // Padding rechts
     toolbarLayout->addSpacing(5);
 
     leftLayout->addLayout(toolbarLayout);
-    connect(upButton, &QToolButton::clicked, this, &MainWindow::onUpButtonClicked);
+    connect(backButton, &QToolButton::clicked, this, &MainWindow::onBackButtonClicked);
+    connect(forwardButton, &QToolButton::clicked, this, &MainWindow::onForwardButtonClicked);
 
     folderView = new QListView;
     folderView->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -135,8 +228,6 @@ MainWindow::MainWindow(QWidget *parent)
     leftToolBar->setMovable(false);
     leftToolBar->setFloatable(false);
     leftToolBar->setIconSize(QSize(20,20));
-    QAction *leftDummyAction = new QAction(QIcon::fromTheme("document-new"), "Neu", this);
-    leftToolBar->addAction(leftDummyAction);
     // Toolbar in Layout einfügen
     if(leftLayout) {
         leftLayout->insertWidget(0, leftToolBar);
@@ -167,13 +258,134 @@ MainWindow::MainWindow(QWidget *parent)
         QModelIndex rootIndex = folderModel->index(drivePath);
         folderView->setRootIndex(rootIndex);
         pathEdit->setText(drivePath);
+        // Add initial path to history
+        navigationHistory.append(drivePath);
+        historyIndex = 0;
+        backButton->setEnabled(false);
+        forwardButton->setEnabled(false);
         generateThumbnailsForCurrentFolder();
     }
 
 
 
     // Rechtes Panel: Neue MediaViewerPanel-Komponente
-    mediaPanel = new MediaViewerPanel(mainSplitter);
+    mediaPanel = new MediaViewerPanel();
+
+    // Toolbar für rechtes Panel (unten über der Statusbar)
+    QToolBar* rightToolBar = new QToolBar();
+    rightToolBar->setMovable(false);
+    rightToolBar->setFloatable(false);
+    rightToolBar->setIconSize(QSize(32,32));
+    
+    // Lade externe Programme aus den Einstellungen
+    QString imageEditorPath = "C:/Program Files/IrfanView/i_view64.exe";
+    QString videoPlayerPath = "C:/Program Files/MPC-HC/mpc-hc64.exe";
+    QString fileInfoUrlBase = "https://fetlife.com/";
+    
+    // Versuche, die Pfade aus der Konfigurationsdatei zu laden
+    QFile configFile2("build/program-settings.json");
+    if(configFile2.open(QIODevice::ReadOnly)) {
+        QJsonDocument configDoc = QJsonDocument::fromJson(configFile2.readAll());
+        QJsonObject configObj = configDoc.object();
+        
+        // Externe Programme laden
+        if(configObj.contains("externalPrograms")) {
+            QJsonObject extPrograms = configObj["externalPrograms"].toObject();
+            if(extPrograms.contains("imageEditor"))
+                imageEditorPath = extPrograms["imageEditor"].toString();
+            if(extPrograms.contains("videoPlayer"))
+                videoPlayerPath = extPrograms["videoPlayer"].toString();
+        }
+        
+        // URL-Basis für Browser laden
+        if(configObj.contains("fileInfoUrlBase"))
+            fileInfoUrlBase = configObj["fileInfoUrlBase"].toString();
+            
+        configFile2.close();
+    }
+    
+    // Erstelle Actions für externe Programme
+    QAction* openInIrfanView = new QAction(QIcon::fromTheme("image-x-generic"), "In Honeyview öffnen", this);
+    QAction* openInMpcHc = new QAction(QIcon::fromTheme("video-x-generic"), "In MPC-HC öffnen", this);
+    QAction* openInBrowser = new QAction(QIcon::fromTheme("web-browser"), "Im Browser öffnen", this);
+    QAction* openInFolder = new QAction(QIcon::fromTheme("folder-open"), "Im Explorer anzeigen", this);
+    
+    // Verbinde mit Slots zum Öffnen der externen Programme
+    connect(openInIrfanView, &QAction::triggered, this, [=]() {
+        QString filePath = folderModel->filePath(folderView->currentIndex());
+        if(!filePath.isEmpty() && QFile::exists(filePath)) {
+            QProcess::startDetached(imageEditorPath, QStringList() << filePath);
+        }
+    });
+    
+    connect(openInMpcHc, &QAction::triggered, this, [=]() {
+        QString filePath = folderModel->filePath(folderView->currentIndex());
+        if(!filePath.isEmpty() && QFile::exists(filePath)) {
+            QProcess::startDetached(videoPlayerPath, QStringList() << filePath);
+        }
+    });
+    
+    connect(openInBrowser, &QAction::triggered, this, [=]() {
+        QString filePath = folderModel->filePath(folderView->currentIndex());
+        if(!filePath.isEmpty() && QFile::exists(filePath)) {
+            QFileInfo fileInfo(filePath);
+            QString fileName = fileInfo.fileName();
+            
+            // Extrahiere den Teil nach dem letzten Unterstrich
+            QString idPart;
+            int lastUnderscorePos = fileName.lastIndexOf('_');
+            
+            if (lastUnderscorePos != -1 && lastUnderscorePos < fileName.length() - 1) {
+                // Extrahiere alles nach dem letzten Unterstrich
+                idPart = fileName.mid(lastUnderscorePos + 1);
+                
+                // Entferne die Dateiendung, falls vorhanden
+                int dotPos = idPart.lastIndexOf('.');
+                if (dotPos != -1) {
+                    idPart = idPart.left(dotPos);
+                }
+            } else {
+                // Wenn kein Unterstrich gefunden wurde, verwende den ganzen Dateinamen ohne Endung
+                idPart = fileName;
+                int dotPos = idPart.lastIndexOf('.');
+                if (dotPos != -1) {
+                    idPart = idPart.left(dotPos);
+                }
+            }
+            
+            QString url = fileInfoUrlBase + idPart;
+            QDesktopServices::openUrl(QUrl(url));
+        }
+    });
+    
+    connect(openInFolder, &QAction::triggered, this, [=]() {
+        QString filePath = folderModel->filePath(folderView->currentIndex());
+        if(!filePath.isEmpty() && QFile::exists(filePath)) {
+            QString nativePath = QDir::toNativeSeparators(filePath);
+            QProcess::startDetached("explorer.exe", QStringList() << "/select," + nativePath);
+        }
+    });
+    
+    rightToolBar->addAction(openInIrfanView);
+    rightToolBar->addAction(openInMpcHc);
+    rightToolBar->addAction(openInBrowser);
+    rightToolBar->addAction(openInFolder);
+    // Container-Widget für die Toolbar am unteren Rand
+    QWidget* rightToolbarContainer = new QWidget();
+    QHBoxLayout* rightToolbarLayout = new QHBoxLayout(rightToolbarContainer);
+    rightToolbarLayout->setContentsMargins(0,0,0,0);
+    rightToolbarLayout->setSpacing(0);
+    rightToolbarLayout->addStretch();
+    rightToolbarLayout->addWidget(rightToolBar);
+    rightToolbarLayout->addStretch();
+    // Haupt-Container für das rechte Panel
+    QWidget* rightPanelContainer = new QWidget();
+    QVBoxLayout* rightPanelLayout = new QVBoxLayout(rightPanelContainer);
+    rightPanelLayout->setContentsMargins(10,10,10,10);
+    rightPanelLayout->setSpacing(0);
+    rightPanelLayout->addWidget(mediaPanel, 1); // MediaViewerPanel nimmt den ganzen Platz
+    rightPanelLayout->addWidget(rightToolbarContainer, 0);
+
 
 
 
@@ -184,8 +396,8 @@ MainWindow::MainWindow(QWidget *parent)
     
 
     mainSplitter->addWidget(leftPanel);
-    mainSplitter->addWidget(mediaPanel);
-    mainSplitter->setHandleWidth(12);
+    mainSplitter->addWidget(rightPanelContainer);
+    mainSplitter->setHandleWidth(20);
     mainSplitter->setStyleSheet("QSplitter::handle { background: #f0f0f0; border-radius: 3px; }");
     mainSplitter->setStretchFactor(0, 0);
     mainSplitter->setStretchFactor(1, 1);
@@ -252,29 +464,6 @@ void MainWindow::onFolderViewContextMenu(const QPoint& pos)
 
 
 
-void MainWindow::onUpButtonClicked()
-{
-    QModelIndex currentRoot = folderView->rootIndex();
-    QString currentPath = folderModel->filePath(currentRoot);
-    QDir dir(currentPath);
-    if (dir.isRoot()) return; // Schon im Laufwerks-Root
-    dir.cdUp();
-    QString upPath = dir.absolutePath();
-    QModelIndex upIndex = folderModel->index(upPath);
-    if (upIndex.isValid()) {
-        folderView->setRootIndex(upIndex);
-        pathEdit->setText(upPath);
-        generateThumbnailsForCurrentFolder();
-        // Laufwerksauswahl ggf. anpassen
-        QString drive = upPath.left(3); // z.B. "C:/"
-        int driveIdx = driveComboBox->findText(drive, Qt::MatchStartsWith);
-        if (driveIdx >= 0) driveComboBox->setCurrentIndex(driveIdx);
-        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit); // <-- Speichern nach Verzeichniswechsel
-    }
-}
-
-
-
 void MainWindow::onDriveChanged(int index)
 {
     if (index < 0) return;
@@ -283,6 +472,13 @@ void MainWindow::onDriveChanged(int index)
     folderView->setRootIndex(rootIndex);
     pathEdit->setText(drivePath);
     SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit); // <-- Speichern nach Verzeichniswechsel
+    // Manage history
+    while (navigationHistory.size() > historyIndex + 1)
+        navigationHistory.removeLast();
+    navigationHistory.append(drivePath);
+    historyIndex++;
+    backButton->setEnabled(historyIndex > 0);
+    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
 }
 
 void MainWindow::onFolderDoubleClicked(const QModelIndex &index)
@@ -296,6 +492,13 @@ void MainWindow::onFolderDoubleClicked(const QModelIndex &index)
         folderView->setRootIndex(index);
         pathEdit->setText(filePath);
         SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit); // <-- Speichern nach Verzeichniswechsel
+        // Manage history
+        while (navigationHistory.size() > historyIndex + 1)
+            navigationHistory.removeLast();
+        navigationHistory.append(filePath);
+        historyIndex++;
+        backButton->setEnabled(historyIndex > 0);
+        forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
     } else {
         // Optional: Bei Datei Doppelklick kann geöffnet werden
         onFolderSelected(index);
@@ -464,5 +667,60 @@ void MainWindow::onThumbnailGenerationFinished()
     // Aktualisiere die Ansicht
     if (folderView) {
         folderView->viewport()->update();
+    }
+}
+
+// Slot für Zurück-Button
+void MainWindow::onBackButtonClicked()
+{
+    if (historyIndex <= 0) return;
+    historyIndex--;
+    QString prevPath = navigationHistory.at(historyIndex);
+    QModelIndex prevIndex = folderModel->index(prevPath);
+    if (prevIndex.isValid()) {
+        folderView->setRootIndex(prevIndex);
+        pathEdit->setText(prevPath);
+        generateThumbnailsForCurrentFolder();
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+    }
+    backButton->setEnabled(historyIndex > 0);
+    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+}
+
+// Slot für Vorwärts-Button
+void MainWindow::onForwardButtonClicked()
+{
+    if (historyIndex >= navigationHistory.size() - 1) return;
+    historyIndex++;
+    QString nextPath = navigationHistory.at(historyIndex);
+    QModelIndex nextIndex = folderModel->index(nextPath);
+    if (nextIndex.isValid()) {
+        folderView->setRootIndex(nextIndex);
+        pathEdit->setText(nextPath);
+        generateThumbnailsForCurrentFolder();
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+    }
+    backButton->setEnabled(historyIndex > 0);
+    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+}
+
+// Slot: Navigiert einen Ordner nach oben
+void MainWindow::onUpButtonClicked() {
+    QString currentPath = pathEdit->text();
+    QDir dir(currentPath);
+    if (dir.cdUp()) {
+        QString parentPath = dir.absolutePath();
+        QModelIndex idx = folderModel->index(parentPath);
+        folderView->setRootIndex(idx);
+        pathEdit->setText(parentPath);
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+        generateThumbnailsForCurrentFolder();
+        // Verlauf verwalten
+        while (navigationHistory.size() > historyIndex + 1)
+            navigationHistory.removeLast();
+        navigationHistory.append(parentPath);
+        historyIndex++;
+        backButton->setEnabled(historyIndex > 0);
+        forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
     }
 }

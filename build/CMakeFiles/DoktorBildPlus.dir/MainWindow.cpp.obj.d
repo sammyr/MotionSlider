@@ -539,13 +539,23 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \

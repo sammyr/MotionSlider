@@ -179,7 +179,9 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
         QString sizeInfo = QString::number(info.size() / (1024*1024.0), 'f', 1) + " MB";
         painter.drawText(QRect(80, 5, 35, 15), Qt::AlignRight, sizeInfo);
         
-        painter.end();
+        if (painter.isActive()) {
+            painter.end();
+        }
         
         // Speichere das generische Thumbnail
         success = videoThumb.save(thumbPath, "PNG");
@@ -320,5 +322,3 @@ void ThumbnailGenerator::onGenerationFinished() {
     
     emit thumbnailGenerationFinished();
 }
-
-

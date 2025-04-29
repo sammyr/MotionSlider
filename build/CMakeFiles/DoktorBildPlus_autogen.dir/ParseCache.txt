@@ -171,12 +171,17 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QAction
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfilesystemmodel.h
@@ -184,8 +189,11 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontvariableaxis.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qimage.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h
@@ -227,6 +235,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate
@@ -1015,8 +1024,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h
-D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.cpp
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.cpp
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h
@@ -1482,6 +1491,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/q20type_traits.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/q20utility.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/q23utility.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qabstracteventdispatcher.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qalgorithms.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qanystringview.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qarraydata.h
@@ -1491,6 +1501,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qatomic.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qatomic_cxx11.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qbasicatomic.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qbasictimer.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qbindingstorage.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearray.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearrayalgorithms.h
@@ -1507,10 +1518,16 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcontainerinfo.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcontainertools_impl.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcontiguouscache.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qdarwinhelpers.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qdatastream.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qdeadlinetimer.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qdebug.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qelapsedtimer.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qendian.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qexceptionhandling.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qflags.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qfloat16.h
@@ -1529,6 +1546,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qlatin1stringview.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qline.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qlogging.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qmalloc.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qmap.h
@@ -1538,6 +1556,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qmetatype.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qminmax.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qnamespace.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qnativeinterface.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qnumeric.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qobject_impl.h
@@ -1602,17 +1621,25 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QAction
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontvariableaxis.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qimage.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qpalette.h
@@ -1644,10 +1671,14 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolBar
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolButton
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractbutton.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractslider.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h
@@ -1655,8 +1686,10 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbar.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbutton.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgets-config.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgetsexports.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h

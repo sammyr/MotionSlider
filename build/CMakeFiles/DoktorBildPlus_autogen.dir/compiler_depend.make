@@ -214,14 +214,19 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
@@ -283,6 +288,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -860,9 +866,11 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hash
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF:
 
-C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h:
-
 C:/Qt/6.9.0/mingw_64/include/QtCore/qabstracteventdispatcher.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h:
 
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/Linker/Windows-GNU-CXX.cmake:
 
@@ -907,8 +915,6 @@ C:/Program\ Files/CMake/share/cmake-4.0/Modules/CMakeRCInformation.cmake:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtFeature.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/QStringList:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake:
 
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/CMakeSystemSpecificInformation.cmake:
 
@@ -1178,9 +1184,9 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qmutex.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearraylist.h:
 
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessAliasTargets.cmake:
-
 C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearrayview.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QAction:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h:
 
@@ -1436,10 +1442,6 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h:
 
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_mac.h:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h:
@@ -1469,6 +1471,12 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w6
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_uninitialized.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qsize.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/postypes.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/concept_check.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qstdlibdetection.h:
 
@@ -1506,15 +1514,15 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qswap.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateTargets.cmake:
 
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersionImpl.cmake:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qsysinfo.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginAdditionalTargetInfo.cmake:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersionImpl.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qsystemdetection.h:
 
@@ -1624,6 +1632,10 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6GuiPrivate/Qt6GuiPrivateAdditionalTargetInfo.c
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsAdditionalTargetInfo.cmake:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginTargets-relwithdebinfo.cmake:
+
 C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QMinimalIntegrationPluginConfig.cmake:
@@ -1634,6 +1646,10 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake:
+
 C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h:
@@ -1642,9 +1658,15 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtPublicSbomDepHelpers.cmake:
 
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-relwithdebinfo.cmake:
+
 C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h:
 
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-relwithdebinfo.cmake:
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateConfig.cmake:
 
@@ -1699,10 +1721,6 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h:
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare:
-
-C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h:
 
@@ -2020,8 +2038,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QJpegPluginTargets-relwithdebinfo.cmake
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginConfig.cmake:
 
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginTargets-relwithdebinfo.cmake:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QSvgIconPluginAdditionalTargetInfo.cmake:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/process.h:
@@ -2088,8 +2104,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QFFmpegMediaPluginTargets.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginConfig.cmake:
 
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateConfigVersionImpl.cmake:
@@ -2117,6 +2131,14 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersionImpl.cmake:
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/align.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_mac.h:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessAliasTargets.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginConfig.cmake:
 
@@ -2251,10 +2273,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/char
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/chrono.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/codecvt.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/postypes.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/concept_check.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/cpp_type_traits.h:
 

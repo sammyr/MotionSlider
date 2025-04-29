@@ -180,14 +180,19 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: D
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
@@ -249,6 +254,7 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: D
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -1165,18 +1171,23 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Dokt
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QCloseEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QColor \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
@@ -1245,6 +1256,7 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Dokt
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMenuBar \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QPushButton \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStatusBar \
@@ -1567,7 +1579,12 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Dokt
   D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h
 
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.cpp \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QDateTime \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QMimeDatabase \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
   C:/Qt/6.9.0/mingw_64/include/QtCore/q17memory.h \
@@ -1594,6 +1611,8 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearrayview.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qcompare.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qcompare_impl.h \
@@ -1613,6 +1632,8 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qelapsedtimer.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qendian.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h \
@@ -1634,6 +1655,10 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qiterator.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qline.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
@@ -1661,6 +1686,7 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qscopeguard.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qset.h \
@@ -1710,14 +1736,20 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtCore/qtypes.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qurl.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qutf8stringview.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
@@ -1761,22 +1793,32 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NP
   C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyle \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolBar \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolButton \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbar.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbutton.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -4121,12 +4163,17 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Vid
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfilesystemmodel.h \
@@ -4181,6 +4228,7 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Vid
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -4701,14 +4749,19 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
@@ -4770,6 +4823,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -5491,6 +5545,8 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qabstracteventdispatcher.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication:
+
 C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h:
@@ -5564,6 +5620,8 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h:
 C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearrayview.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtPublicWalkLibsHelpers.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QAction:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h:
 
@@ -5865,6 +5923,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w6
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/concept_check.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/postypes.h:
@@ -6057,6 +6117,12 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h:
 
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_pair.h:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginTargets-relwithdebinfo.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard:
+
 C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon:
@@ -6066,6 +6132,10 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_lock.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform:
 
@@ -6080,6 +6150,12 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-relwithdebinfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/math.h:
 
@@ -6129,17 +6205,13 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateTargets.cmake:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/version:
-
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_stat64.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/version:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h:
-
-C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h:
 
@@ -6393,8 +6465,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exce
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_defines.h:
 
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_stdarg.h:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/exception_ptr.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_fwd.h:
@@ -6481,8 +6551,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginAdditionalTar
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_pair.h:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/atomicity.h:
@@ -6522,10 +6590,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cmath:
 C:/Qt/6.9.0/mingw_64/include/QtCore/QTemporaryFile:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/condition_variable:
-
-DoktorBildPlus_autogen/EWIEGA46WW/moc_MediaViewerPanel.cpp:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_timeval.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint:
 
@@ -6628,6 +6692,12 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_off_t.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_secapi.h:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_stdarg.h:
+
+DoktorBildPlus_autogen/EWIEGA46WW/moc_MediaViewerPanel.cpp:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_timeval.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/assert.h:
 
@@ -6773,17 +6843,13 @@ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qpushbutton.h:
 
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.cpp:
 
+C:/Qt/6.9.0/mingw_64/include/QtCore/QDateTime:
+
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.cpp:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:
 
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.cpp:
-
-C:/Qt/6.9.0/mingw_64/include/QtCore/QDateTime:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake:
-
-C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:
 
@@ -6988,8 +7054,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QJpegPluginConfig.cmake:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QMinimalIntegrationPluginConfig.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginConfig.cmake:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QOffscreenIntegrationPluginTargets-relwithdebinfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QSvgIconPluginAdditionalTargetInfo.cmake:
 

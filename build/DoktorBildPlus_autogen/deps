@@ -211,14 +211,19 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QFileSystemModel \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
@@ -280,6 +285,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \

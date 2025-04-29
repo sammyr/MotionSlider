@@ -412,8 +412,35 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolBar \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbar.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractslider.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolButton \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbutton.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qbasictimer.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qabstracteventdispatcher.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qdeadlinetimer.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qelapsedtimer.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qnativeinterface.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QMimeDatabase \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimedatabase.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimetype.h \
@@ -453,21 +480,31 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyle \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qbasictimer.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qabstracteventdispatcher.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qdeadlinetimer.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qelapsedtimer.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qnativeinterface.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QDateTime \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h

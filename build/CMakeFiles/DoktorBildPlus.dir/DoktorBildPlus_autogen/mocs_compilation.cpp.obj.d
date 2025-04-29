@@ -540,8 +540,21 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QAction \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtmochelpers.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtmocconstants.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/q20algorithm.h \
@@ -568,9 +581,6 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolTip \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtooltip.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_ThumbnailGenerator.cpp

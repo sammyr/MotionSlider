@@ -52,12 +52,18 @@ private:
     QListView *folderView;
     QFileSystemModel *folderModel;
     QLineEdit *pathEdit;
-    QToolButton *upButton;
     QComboBox *driveComboBox; // Laufwerksauswahl
+    QToolButton *backButton; // Neuer Zurück-Button
+    QToolButton *forwardButton; // Neuer Vorwärts-Button
+    QToolButton *upButton; // Gehe einen Ordner hoch
+    QStringList navigationHistory; // Verlauf der besuchten Ordner
+    int historyIndex; // Aktuelle Position im Verlauf
 
     // Navigation
     void onFolderDoubleClicked(const QModelIndex &index);
     void onDriveChanged(int index);
+    void onBackButtonClicked();
+    void onForwardButtonClicked();
     void onUpButtonClicked();
 
     // Panel für Ordnerinhalt (rechts)
