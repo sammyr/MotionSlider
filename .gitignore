@@ -1,0 +1,36 @@
+# Ignoriere den Thumbnails-Ordner
+/thumbnails/
+thumbnails/
+thumbnails/*
+
+# Ignoriere die program-settings.json im build-Verzeichnis
+/build/program-settings.json
+build/program-settings.json
+
+# Zusätzliche übliche Qt/C++ Dateien die ignoriert werden sollten
+*.user
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.dylib
+*.qm
+*.prl
+*.app
+*.pro.user
+*.autosave
+debug/
+release/
+Makefile*
+*.Debug
+*.Release
+.qmake.stash
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Verzeichnisse
+.vs/
+.idea/
+.vscode/
