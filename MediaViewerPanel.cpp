@@ -9,8 +9,13 @@
 #include <QDir>
 #include <QDateTime>
 #include <QMessageBox>
+#include <QWheelEvent>
+#include <cmath>
+#include <QScrollArea>
+#include <QMouseEvent>
+#include <QScrollBar>
 
-MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false) {
+MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false), isPanning(false) {
     // Lade Lautstärke und Loop-Status aus der Konfigurationsdatei
     double volumeValue = 0.7; // Standardwert
     
@@ -27,6 +32,11 @@ MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFacto
             
         configFile.close();
     }
+    
+    // Erstelle MediaPlayer und AudioOutput vor UI, damit connects gültig sind
+    mediaPlayer = new QMediaPlayer(this);
+    audioOutput = new QAudioOutput(this);
+    mediaPlayer->setAudioOutput(audioOutput);
     
     setupUI(volumeValue);
 }
@@ -86,9 +96,6 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     loopAction->setToolTip("Video in Endlosschleife abspielen"); // Tooltip hinzufügen
     connect(loopAction, &QAction::toggled, this, &MediaViewerPanel::onLoopToggled);
     
-    // Verbinde MediaPlayer mit MediaStatusChanged für Loop-Funktion
-    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
-    
     // Lautstärke-Widget
     volumeWidget = new QWidget(this);
     QHBoxLayout* volumeLayout = new QHBoxLayout(volumeWidget);
@@ -131,27 +138,36 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     // StackedWidget für Bild/Video
     stackedWidget = new QStackedWidget(this);
     
-    // Bild-Anzeige
+    // Bild-Anzeige mit ScrollArea für Panning
     imageLabel = new QLabel;
     imageLabel->setAlignment(Qt::AlignCenter);
     imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     imageLabel->setScaledContents(false);
+    imageScrollArea = new QScrollArea;
+    // Bild in ScrollArea zentrieren
+    imageScrollArea->setAlignment(Qt::AlignCenter);
+    imageScrollArea->setWidget(imageLabel);
+    imageScrollArea->setWidgetResizable(false);
+    // Scrollbalken immer ausblenden
+    imageScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    imageScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // Panning: install event filters and enable mouse tracking
+    imageScrollArea->installEventFilter(this);
+    imageScrollArea->setMouseTracking(true);
+    imageScrollArea->viewport()->installEventFilter(this);
+    imageScrollArea->viewport()->setMouseTracking(true);
+    imageLabel->installEventFilter(this);
+    imageLabel->setMouseTracking(true);
     
     // Video-Anzeige mit Audio
     videoWidget = new QVideoWidget;
-    mediaPlayer = new QMediaPlayer(this);
-    audioOutput = new QAudioOutput(this); // Neuer Audio-Output
-    mediaPlayer->setAudioOutput(audioOutput); // Audio-Output setzen
     mediaPlayer->setVideoOutput(videoWidget);
-    
-    // Setze die Lautstärke aus dem Parameter
     audioOutput->setVolume(volumeValue);
-    
-    // Verbinde MediaPlayer mit MediaStatusChanged für Loop-Funktion
-    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
+    // Verbindung MediaStatusChanged entfernt (temporär deaktiviert)
+    // connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
     
     // Widgets zum StackedWidget hinzufügen
-    stackedWidget->addWidget(imageLabel);      // Index 0: Bild
+    stackedWidget->addWidget(imageScrollArea); // Index 0: Bild mit Panning
     stackedWidget->addWidget(videoWidget);     // Index 1: Video
     
     // Container für Playback-Slider
@@ -188,19 +204,19 @@ void MediaViewerPanel::setupUI(double volumeValue) {
         }
     });
     
-    // Verbinde MediaPlayer-Positionsupdate mit Slider
-    connect(mediaPlayer, &QMediaPlayer::positionChanged, this, [this](qint64 position) {
-        qint64 duration = mediaPlayer->duration();
-        if (duration > 0 && !positionSlider->isSliderDown()) {
-            // Konvertiere Position zu Slider-Wert (0-1000)
-            positionSlider->setValue(position * 1000 / duration);
-        }
-    });
+    // Verbindung positionChanged entfernt (temporär deaktiviert)
+    // connect(mediaPlayer, &QMediaPlayer::positionChanged, this, [this](qint64 position) {
+    //     qint64 duration = mediaPlayer->duration();
+    //     if (duration > 0 && !positionSlider->isSliderDown()) {
+    //         // Konvertiere Position zu Slider-Wert (0-1000)
+    //         positionSlider->setValue(position * 1000 / duration);
+    //     }
+    // });
     
-    // Verbinde Daueränderung mit Slider-Reset
-    connect(mediaPlayer, &QMediaPlayer::durationChanged, this, [this](qint64 duration) {
-        positionSlider->setValue(0);
-    });
+    // Verbindung durationChanged entfernt (temporär deaktiviert)
+    // connect(mediaPlayer, &QMediaPlayer::durationChanged, this, [this](qint64 duration) {
+    positionSlider->setValue(0);
+    // });
     
     sliderLayout->addWidget(positionSlider);
     
@@ -244,7 +260,10 @@ void MediaViewerPanel::loadImage(const QString& imagePath) {
     if (originalPixmap.isNull()) return;
     
     // Bild anzeigen
-    imageLabel->setPixmap(originalPixmap.scaled(imageLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    QSize scaledSize = originalPixmap.size() * zoomFactor;
+    QPixmap scaled = originalPixmap.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    imageLabel->setPixmap(scaled);
+    imageLabel->resize(scaled.size()); // Label anpassen für ScrollArea
     imageLabel->show();
     stackedWidget->setCurrentIndex(0);
     
@@ -264,14 +283,27 @@ void MediaViewerPanel::loadVideo(const QString& videoPath) {
 }
 
 void MediaViewerPanel::zoomImage(double factor) {
-    zoomFactor = factor;
     if (originalPixmap.isNull()) return;
-    
-    // Skalierte Größe berechnen
+    // Aktuelle Scroll-Position und Viewport-Maße
+    QScrollBar *hBar = imageScrollArea->horizontalScrollBar();
+    QScrollBar *vBar = imageScrollArea->verticalScrollBar();
+    QWidget *vp = imageScrollArea->viewport();
+    QPoint vpCursor = vp->mapFromGlobal(QCursor::pos());
+    // Relative Position im gesamten Bild vor Zoom
+    double relX = double(hBar->value() + vpCursor.x()) / double(imageLabel->width());
+    double relY = double(vBar->value() + vpCursor.y()) / double(imageLabel->height());
+    // Zoom-Faktor übernehmen
+    zoomFactor = factor;
+    // Neue Größe
     QSize scaledSize = originalPixmap.size() * zoomFactor;
-    
-    // Bild neu skalieren und anzeigen
-    imageLabel->setPixmap(originalPixmap.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    QPixmap scaled = originalPixmap.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    imageLabel->setPixmap(scaled);
+    imageLabel->resize(scaled.size());
+    // Scroll auf neue Position entsprechend relX, relY
+    int newH = int(relX * imageLabel->width()) - vpCursor.x();
+    int newV = int(relY * imageLabel->height()) - vpCursor.y();
+    hBar->setValue(qMax(0, qMin(newH, hBar->maximum())));
+    vBar->setValue(qMax(0, qMin(newV, vBar->maximum())));
 }
 
 void MediaViewerPanel::onVolumeChanged(int value) {
@@ -464,4 +496,75 @@ void MediaViewerPanel::onScreenshot() {
                 "Screenshots von Videos sind nicht auf allen Systemen zuverlässig möglich.");
         }
     }
+}
+
+// Zoomen des Bildes per Mausrad im rechten Panel
+void MediaViewerPanel::wheelEvent(QWheelEvent *event) {
+    // Nur bei Bildansicht zoomen
+    if (stackedWidget->currentIndex() == 0) {
+        int steps = event->angleDelta().y() / 120;
+        if (steps != 0) {
+            double factor = std::pow(1.1, steps);
+            zoomImage(zoomFactor * factor);
+        }
+        event->accept();
+    } else {
+        QWidget::wheelEvent(event);
+    }
+}
+
+// Event-Filter für Panning in ScrollArea und Label
+bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
+    // Wheel-Event für Zoom (kein Scroll)
+    if (event->type() == QEvent::Wheel && stackedWidget->currentIndex() == 0) {
+        auto *we = static_cast<QWheelEvent*>(event);
+        int steps = we->angleDelta().y() / 120;
+        if (steps != 0) {
+            double factor = std::pow(1.1, steps);
+            zoomImage(zoomFactor * factor);
+        }
+        return true;
+    }
+    // Handle panning only on mouse events
+    if ((watched == imageScrollArea || watched == imageScrollArea->viewport() || watched == imageLabel)) {
+        QEvent::Type type = event->type();
+        if (type == QEvent::MouseButtonPress || type == QEvent::MouseMove || type == QEvent::MouseButtonRelease) {
+            auto *me = static_cast<QMouseEvent*>(event);
+            QPoint vpPos = imageScrollArea->viewport()->mapFromGlobal(me->globalPosition().toPoint());
+            if (type == QEvent::MouseButtonPress && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton)) {
+                isPanning = true;
+                lastPanPoint = vpPos;
+                imageScrollArea->viewport()->setCursor(Qt::ClosedHandCursor);
+                return true;
+            }
+            if (type == QEvent::MouseMove && isPanning) {
+                QPoint delta = vpPos - lastPanPoint;
+                lastPanPoint = vpPos;
+                imageScrollArea->horizontalScrollBar()->setValue(
+                    imageScrollArea->horizontalScrollBar()->value() - delta.x());
+                imageScrollArea->verticalScrollBar()->setValue(
+                    imageScrollArea->verticalScrollBar()->value() - delta.y());
+                return true;
+            }
+            if (type == QEvent::MouseButtonRelease && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton) && isPanning) {
+                isPanning = false;
+                imageScrollArea->viewport()->setCursor(Qt::ArrowCursor);
+                return true;
+            }
+        }
+    }
+    return QWidget::eventFilter(watched, event);
+}
+
+// Stub-Implementierungen, um fehlende vtable-Einträge zu erfüllen
+void MediaViewerPanel::mousePressEvent(QMouseEvent *event) {
+    QWidget::mousePressEvent(event);
+}
+
+void MediaViewerPanel::mouseMoveEvent(QMouseEvent *event) {
+    QWidget::mouseMoveEvent(event);
+}
+
+void MediaViewerPanel::mouseReleaseEvent(QMouseEvent *event) {
+    QWidget::mouseReleaseEvent(event);
 }

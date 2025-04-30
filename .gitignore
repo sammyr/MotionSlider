@@ -3,9 +3,6 @@
 thumbnails/
 thumbnails/*
 
-# Ignoriere die program-settings.json im build-Verzeichnis
-/build/program-settings.json
-build/program-settings.json
 
 # Zusätzliche übliche Qt/C++ Dateien die ignoriert werden sollten
 *.user

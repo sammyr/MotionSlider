@@ -1,0 +1,36 @@
+{
+    "NameMaxLength": 10,
+    "externalPrograms": {
+        "imageEditor": "D:/_SOFTWARE/_VIDEO AUDIO/HONEYVIEW-PORTABLE/Honeyview32.exe",
+        "resizeProgram": "C:/Program Files/Topaz Labs LLC/Topaz Gigapixel AI/Topaz Gigapixel AI.exe",
+        "videoPlayer": "C:/Program Files/MPC-HC/mpc-hc64.exe"
+    },
+    "fileInfoUrlBase": "https://fetlife.com/",
+    "iconSize": 64,
+    "screenshotsPath": "D:/___SYSTEM/Desktop",
+    "scrollSplitPercent": 70,
+    "sortOrder": "size",
+    "supportedImageTypes": [
+        ".jpg",
+        ".png",
+        ".bmp",
+        ".jpeg",
+        ".gif",
+        ".webp",
+        ".heic",
+        ".heif",
+        ".heic",
+        ".heif"
+    ],
+    "supportedVideoTypes": [
+        ".mp4",
+        ".m4v",
+        ".avi",
+        ".mov",
+        ".webm",
+        ".m4a",
+        ".mpg"
+    ],
+    "videoLoop": true,
+    "volume": 0
+}

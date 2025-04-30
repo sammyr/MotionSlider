@@ -188,6 +188,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolBar \
@@ -195,6 +196,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
@@ -202,6 +204,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h \

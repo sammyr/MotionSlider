@@ -441,6 +441,9 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QMimeDatabase \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimedatabase.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimetype.h \
@@ -507,4 +510,27 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qsize.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollBar \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h

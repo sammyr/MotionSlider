@@ -288,6 +288,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
@@ -314,6 +315,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \
@@ -1314,9 +1316,9 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ratio:
 
-C:/Qt/6.9.0/mingw_64/include/QtCore/qexceptionhandling.h:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qexceptionhandling.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h:
 
@@ -1812,9 +1814,13 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginAdditional
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate:
 

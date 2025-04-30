@@ -27,6 +27,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
     void openFile();
@@ -58,6 +59,7 @@ private:
     QToolButton *upButton; // Gehe einen Ordner hoch
     QStringList navigationHistory; // Verlauf der besuchten Ordner
     int historyIndex; // Aktuelle Position im Verlauf
+    int scrollSplitPercent; // Prozentuale Position für Mausrad-Switch im linken Panel
 
     // Navigation
     void onFolderDoubleClicked(const QModelIndex &index);

@@ -121,7 +121,10 @@ MainWindow::MainWindow(QWidget *parent)
     if (currentSort == "date") sortIndex = 1;
     else if (currentSort == "size") sortIndex = 2;
     else if (currentSort == "type") sortIndex = 3;
+    // Signals blockieren, damit currentIndexChanged nicht zu früh feuert
+    sortComboBox->blockSignals(true);
     sortComboBox->setCurrentIndex(sortIndex);
+    sortComboBox->blockSignals(false);
     
     // Verbinde Signal mit Slot zum Speichern der Sortierung
     connect(sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this, sortComboBox](int index) {
@@ -151,15 +154,23 @@ MainWindow::MainWindow(QWidget *parent)
         }
         
         // Aktualisiere die Sortierung in der Ansicht
-        if (sortValue == "name") {
-            folderContentModel->sort(0, Qt::AscendingOrder); // Nach Name sortieren
-        } else if (sortValue == "date") {
-            folderContentModel->sort(3, Qt::DescendingOrder); // Nach Datum sortieren (neueste zuerst)
-        } else if (sortValue == "size") {
-            folderContentModel->sort(1, Qt::DescendingOrder); // Nach Größe sortieren (größte zuerst)
-        } else if (sortValue == "type") {
-            folderContentModel->sort(2, Qt::AscendingOrder); // Nach Typ sortieren
+        // Prüfe auf gültige Model- und View-Pointer
+        if (!folderModel || !folderView) {
+            qDebug() << "Sortierung abgebrochen: Model oder View ist null!";
+            return;
         }
+        if (sortValue == "name") {
+            folderModel->sort(0, Qt::AscendingOrder); // Nach Name sortieren
+        } else if (sortValue == "date") {
+            folderModel->sort(3, Qt::DescendingOrder); // Nach Datum sortieren (neueste zuerst)
+        } else if (sortValue == "size") {
+            folderModel->sort(1, Qt::DescendingOrder); // Nach Größe sortieren (größte zuerst)
+        } else if (sortValue == "type") {
+            folderModel->sort(2, Qt::AscendingOrder); // Nach Typ sortieren
+        }
+        // View nach Sortierung neu zeichnen
+        folderView->update();
+        qDebug() << "Sortierung angewendet und View aktualisiert.";
     });
     
     toolbarLayout->addWidget(sortComboBox);
@@ -179,6 +190,10 @@ MainWindow::MainWindow(QWidget *parent)
     folderModel = new QFileSystemModel(this);
     folderModel->setRootPath("");
     folderView->setModel(folderModel);
+    folderView->viewport()->installEventFilter(this); // Event-Filter für Mausrad: Bei Scroll im rechten Bereich der linken Liste Auswahl ändern
+    // Zeige Bild im rechten Panel auch bei Tastatur-Navigation
+    connect(folderView->selectionModel(), &QItemSelectionModel::currentChanged,
+            this, &MainWindow::onFolderSelected);
 
     // Setze benutzerdefinierten Delegate für Thumbnails und konfiguriere View
     m_thumbnailDelegate = new ThumbnailDelegate(folderView);
@@ -558,10 +573,10 @@ void MainWindow::wheelEvent(QWheelEvent *event)
         QPoint numSteps = numDegrees / 15;
         
         if (!numSteps.isNull()) {
-            // Zoom-Faktor anpassen
+            // Zoom-Faktor berechnen
             double factor = (numSteps.y() > 0) ? 1.25 : 0.8; // Rein- oder rauszoomen
             
-            // Zoom an MediaViewerPanel delegieren
+            // Zoom durchführen
             mediaPanel->zoomImage(factor);
             event->accept();
             return;
@@ -723,4 +738,27 @@ void MainWindow::onUpButtonClicked() {
         backButton->setEnabled(historyIndex > 0);
         forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
     }
+}
+
+// Überschreibe Event-Filter für Mausrad-Events
+bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
+    if (watched == folderView->viewport() && event->type() == QEvent::Wheel) {
+        QWheelEvent *we = static_cast<QWheelEvent*>(event);
+        QPoint pos = we->position().toPoint();
+        int half = folderView->width() / 2;
+        if (pos.x() > half) {
+            int delta = we->angleDelta().y();
+            int step = (delta > 0) ? -1 : 1;
+            QModelIndex current = folderView->currentIndex();
+            int row = current.isValid() ? current.row() : 0;
+            int maxRow = folderModel->rowCount(folderView->rootIndex()) - 1;
+            int newRow = qBound(0, row + step, maxRow);
+            QModelIndex newIndex = folderModel->index(newRow, 0, folderView->rootIndex());
+            folderView->setCurrentIndex(newIndex);
+            // Datei im rechten Panel anzeigen
+            onFolderSelected(newIndex);
+            return true;
+        }
+    }
+    return QMainWindow::eventFilter(watched, event);
 }

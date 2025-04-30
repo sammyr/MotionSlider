@@ -234,6 +234,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
@@ -259,6 +260,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \

@@ -555,6 +555,8 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtmochelpers.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtmocconstants.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/q20algorithm.h \
