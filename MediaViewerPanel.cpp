@@ -14,8 +14,9 @@
 #include <QScrollArea>
 #include <QMouseEvent>
 #include <QScrollBar>
+#include <QToolButton>
 
-MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false), isPanning(false) {
+MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false), isPanning(false), mutedEnabled(false) {
     // Lade Lautstärke und Loop-Status aus der Konfigurationsdatei
     double volumeValue = 0.7; // Standardwert
     
@@ -29,6 +30,9 @@ MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFacto
             
         if(configObj.contains("videoLoop"))
             videoLoopEnabled = configObj["videoLoop"].toBool();
+            
+        if(configObj.contains("muted"))
+            mutedEnabled = configObj["muted"].toBool();
             
         configFile.close();
     }
@@ -101,8 +105,30 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     QHBoxLayout* volumeLayout = new QHBoxLayout(volumeWidget);
     volumeLayout->setContentsMargins(5, 0, 5, 0);
     
-    QLabel* volumeIcon = new QLabel(this);
-    volumeIcon->setPixmap(style->standardIcon(QStyle::SP_MediaVolume).pixmap(16, 16));
+    QToolButton* muteButton = new QToolButton(this);
+    muteButton->setCheckable(true);
+    muteButton->setChecked(mutedEnabled);
+    audioOutput->setMuted(mutedEnabled);
+    if(mutedEnabled)
+        muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolumeMuted));
+    else
+        muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolume));
+    connect(muteButton, &QToolButton::toggled, this, [this, style, muteButton](bool muted) {
+        audioOutput->setMuted(muted);
+        if (muted)
+            muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolumeMuted));
+        else
+            muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolume));
+        // Speichere Mute-Status
+        QFile cfg("build/program-settings.json");
+        if(cfg.open(QIODevice::ReadWrite)) {
+            QJsonObject obj = QJsonDocument::fromJson(cfg.readAll()).object();
+            obj["muted"] = muted;
+            cfg.resize(0);
+            cfg.write(QJsonDocument(obj).toJson());
+            cfg.close();
+        }
+    });
     
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
@@ -110,7 +136,7 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     volumeSlider->setFixedWidth(80);
     connect(volumeSlider, &QSlider::valueChanged, this, &MediaViewerPanel::onVolumeChanged);
     
-    volumeLayout->addWidget(volumeIcon);
+    volumeLayout->addWidget(muteButton);
     volumeLayout->addWidget(volumeSlider);
     
     // Aktionen zur Toolbar hinzufügen
@@ -163,8 +189,8 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     videoWidget = new QVideoWidget;
     mediaPlayer->setVideoOutput(videoWidget);
     audioOutput->setVolume(volumeValue);
-    // Verbindung MediaStatusChanged entfernt (temporär deaktiviert)
-    // connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
+    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
+    connect(mediaPlayer, &QMediaPlayer::playbackStateChanged, this, &MediaViewerPanel::onMediaStateChanged);
     
     // Widgets zum StackedWidget hinzufügen
     stackedWidget->addWidget(imageScrollArea); // Index 0: Bild mit Panning
@@ -203,20 +229,6 @@ void MediaViewerPanel::setupUI(double volumeValue) {
             mediaPlayer->setPosition(position * duration / 1000);
         }
     });
-    
-    // Verbindung positionChanged entfernt (temporär deaktiviert)
-    // connect(mediaPlayer, &QMediaPlayer::positionChanged, this, [this](qint64 position) {
-    //     qint64 duration = mediaPlayer->duration();
-    //     if (duration > 0 && !positionSlider->isSliderDown()) {
-    //         // Konvertiere Position zu Slider-Wert (0-1000)
-    //         positionSlider->setValue(position * 1000 / duration);
-    //     }
-    // });
-    
-    // Verbindung durationChanged entfernt (temporär deaktiviert)
-    // connect(mediaPlayer, &QMediaPlayer::durationChanged, this, [this](qint64 duration) {
-    positionSlider->setValue(0);
-    // });
     
     sliderLayout->addWidget(positionSlider);
     
@@ -275,7 +287,6 @@ void MediaViewerPanel::loadVideo(const QString& videoPath) {
     // Bild ausblenden
     imageLabel->hide();
     
-    // Video laden und abspielen
     mediaPlayer->setSource(QUrl::fromLocalFile(videoPath));
     videoWidget->show();
     stackedWidget->setCurrentIndex(1);
@@ -355,43 +366,25 @@ void MediaViewerPanel::onNext() {
 }
 
 void MediaViewerPanel::onLoopToggled(bool checked) {
-    // Speichere den Loop-Status
     videoLoopEnabled = checked;
-    
-    // Speichere den Status in der Konfigurationsdatei
-    QFile configFile("build/program-settings.json");
-    if(configFile.open(QIODevice::ReadOnly)) {
-        QJsonDocument configDoc = QJsonDocument::fromJson(configFile.readAll());
-        QJsonObject configObj = configDoc.object();
-        
-        // Aktualisiere den Loop-Status
-        configObj["videoLoop"] = videoLoopEnabled;
-        
-        // Erstelle ein neues QJsonDocument mit dem aktualisierten Objekt
-        QJsonDocument updatedDoc(configObj);
-        
-        configFile.close();
-        
-        // Schreibe die aktualisierte Konfiguration zurück
-        if(configFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-            // Verwende QJsonDocument::Indented für besser lesbares JSON
-            configFile.write(updatedDoc.toJson(QJsonDocument::Indented));
-            configFile.close();
-            
-            qDebug() << "Loop-Status gespeichert:" << (videoLoopEnabled ? "aktiviert" : "deaktiviert");
-        } else {
-            qDebug() << "Fehler beim Öffnen der Konfigurationsdatei zum Schreiben";
-        }
-    } else {
-        qDebug() << "Fehler beim Öffnen der Konfigurationsdatei zum Lesen";
-    }
 }
 
 void MediaViewerPanel::onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
-    // Wenn das Video zu Ende ist und Loop aktiviert ist, starte es neu
-    if (status == QMediaPlayer::EndOfMedia && videoLoopEnabled) {
+    if (status == QMediaPlayer::MediaStatus::EndOfMedia && videoLoopEnabled) {
         mediaPlayer->setPosition(0);
         mediaPlayer->play();
+    }
+}
+
+void MediaViewerPanel::onMediaStateChanged(QMediaPlayer::PlaybackState state) {
+    if (state == QMediaPlayer::PlaybackState::StoppedState && videoLoopEnabled) {
+        mediaPlayer->play();
+    }
+    // Aktualisiere das Play/Pause-Icon basierend auf dem Wiedergabestatus
+    if (state == QMediaPlayer::PlayingState) {
+        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause));
+    } else {
+        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
     }
 }
 
@@ -408,15 +401,6 @@ void MediaViewerPanel::onPlayPause() {
 void MediaViewerPanel::onStop() {
     mediaPlayer->stop();
     playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
-}
-
-void MediaViewerPanel::onMediaStateChanged(QMediaPlayer::PlaybackState state) {
-    // Aktualisiere das Play/Pause-Icon basierend auf dem Wiedergabestatus
-    if (state == QMediaPlayer::PlayingState) {
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause));
-    } else {
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
-    }
 }
 
 void MediaViewerPanel::onCopyImage() {

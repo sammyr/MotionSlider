@@ -533,6 +533,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.h
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QString
@@ -962,7 +963,6 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h
-D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.h
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug
@@ -1457,8 +1457,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h
  mdp:D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h
-D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.cpp
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug

@@ -7,9 +7,10 @@
     },
     "fileInfoUrlBase": "https://fetlife.com/",
     "iconSize": 64,
+    "muted": true,
     "screenshotsPath": "D:/___SYSTEM/Desktop",
     "scrollSplitPercent": 70,
-    "sortOrder": "size",
+    "sortOrder": "name",
     "supportedImageTypes": [
         ".jpg",
         ".png",
@@ -32,5 +33,5 @@
         ".mpg"
     ],
     "videoLoop": true,
-    "volume": 0
+    "volume": 0.12
 }

@@ -48,6 +48,7 @@ private:
     QVideoWidget* videoWidget = nullptr;
     QMediaPlayer* mediaPlayer = nullptr;
     QAudioOutput* audioOutput = nullptr; // Für die Tonwiedergabe
+    bool mutedEnabled = false; // Status für Stummschaltung
     QVBoxLayout* mainLayout = nullptr;
     QToolBar* mediaToolBar = nullptr;
     QAction* playPauseAction = nullptr;
@@ -77,6 +78,8 @@ private:
     void clearToolbar();
 
 private slots:
+    void onLoopToggled(bool checked);
+    void onMediaStatusChanged(QMediaPlayer::MediaStatus status);
     void onPlayPause();
     void onStop();
     void onPrev();
@@ -84,9 +87,7 @@ private slots:
     void onScreenshot();
     void onCopyImage();
     void onVolumeChanged(int value);
-    void onLoopToggled(bool checked);
     void onMediaStateChanged(QMediaPlayer::PlaybackState state);
-    void onMediaStatusChanged(QMediaPlayer::MediaStatus status);
 
 protected:
     // Zoomen des Bildes per Mausrad im rechten Panel
