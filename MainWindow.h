@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QProgressBar>
 #include <QListView>
 #include <QFileSystemModel>
 #include <QLineEdit>
@@ -9,6 +10,12 @@
 #include <QToolButton>
 #include <QSplitter>
 #include <QToolBar>
+#include <QClipboard>
+#include <QGuiApplication>
+#include <QMessageBox>
+#include <QFileInfo>
+#include <QDir>
+#include <QSpinBox>
 
 // Unsere eigenen Klassen einbinden
 #include "ThumbnailDelegate.h"
@@ -39,11 +46,18 @@ private:
     // Thumbnail-Generator und Delegate
     ThumbnailGenerator* m_thumbnailGenerator;
     ThumbnailDelegate* m_thumbnailDelegate;
+    QProgressBar* progressBar; // Fortschrittsbalken für Statusleiste
     
     // Fenstereinstellungen werden jetzt über den SettingsManager verwaltet
 
 private slots:
     void onFolderViewContextMenu(const QPoint& pos);
+    void cutItems();
+    void copyItems();
+    void deleteItems();
+    void showProperties();
+    void pasteItems();
+    void onThumbnailSizeChanged(int size);
 
 private:
     // Ruft den ThumbnailGenerator auf, um Thumbnails zu erstellen
@@ -60,6 +74,12 @@ private:
     QStringList navigationHistory; // Verlauf der besuchten Ordner
     int historyIndex; // Aktuelle Position im Verlauf
     int scrollSplitPercent; // Prozentuale Position für Mausrad-Switch im linken Panel
+    // Thumbnail-Größe im File Explorer
+    QSpinBox *thumbnailSizeSpinBox;
+    int thumbnailSize;
+    // Cut-Paste Unterstützung
+    QStringList cutPaths;    // Zu verschiebende Dateien
+    bool cutOperationActive; // Flag, ob aktuell ausgeschnitten wurde
 
     // Navigation
     void onFolderDoubleClicked(const QModelIndex &index);
@@ -82,5 +102,7 @@ private slots:
     void onThumbnailGenerationFinished();
     
 private:
+    void updateThumbnailGridSize();
+    int thumbnailSpacing = 24; // Abstand zwischen Thumbnails (aus Settings)
 
 };

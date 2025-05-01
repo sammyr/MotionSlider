@@ -42,6 +42,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
@@ -288,8 +289,11 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -306,6 +310,8 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qcombobox.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
@@ -314,10 +320,13 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h \
@@ -992,11 +1001,11 @@ C:/Program\ Files/CMake/share/cmake-4.0/Modules/FindVulkan.cmake:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/signal.h:
 
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake:
+
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qfunctionaltools_impl.h:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake:
 
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/Compiler/GNU-CXX.cmake:
 
@@ -1036,18 +1045,6 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qtcore-config.h:
 
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/Internal/CheckFlagCommonConfig.cmake:
 
-D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6VersionlessAliasTargets.cmake:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/exception:
-
-C:/Qt/6.9.0/mingw_64/include/QtCore/qalgorithms.h:
-
-C:/Qt/6.9.0/mingw_64/include/QtCore/qarraydatapointer.h:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaTargets-relwithdebinfo.cmake:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/charconv.h:
@@ -1079,6 +1076,8 @@ C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/Windows-Initialize.cmak
 C:/Program\ Files/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/QDir:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:
 
@@ -1131,6 +1130,18 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qtaggedpointer.h:
 C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6CorePrivate/Qt6CorePrivateAdditionalTargetInfo.cmake:
+
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6VersionlessAliasTargets.cmake:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/exception:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qalgorithms.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qarraydatapointer.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qanystringview.h:
 
@@ -1235,6 +1246,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_
 C:/Qt/6.9.0/mingw_64/include/QtCore/qcomparehelpers.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qcontainerfwd.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qconfig.h:
 
@@ -1362,9 +1375,9 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qitemselectionmodel.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qiterable.h:
 
-C:/Qt/6.9.0/mingw_64/include/QtCore/qiterator.h:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateVersionlessAliasTargets.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qiterator.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc:
 
@@ -1394,9 +1407,9 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qlogging.h:
 
-C:/Qt/6.9.0/mingw_64/include/QtCore/qmalloc.h:
-
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateDependencies.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qmalloc.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qmap.h:
 
@@ -1497,6 +1510,8 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qstringbuilder.h:
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.tcc:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractbutton.h:
 
@@ -1702,13 +1717,13 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QSvgPluginAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h:
 
-C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateConfigVersionImpl.cmake:
-
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/errno.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QICOPluginAdditionalTargetInfo.cmake:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateConfigVersionImpl.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h:
 
@@ -1768,6 +1783,8 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qvector2d.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox:
+
 C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer:
@@ -1820,6 +1837,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostr
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar:
+
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate:
@@ -1848,6 +1867,8 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6GuiAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qcombobox.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h:
+
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6CorePrivate/Qt6CorePrivateVersionlessAliasTargets.cmake:
@@ -1860,9 +1881,19 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginConfig.cmake:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_mutex.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h:
 
@@ -1905,8 +1936,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6Config.cmake:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6ConfigExtras.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtInstallPaths.cmake:
 
@@ -2053,8 +2082,6 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QSvgIconPluginTargets-relwithdebinfo.cm
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QSvgPluginTargets.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginAdditionalTargetInfo.cmake:
-
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginConfig.cmake:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h:
 

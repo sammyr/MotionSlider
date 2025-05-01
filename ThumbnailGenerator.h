@@ -34,11 +34,13 @@ private:
     // Thumbnail für eine einzelne Datei generieren
     bool generateThumbnailForFile(const QString& filePath);
     // Generiert ein Video-Thumbnail mit FFmpeg oder Fallback
-    bool generateVideoThumbnail(const QFileInfo& info, const QString& thumbPath);
+    bool generateVideoThumbnail(const QFileInfo& info, const QString& thumbPath, const QSize& size);
     // Liste von bekannten Video-Dateierweiterungen
     QStringList getVideoExtensions();
     
     bool m_stopRequested;
+    int thumbnailWidth;
+    int thumbnailHeight;
 };
 
 class ThumbnailGenerator : public QObject {

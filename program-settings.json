@@ -6,7 +6,7 @@
         "videoPlayer": "C:/Program Files/MPC-HC/mpc-hc64.exe"
     },
     "fileInfoUrlBase": "https://fetlife.com/",
-    "iconSize": 64,
+    "iconSize": 164,
     "lastDrive": "D:/",
     "screenshotsPath": "D:/___SYSTEM/Desktop",
     "scrollSplitPercent": 70,
@@ -34,5 +34,6 @@
         ".mpg"
     ],
     "videoLoop": true,
-    "volume": 0
+    "volume": 0,
+    "thumbnailSpacing": 24
 }

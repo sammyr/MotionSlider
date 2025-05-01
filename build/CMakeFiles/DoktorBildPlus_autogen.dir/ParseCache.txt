@@ -4,6 +4,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QDir
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QFile
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject
@@ -236,8 +237,11 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate
@@ -253,6 +257,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractspinbox.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qcombobox.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h
@@ -261,10 +267,13 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h

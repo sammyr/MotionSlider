@@ -484,6 +484,25 @@ CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\SettingsManager.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qwidget.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qurl.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtextcursor.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtextdocument.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtextformat.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QMimeDatabase \

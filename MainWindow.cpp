@@ -23,6 +23,15 @@
 #include <QPainter>
 #include <QColor>
 #include <QStringList> // Für Navigation History
+#include <QMenu>
+#include <QMimeData>
+#include <QUrl>
+#include <QEvent>
+#include <QResizeEvent>
+#include <QClipboard>
+#include <QMimeData>
+#include <QSpinBox>
+#include <QLabel>
 
 #include "NameShortenDelegate.h"
 #include "ThumbnailDelegate.h"
@@ -31,9 +40,22 @@
 #include <QJsonObject>
 #include <QFile>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <shellapi.h>
+#endif
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    progressBar = new QProgressBar(this);
+    progressBar->setMinimum(0);
+    progressBar->setMaximum(100);
+    progressBar->setValue(0);
+    progressBar->setTextVisible(true);
+    progressBar->setFormat("Generiere Thumbnails: %p%");
+    progressBar->setVisible(false);
+    statusBar()->addPermanentWidget(progressBar);
     historyIndex = -1;
     // Menü
     QMenu *fileMenu = menuBar()->addMenu(tr("&Datei"));
@@ -103,19 +125,19 @@ MainWindow::MainWindow(QWidget *parent)
     sortComboBox->addItem("Größe", "size");
     sortComboBox->addItem("Typ", "type");
     
+    // Einstellungen laden
+    QJsonObject configObj;
+    QFile cfgFile("build/program-settings.json");
+    if (cfgFile.open(QIODevice::ReadOnly)) {
+        configObj = QJsonDocument::fromJson(cfgFile.readAll()).object();
+        cfgFile.close();
+    }
+
     // Aktuellen Sortierwert aus den Einstellungen laden
     QString currentSort = "name"; // Standardwert
-    QFile configFile1("build/program-settings.json");
-    if(configFile1.open(QIODevice::ReadOnly)) {
-        QJsonDocument configDoc = QJsonDocument::fromJson(configFile1.readAll());
-        QJsonObject configObj = configDoc.object();
-        
-        if(configObj.contains("sortOrder"))
-            currentSort = configObj["sortOrder"].toString();
+    if(configObj.contains("sortOrder"))
+        currentSort = configObj["sortOrder"].toString();
             
-        configFile1.close();
-    }
-    
     // Index basierend auf dem aktuellen Sortierwert setzen
     int sortIndex = 0;
     if (currentSort == "date") sortIndex = 1;
@@ -175,6 +197,26 @@ MainWindow::MainWindow(QWidget *parent)
     
     toolbarLayout->addWidget(sortComboBox);
     
+    // Thumbnail-Größe aus Settings laden
+    int currentThumbSize = 160;
+    if (configObj.contains("thumbnailSpacing"))
+        this->thumbnailSpacing = configObj["thumbnailSpacing"].toInt();
+    else
+        this->thumbnailSpacing = 24;
+    qDebug() << "[DEBUG] thumbnailSpacing aus Settings geladen:" << this->thumbnailSpacing;
+    if (configObj.contains("thumbnailSize"))
+        currentThumbSize = configObj["thumbnailSize"].toInt();
+    thumbnailSize = currentThumbSize;
+    // SpinBox für Thumbnail-Größe
+    thumbnailSizeSpinBox = new QSpinBox;
+    thumbnailSizeSpinBox->setRange(64, 384);
+    thumbnailSizeSpinBox->setSingleStep(16);
+    thumbnailSizeSpinBox->setValue(currentThumbSize);
+    thumbnailSizeSpinBox->setToolTip(tr("Thumbnail-Größe"));
+    toolbarLayout->addWidget(new QLabel(tr("Größe:")), 0);
+    toolbarLayout->addWidget(thumbnailSizeSpinBox);
+    connect(thumbnailSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::onThumbnailSizeChanged);
+    
     // Padding rechts
     toolbarLayout->addSpacing(5);
 
@@ -195,16 +237,27 @@ MainWindow::MainWindow(QWidget *parent)
     connect(folderView->selectionModel(), &QItemSelectionModel::currentChanged,
             this, &MainWindow::onFolderSelected);
 
+    // Verzeichnis-Wechsel aktivieren (nach folderView Instanziierung)
+    connect(driveComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onDriveChanged);
+    connect(folderView, &QListView::doubleClicked, this, &MainWindow::onFolderDoubleClicked);
+    connect(folderView, &QListView::clicked, this, &MainWindow::onFolderSelected);
+
     // Setze benutzerdefinierten Delegate für Thumbnails und konfiguriere View
-    m_thumbnailDelegate = new ThumbnailDelegate(folderView);
+    // Maximale Namenslänge aus Einstellungen lesen
+    int nameMaxLength = 10;
+    if (configObj.contains("NameMaxLength"))
+        nameMaxLength = configObj["NameMaxLength"].toInt();
+
+    m_thumbnailDelegate = new ThumbnailDelegate(nameMaxLength, folderView);
     folderView->setItemDelegate(m_thumbnailDelegate);
     folderView->setViewMode(QListView::IconMode);
-    folderView->setIconSize(QSize(64, 64));
-    folderView->setGridSize(QSize(120, 110)); // Gleichmäßige Kacheln für Icon+Text
+    folderView->setIconSize(QSize(thumbnailSize, thumbnailSize));
+
+    updateThumbnailGridSize();
     folderView->setResizeMode(QListView::Adjust);
     folderView->setUniformItemSizes(true);
-    folderView->setSpacing(10);
-    
+    folderView->setSpacing(thumbnailSpacing);
+
     // Initialisiere den Thumbnail-Generator
     m_thumbnailGenerator = new ThumbnailGenerator(this);
     
@@ -219,24 +272,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Debug-Ausgabe
     qDebug() << "ThumbnailDelegate installiert und View konfiguriert";
 
-    // NameMaxLength aus program-settings.json auslesen
-    int nameMaxLength = 10;
-    QString settingsPath = QCoreApplication::applicationDirPath() + "/program-settings.json";
-    QFile settingsFile(settingsPath);
-    if(settingsFile.open(QIODevice::ReadOnly)) {
-        QJsonDocument doc = QJsonDocument::fromJson(settingsFile.readAll());
-        QJsonObject obj = doc.object();
-        if(obj.contains("NameMaxLength")) {
-            nameMaxLength = obj.value("NameMaxLength").toInt(10);
-        }
-
-
-    }
-
-
-    // Delegate nur für folderContentView setzen
-    if(folderContentView)
-        folderContentView->setItemDelegate(new NameShortenDelegate(nameMaxLength, folderContentView));
+    // NameMaxLength aus Settings verwenden für folderContentView
+    int nameMaxLengthContent = 20;
+    if (configObj.contains("NameMaxLength"))
+        nameMaxLengthContent = configObj["NameMaxLength"].toInt();
+    if (folderContentView)
+        folderContentView->setItemDelegate(new NameShortenDelegate(nameMaxLengthContent, folderContentView));
 
     // Toolbar oben im linken Panel
     QToolBar *leftToolBar = new QToolBar(leftPanel);
@@ -251,7 +292,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Signal für Laufwerkswechsel
-    connect(driveComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onDriveChanged);
     folderView->setFlow(QListView::LeftToRight);
     
     // Aktualisiere die Anzeige - wichtig für Thumbnails
@@ -262,14 +302,15 @@ MainWindow::MainWindow(QWidget *parent)
     folderView->setMinimumWidth(180);
 
     // Signal: Datei im Ordnerbaum geklickt
-    connect(folderView, &QListView::clicked, this, &MainWindow::onFolderSelected);
-    connect(folderView, &QListView::doubleClicked, this, &MainWindow::onFolderDoubleClicked);
+    //connect(folderView, &QListView::clicked, this, &MainWindow::onFolderSelected);
+    //connect(folderView, &QListView::doubleClicked, this, &MainWindow::onFolderDoubleClicked);
     // Thumbnails im linken Panel anzeigen
-    folderView->setItemDelegate(new ThumbnailDelegate(folderView));
+    //folderView->setItemDelegate(new ThumbnailDelegate(folderView));
 
     // Initialisiere Pfad auf erstes Laufwerk
     if (driveComboBox->count() > 0) {
         QString drivePath = driveComboBox->itemText(0);
+        folderModel->setRootPath(drivePath);
         QModelIndex rootIndex = folderModel->index(drivePath);
         folderView->setRootIndex(rootIndex);
         pathEdit->setText(drivePath);
@@ -419,6 +460,8 @@ MainWindow::MainWindow(QWidget *parent)
     mainSplitter->setCollapsible(0, false);
     mainSplitter->setCollapsible(1, false);
     mainSplitter->setSizes({220, 600});
+    // Reagiere auf Panel-Resize
+    connect(mainSplitter, &QSplitter::splitterMoved, this, [this](int, int){ updateThumbnailGridSize(); });
 
     setCentralWidget(mainSplitter);
     statusBar();
@@ -428,337 +471,315 @@ MainWindow::MainWindow(QWidget *parent)
     
     // Wenn ein Pfad geladen wurde, setze Root-Index und generiere Thumbnails
     if (!pathEdit->text().isEmpty()) {
+        folderModel->setRootPath(pathEdit->text());
         QModelIndex rootIndex = folderModel->index(pathEdit->text());
         folderView->setRootIndex(rootIndex);
         generateThumbnailsForCurrentFolder();
     }
 }
 
-
-
-MainWindow::~MainWindow()
-{
-    // Kein explizites Speichern mehr hier, das passiert jetzt nur noch im closeEvent.
+void MainWindow::openFile() {
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Datei öffnen"), QString(),
+        tr("Bilder/Videos (*.png *.jpg *.jpeg *.bmp *.mp4 *.avi *.mkv *.mov)"));
+    if (fileName.isEmpty()) return;
+    mediaPanel->loadFile(fileName);
 }
 
+void MainWindow::clearAllThumbnails() {
+    if (m_thumbnailGenerator && m_thumbnailGenerator->isGenerating())
+        m_thumbnailGenerator->stopThumbnailGeneration();
+    QString thumbDir = QCoreApplication::applicationDirPath() + "/thumbnails";
+    QDir dir(thumbDir);
+    if (dir.exists()) dir.removeRecursively();
+    folderView->viewport()->update();
+}
 
+void MainWindow::onThumbnailGenerationStarted() {
+    progressBar->setValue(0);
+    progressBar->setFormat(tr("Generiere Thumbnails: %p%"));
+    progressBar->setVisible(true);
+    statusBar()->clearMessage();
+}
 
-void MainWindow::onFolderViewContextMenu(const QPoint& pos)
-{
-    QModelIndexList selected = folderView->selectionModel()->selectedIndexes();
-    if (selected.isEmpty())
-        return;
-    
-    QMenu menu(this);
-    QAction *resizeAction = menu.addAction("Resize (Topaz Gigapixel AI)");
-    
-    // Neue Option zum Löschen aller Thumbnails
-    QAction *clearThumbsAction = menu.addAction("Alle Thumbnails löschen");
-    
-    QAction *chosen = menu.exec(folderView->viewport()->mapToGlobal(pos));
-    
-    if (chosen == resizeAction) {
-        QStringList files;
-        for (const QModelIndex &idx : selected) {
-            if (folderModel->isDir(idx)) continue;
-            files << folderModel->filePath(idx);
-        }
+void MainWindow::onThumbnailGenerationProgress(int percent) {
+    progressBar->setValue(percent);
+}
 
-        // Externe Resize-Funktionalität aufrufen
-        ExternalTools::startResizeExternal(files);
-    } 
-    else if (chosen == clearThumbsAction) {
-        // Thumbnails löschen
-        clearAllThumbnails();
+void MainWindow::onThumbnailGenerationFinished() {
+    progressBar->setValue(100);
+    progressBar->setVisible(false);
+    statusBar()->showMessage(tr("Thumbnail-Generierung abgeschlossen"), 3000);
+    folderView->viewport()->update();
+}
+
+void MainWindow::onBackButtonClicked() {
+    if (historyIndex <= 0) return;
+    historyIndex--;
+    QString path = navigationHistory.at(historyIndex);
+    folderModel->setRootPath(path);
+    folderView->setRootIndex(folderModel->index(path));
+    pathEdit->setText(path);
+    backButton->setEnabled(historyIndex > 0);
+    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+    generateThumbnailsForCurrentFolder();
+}
+
+void MainWindow::onForwardButtonClicked() {
+    if (historyIndex >= navigationHistory.size() - 1) return;
+    historyIndex++;
+    QString path = navigationHistory.at(historyIndex);
+    folderModel->setRootPath(path);
+    folderView->setRootIndex(folderModel->index(path));
+    pathEdit->setText(path);
+    backButton->setEnabled(historyIndex > 0);
+    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+    generateThumbnailsForCurrentFolder();
+}
+
+void MainWindow::onUpButtonClicked() {
+    QString currentPath = pathEdit->text();
+    QDir dir(currentPath);
+    if (dir.cdUp()) {
+        QString parent = dir.absolutePath();
+        folderModel->setRootPath(parent);
+        QModelIndex rootIndex = folderModel->index(parent);
+        folderView->setRootIndex(rootIndex);
+        pathEdit->setText(parent);
+        generateThumbnailsForCurrentFolder();
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+        // update history
+        while (navigationHistory.size() > historyIndex + 1) navigationHistory.removeLast();
+        navigationHistory.append(parent);
+        historyIndex++;
+        backButton->setEnabled(historyIndex > 0);
+        forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
     }
 }
 
+void MainWindow::onFolderViewContextMenu(const QPoint &pos) {
+    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
+    QMenu menu(this);
+    QAction *pasteAct = menu.addAction(tr("Einfügen"), this, &MainWindow::pasteItems);
+    if (!QApplication::clipboard()->mimeData()->hasUrls()) pasteAct->setEnabled(false);
+    menu.addAction(tr("Ausschneiden"), this, &MainWindow::cutItems);
+    menu.addAction(tr("Kopieren"), this, &MainWindow::copyItems);
+    menu.addAction(tr("Löschen"), this, &MainWindow::deleteItems);
+    menu.addAction(tr("Eigenschaften"), this, &MainWindow::showProperties);
+    menu.exec(folderView->viewport()->mapToGlobal(pos));
+}
 
+void MainWindow::copyItems() {
+    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
+    QMimeData *md = new QMimeData;
+    QList<QUrl> urls;
+    for (auto &idx : sel) {
+        if (idx.column() != 0) continue;
+        QString path = folderModel->filePath(idx);
+        urls.append(QUrl::fromLocalFile(path));
+    }
+    md->setUrls(urls);
+    QApplication::clipboard()->setMimeData(md);
+}
 
-// Die Methode startResizeExternal() wurde in ExternalTools ausgelagert
+void MainWindow::cutItems() {
+    // Bereite Cut-Operation vor: speichere Pfade, kopiere in Clipboard
+    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
+    cutPaths.clear();
+    for (auto &idx : sel) {
+        if (idx.column() != 0) continue;
+        cutPaths.append(folderModel->filePath(idx));
+    }
+    if (cutPaths.isEmpty()) return;
+    // Clipboard setzen
+    QMimeData *md = new QMimeData;
+    QList<QUrl> urls;
+    for (const QString &p : cutPaths) urls.append(QUrl::fromLocalFile(p));
+    md->setUrls(urls);
+    QApplication::clipboard()->setMimeData(md);
+    cutOperationActive = true;
+}
 
+void MainWindow::deleteItems() {
+    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
+    QStringList paths;
+    for (auto &idx : sel) {
+        if (idx.column() != 0) continue;
+        paths << folderModel->filePath(idx);
+    }
+    if (paths.isEmpty()) return;
+    // Verschiebe in Papierkorb
+    for (const QString &p : paths) {
+        QFileInfo info(p);
+        auto moveToTrash = [&](const QString &path){
+            #ifdef Q_OS_WIN
+            SHFILEOPSTRUCT op = {0};
+            op.wFunc = FO_DELETE;
+            std::wstring from = QDir::toNativeSeparators(path).toStdWString();
+            from.push_back(0);
+            op.pFrom = from.c_str();
+            op.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION;
+            SHFileOperation(&op);
+            #else
+            QDir(path).removeRecursively();
+            #endif
+        };
+        moveToTrash(p);
+    }
+    folderView->update();
+}
 
+void MainWindow::showProperties() {
+    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
+    if (sel.isEmpty()) return;
+    QString p = folderModel->filePath(sel.first());
+    QFileInfo info(p);
+    QString details = tr("Pfad: %1\nGröße: %2 Bytes\nZuletzt geändert: %3").arg(
+        info.absoluteFilePath(),
+        QString::number(info.size()),
+        info.lastModified().toString());
+    QMessageBox::information(this, tr("Eigenschaften"), details);
+}
 
-void MainWindow::onDriveChanged(int index)
-{
+void MainWindow::onThumbnailSizeChanged(int size) {
+    thumbnailSize = size;
+    folderView->setIconSize(QSize(size, size));
+    updateThumbnailGridSize();
+    // Settings schreiben
+    QFile cfg("build/program-settings.json");
+    if (cfg.open(QIODevice::ReadWrite)) {
+        QJsonDocument doc = QJsonDocument::fromJson(cfg.readAll());
+        QJsonObject obj = doc.object();
+        obj["thumbnailSize"] = size;
+        cfg.resize(0);
+        cfg.write(QJsonDocument(obj).toJson());
+        cfg.close();
+    }
+}
+
+// Implementierung Verzeichnis-Wechsel und Thumbnail-Generierung
+MainWindow::~MainWindow() {}
+
+void MainWindow::onDriveChanged(int index) {
     if (index < 0) return;
     QString drivePath = driveComboBox->itemText(index);
+    folderModel->setRootPath(drivePath);
     QModelIndex rootIndex = folderModel->index(drivePath);
     folderView->setRootIndex(rootIndex);
     pathEdit->setText(drivePath);
-    SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit); // <-- Speichern nach Verzeichniswechsel
-    // Manage history
-    while (navigationHistory.size() > historyIndex + 1)
-        navigationHistory.removeLast();
+    SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+    // Verlauf
+    while (navigationHistory.size() > historyIndex + 1) navigationHistory.removeLast();
     navigationHistory.append(drivePath);
     historyIndex++;
     backButton->setEnabled(historyIndex > 0);
     forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+    generateThumbnailsForCurrentFolder();
 }
 
-void MainWindow::onFolderDoubleClicked(const QModelIndex &index)
-{
-    // Vor dem Öffnen eines Ordners Thumbnails generieren
-    generateThumbnailsForCurrentFolder();
-
+void MainWindow::onFolderDoubleClicked(const QModelIndex &index) {
     QString filePath = folderModel->filePath(index);
     QFileInfo info(filePath);
     if (info.isDir()) {
-        folderView->setRootIndex(index);
+        folderModel->setRootPath(filePath);
+        QModelIndex dirIndex = folderModel->index(filePath);
+        folderView->setRootIndex(dirIndex);
         pathEdit->setText(filePath);
-        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit); // <-- Speichern nach Verzeichniswechsel
-        // Manage history
-        while (navigationHistory.size() > historyIndex + 1)
-            navigationHistory.removeLast();
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+        while (navigationHistory.size() > historyIndex + 1) navigationHistory.removeLast();
         navigationHistory.append(filePath);
         historyIndex++;
         backButton->setEnabled(historyIndex > 0);
         forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
+        // Thumbnails für das neue Verzeichnis generieren
+        generateThumbnailsForCurrentFolder();
     } else {
-        // Optional: Bei Datei Doppelklick kann geöffnet werden
-        onFolderSelected(index);
-    }
-}
-
-
-
-void MainWindow::onFolderSelected(const QModelIndex &index)
-{
-    // Thumbnails für das aktuelle Verzeichnis generieren
-    generateThumbnailsForCurrentFolder();
-
-    QString filePath = folderModel->filePath(index);
-    QFileInfo info(filePath);
-    if (info.isDir()) {
-        // Beim Klick auf Ordner passiert nichts besonderes
-        return;
-    }
-
-    QMimeDatabase db;
-    QMimeType type = db.mimeTypeForFile(filePath);
-
-    // Medien-Dateitypen (Bild oder Video) werden von MediaViewerPanel behandelt
-    if (type.name().startsWith("image/") || 
-        type.name().startsWith("video/") || 
-        filePath.endsWith(".mp4", Qt::CaseInsensitive) ||
-        filePath.endsWith(".avi", Qt::CaseInsensitive) ||
-        filePath.endsWith(".mkv", Qt::CaseInsensitive) ||
-        filePath.endsWith(".mov", Qt::CaseInsensitive) ||
-        filePath.endsWith(".flv", Qt::CaseInsensitive)) {
-        
-        // Medientyp erkennen und entsprechend anzeigen
         mediaPanel->loadFile(filePath);
     }
-    else {
-        // Unbekannter Dateityp - mit Standardprogramm öffnen
-        ExternalTools::openWithDefaultProgram(filePath);
+}
+
+void MainWindow::onFolderSelected(const QModelIndex &index) {
+    QString filePath = folderModel->filePath(index);
+    QFileInfo info(filePath);
+    if (!info.isDir()) {
+        mediaPanel->loadFile(filePath);
+    } else {
+        mediaPanel->clearMedia();
     }
 }
 
-// ...
-
-void MainWindow::resizeEvent(QResizeEvent *event)
-{
-    // Die Größenänderung wird automatisch vom MediaViewerPanel behandelt
-    QMainWindow::resizeEvent(event);
-}
-
-// ...
-
-void MainWindow::wheelEvent(QWheelEvent *event)
-{
-    // Zoom mit CTRL + Mausrad an MediaViewerPanel delegieren
-    if (mediaPanel && (event->modifiers() & Qt::ControlModifier)) {
-        QPoint numDegrees = event->angleDelta() / 8;
-        QPoint numSteps = numDegrees / 15;
-        
-        if (!numSteps.isNull()) {
-            // Zoom-Faktor berechnen
-            double factor = (numSteps.y() > 0) ? 1.25 : 0.8; // Rein- oder rauszoomen
-            
-            // Zoom durchführen
-            mediaPanel->zoomImage(factor);
-            event->accept();
-            return;
-        }
-    }
-    
-    QMainWindow::wheelEvent(event);
-}
-
-// ...
-
-void MainWindow::openFile() {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Datei öffnen"),
-        QString(), tr("Bilder/Videos (*.png *.jpg *.jpeg *.bmp *.mp4 *.avi *.mkv *.mov)"));
-
-    if (fileName.isEmpty())
-        return;
-
-    mediaPanel->loadFile(fileName);
-}
-
-// ...
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    // Fenstereinstellungen beim Schließen speichern
-    SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
-    QMainWindow::closeEvent(event);
-}
-void MainWindow::generateThumbnailsForCurrentFolder()
-{
-    if (!folderView || !folderModel) {
-        qDebug() << "folderView ist null?" << (!folderView);
-        qDebug() << "folderModel ist null?" << (!folderModel);
-        return;
-    }
-
+void MainWindow::generateThumbnailsForCurrentFolder() {
+    if (!folderView || !folderModel) return;
     QModelIndex rootIdx = folderView->rootIndex();
     QString path = folderModel->filePath(rootIdx);
-
-    qDebug() << "Aktueller Pfad:" << path;
-
-    // Starte die asynchrone Thumbnail-Generierung
     if (m_thumbnailGenerator && m_thumbnailDelegate) {
         m_thumbnailGenerator->startThumbnailGeneration(folderView, folderModel, m_thumbnailDelegate);
     }
 }
 
-void MainWindow::clearAllThumbnails()
-{
-    // Thumbnail-Generierung stoppen, falls sie läuft
-    if (m_thumbnailGenerator && m_thumbnailGenerator->isGenerating()) {
-        m_thumbnailGenerator->stopThumbnailGeneration();
-    }
-    
-    // Thumbnails-Verzeichnis ermitteln
-    QString thumbDir = QCoreApplication::applicationDirPath() + "/thumbnails";
-    
-    // Alle Dateien im Thumbnails-Ordner löschen
-    QDir dir(thumbDir);
-    if (dir.exists()) {
-        qDebug() << "Lösche alle Thumbnails in:" << thumbDir;
-        
-        // Alle PNG-Dateien löschen
-        QStringList filters;
-        filters << "*_thumb.png";
-        dir.setNameFilters(filters);
-        
-        int count = 0;
-        foreach (QString file, dir.entryList()) {
-            if (dir.remove(file)) {
-                count++;
-            }
-        }
-        
-        QMessageBox::information(this, "Thumbnails gelöscht", 
-                               QString("%1 Thumbnails wurden gelöscht.").arg(count));
-        
-        // Aktuelle Ansicht aktualisieren und neue Thumbnails generieren
-        folderView->viewport()->update();
-        generateThumbnailsForCurrentFolder();
-    }
+// Dynamische Anpassung der Thumbnail-GridSize
+void MainWindow::updateThumbnailGridSize() {
+    if (!folderView) return;
+    int nameMaxLength = m_thumbnailDelegate ? m_thumbnailDelegate->getMaxLength() : 10;
+    QFontMetrics fm(folderView->font());
+    int textWidth = fm.horizontalAdvance(QString(nameMaxLength, 'W'));
+    int gridWidth = thumbnailSize; // Nur die Thumbnail-Größe bestimmt die Breite
+    int gridHeight = thumbnailSize + fm.height() * 2 + 8; // Noch weniger Abstand
+    folderView->setGridSize(QSize(gridWidth, gridHeight));
+    folderView->setSpacing(thumbnailSpacing); // Abstand aus Settings
 }
 
-// Slots für den ThumbnailGenerator
-void MainWindow::onThumbnailGenerationStarted()
-{
-    // Statusbar-Nachricht oder andere UI-Anzeige
-    statusBar()->showMessage(tr("Generiere Thumbnails..."));
-}
 
-void MainWindow::onThumbnailGenerationProgress(int percent)
-{
-    // Update der Statusbar mit Fortschritt
-    statusBar()->showMessage(tr("Generiere Thumbnails: %1%").arg(percent));
-}
-
-void MainWindow::onThumbnailGenerationFinished()
-{
-    // Generierung abgeschlossen
-    statusBar()->showMessage(tr("Thumbnail-Generierung abgeschlossen"), 3000);
-    
-    // Aktualisiere die Ansicht
-    if (folderView) {
-        folderView->viewport()->update();
-    }
-}
-
-// Slot für Zurück-Button
-void MainWindow::onBackButtonClicked()
-{
-    if (historyIndex <= 0) return;
-    historyIndex--;
-    QString prevPath = navigationHistory.at(historyIndex);
-    QModelIndex prevIndex = folderModel->index(prevPath);
-    if (prevIndex.isValid()) {
-        folderView->setRootIndex(prevIndex);
-        pathEdit->setText(prevPath);
-        generateThumbnailsForCurrentFolder();
-        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
-    }
-    backButton->setEnabled(historyIndex > 0);
-    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
-}
-
-// Slot für Vorwärts-Button
-void MainWindow::onForwardButtonClicked()
-{
-    if (historyIndex >= navigationHistory.size() - 1) return;
-    historyIndex++;
-    QString nextPath = navigationHistory.at(historyIndex);
-    QModelIndex nextIndex = folderModel->index(nextPath);
-    if (nextIndex.isValid()) {
-        folderView->setRootIndex(nextIndex);
-        pathEdit->setText(nextPath);
-        generateThumbnailsForCurrentFolder();
-        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
-    }
-    backButton->setEnabled(historyIndex > 0);
-    forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
-}
-
-// Slot: Navigiert einen Ordner nach oben
-void MainWindow::onUpButtonClicked() {
-    QString currentPath = pathEdit->text();
-    QDir dir(currentPath);
-    if (dir.cdUp()) {
-        QString parentPath = dir.absolutePath();
-        QModelIndex idx = folderModel->index(parentPath);
-        folderView->setRootIndex(idx);
-        pathEdit->setText(parentPath);
-        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
-        generateThumbnailsForCurrentFolder();
-        // Verlauf verwalten
-        while (navigationHistory.size() > historyIndex + 1)
-            navigationHistory.removeLast();
-        navigationHistory.append(parentPath);
-        historyIndex++;
-        backButton->setEnabled(historyIndex > 0);
-        forwardButton->setEnabled(historyIndex < navigationHistory.size() - 1);
-    }
-}
-
-// Überschreibe Event-Filter für Mausrad-Events
+// Überschriebene Event-Handler
 bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
-    if (watched == folderView->viewport() && event->type() == QEvent::Wheel) {
-        QWheelEvent *we = static_cast<QWheelEvent*>(event);
-        QPoint pos = we->position().toPoint();
-        int half = folderView->width() / 2;
-        if (pos.x() > half) {
-            int delta = we->angleDelta().y();
-            int step = (delta > 0) ? -1 : 1;
-            QModelIndex current = folderView->currentIndex();
-            int row = current.isValid() ? current.row() : 0;
-            int maxRow = folderModel->rowCount(folderView->rootIndex()) - 1;
-            int newRow = qBound(0, row + step, maxRow);
-            QModelIndex newIndex = folderModel->index(newRow, 0, folderView->rootIndex());
-            folderView->setCurrentIndex(newIndex);
-            // Datei im rechten Panel anzeigen
-            onFolderSelected(newIndex);
-            return true;
-        }
-    }
     return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::wheelEvent(QWheelEvent *event) {
+    QMainWindow::wheelEvent(event);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    QMainWindow::resizeEvent(event);
+    updateThumbnailGridSize();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    QMainWindow::closeEvent(event);
+}
+
+// Rekursive Verzeichnis-Kopie
+static bool copyDirRec(const QString &src, const QString &dst) {
+    QDir srcDir(src);
+    if (!QDir().mkpath(dst)) return false;
+    for (const QString &d : srcDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+        copyDirRec(srcDir.filePath(d), QDir(dst).filePath(d));
+    for (const QString &f : srcDir.entryList(QDir::Files))
+        QFile::copy(srcDir.filePath(f), QDir(dst).filePath(f));
+    return true;
+}
+
+void MainWindow::pasteItems() {
+    const QMimeData *md = QApplication::clipboard()->mimeData();
+    if (!md->hasUrls()) return;
+    QModelIndex root = folderView->rootIndex();
+    QString dest = folderModel->filePath(root);
+    for (const QUrl &url : md->urls()) {
+        QString src = url.toLocalFile();
+        QFileInfo info(src);
+        QString target = QDir(dest).filePath(info.fileName());
+        if (info.isDir()) copyDirRec(src, target);
+        else QFile::copy(src, target);
+    }
+    // Wenn vorher ausgeschnitten, Originale löschen
+    if (cutOperationActive) {
+        for (const QString &src : cutPaths) {
+            QFileInfo info(src);
+            if (info.isDir()) QDir(src).removeRecursively();
+            else QFile::remove(src);
+        }
+        cutPaths.clear();
+        cutOperationActive = false;
+        QApplication::clipboard()->clear();
+    }
+    folderView->update();
 }

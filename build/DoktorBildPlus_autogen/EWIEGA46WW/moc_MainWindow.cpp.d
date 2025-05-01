@@ -2,6 +2,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
@@ -234,8 +235,11 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStackedWidget \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
@@ -251,6 +255,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qcombobox.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
@@ -259,10 +265,13 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlineedit.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstackedwidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyle.h \

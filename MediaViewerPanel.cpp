@@ -49,6 +49,20 @@ MediaViewerPanel::~MediaViewerPanel() {
     // Aufräumen, falls nötig
 }
 
+void MediaViewerPanel::clearMedia() {
+    if (mediaPlayer) {
+        mediaPlayer->stop();
+        mediaPlayer->setSource(QUrl());
+    }
+    if (videoWidget) videoWidget->hide();
+    if (imageLabel) {
+        imageLabel->clear();
+        imageLabel->hide();
+    }
+    if (stackedWidget) stackedWidget->setCurrentIndex(0);
+    zoomFactor = 1.0;
+}
+
 void MediaViewerPanel::setupUI(double volumeValue) {
     // Layout erstellen
     mainLayout = new QVBoxLayout(this);
@@ -58,67 +72,64 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     mediaToolBar = new QToolBar(this);
     mediaToolBar->setMovable(false);
     mediaToolBar->setFloatable(false);
-    mediaToolBar->setIconSize(QSize(24, 24)); // Größere Icons für bessere Sichtbarkeit
+    mediaToolBar->setIconSize(QSize(24,24));
     mediaToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    mediaToolBar->setStyleSheet("QToolBar { spacing: 5px; }"); // Mehr Abstand zwischen Buttons
-    
-    // Aktionen hinzufügen
-    QStyle* style = QApplication::style();
-    
-    // Play/Pause-Button
-    playPauseAction = new QAction(style->standardIcon(QStyle::SP_MediaPlay), "Abspielen/Pause", this);
-    connect(playPauseAction, &QAction::triggered, this, &MediaViewerPanel::onPlayPause);
-    
-    // Stop-Button
-    stopAction = new QAction(style->standardIcon(QStyle::SP_MediaStop), "Stopp", this);
-    connect(stopAction, &QAction::triggered, this, &MediaViewerPanel::onStop);
-    
-    // Vorheriger Frame-Button
-    prevAction = new QAction(style->standardIcon(QStyle::SP_MediaSkipBackward), "Vorheriger Frame", this);
-    connect(prevAction, &QAction::triggered, this, &MediaViewerPanel::onPrev);
-    
-    // Nächster Frame-Button
-    nextAction = new QAction(style->standardIcon(QStyle::SP_MediaSkipForward), "Nächster Frame", this);
-    connect(nextAction, &QAction::triggered, this, &MediaViewerPanel::onNext);
-    
-    // Screenshot-Button
-    screenshotAction = new QAction(style->standardIcon(QStyle::SP_DesktopIcon), "Screenshot", this);
-    connect(screenshotAction, &QAction::triggered, this, &MediaViewerPanel::onScreenshot);
-    
-    // Loop-Button (checkbar) mit deutlicherem Icon
+    mediaToolBar->setStyleSheet("QToolBar { spacing:5px; }");
+
+    // Aktionen hinzufügen: Play/Pause, Frame zurück, Frame vor, Loop, Mute, Volume
+    // Play/Pause Toggle-Button
+    QToolButton* playPauseBtn = new QToolButton(this);
+    playPauseBtn->setCheckable(true);
+    playPauseBtn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
+    connect(playPauseBtn, &QToolButton::toggled, this, [this, playPauseBtn](bool play){
+        if(play){ mediaPlayer->play(); playPauseBtn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause)); }
+        else      { mediaPlayer->pause(); playPauseBtn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay)); }
+    });
+    connect(mediaPlayer, &QMediaPlayer::playbackStateChanged, this, [playPauseBtn](QMediaPlayer::PlaybackState st){
+        playPauseBtn->setChecked(st==QMediaPlayer::PlayingState);
+    });
+
+    // Frame Navigation
+    QAction* prevAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSkipBackward),"",this);
+    connect(prevAct, &QAction::triggered, this, &MediaViewerPanel::onPrev);
+    QAction* nextAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSkipForward),"",this);
+    connect(nextAct, &QAction::triggered, this, &MediaViewerPanel::onNext);
+
+    // Loop Button
     QIcon loopIcon;
     if (QFile::exists("icons/loop.png")) {
         loopIcon = QIcon("icons/loop.png");
     } else {
         // Fallback auf ein Standard-Icon, das besser erkennbar ist
-        loopIcon = style->standardIcon(QStyle::SP_BrowserReload);
+        loopIcon = QApplication::style()->standardIcon(QStyle::SP_BrowserReload);
     }
     
-    loopAction = new QAction(loopIcon, "LOOP", this);
+    QAction* loopAction = new QAction(loopIcon, "LOOP", this);
     loopAction->setCheckable(true);
     loopAction->setChecked(videoLoopEnabled); // Status aus Konfiguration laden
     loopAction->setToolTip("Video in Endlosschleife abspielen"); // Tooltip hinzufügen
     connect(loopAction, &QAction::toggled, this, &MediaViewerPanel::onLoopToggled);
     
-    // Lautstärke-Widget
-    volumeWidget = new QWidget(this);
-    QHBoxLayout* volumeLayout = new QHBoxLayout(volumeWidget);
-    volumeLayout->setContentsMargins(5, 0, 5, 0);
-    
+    QToolButton* loopBtn = new QToolButton(this);
+    loopBtn->setDefaultAction(loopAction);
+    loopBtn->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    loopBtn->setMinimumWidth(80);
+
+    // Mute Button
     QToolButton* muteButton = new QToolButton(this);
     muteButton->setCheckable(true);
     muteButton->setChecked(mutedEnabled);
     audioOutput->setMuted(mutedEnabled);
     if(mutedEnabled)
-        muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolumeMuted));
+        muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolumeMuted));
     else
-        muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolume));
-    connect(muteButton, &QToolButton::toggled, this, [this, style, muteButton](bool muted) {
+        muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolume));
+    connect(muteButton, &QToolButton::toggled, this, [this, muteButton](bool muted) {
         audioOutput->setMuted(muted);
         if (muted)
-            muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolumeMuted));
+            muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolumeMuted));
         else
-            muteButton->setIcon(style->standardIcon(QStyle::SP_MediaVolume));
+            muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolume));
         // Speichere Mute-Status
         QFile cfg("build/program-settings.json");
         if(cfg.open(QIODevice::ReadWrite)) {
@@ -129,38 +140,25 @@ void MediaViewerPanel::setupUI(double volumeValue) {
             cfg.close();
         }
     });
-    
+
+    // Lautstärke-Widget
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
     volumeSlider->setValue(volumeValue * 100); // Wert aus der Konfigurationsdatei setzen
-    volumeSlider->setFixedWidth(80);
+    volumeSlider->setFixedWidth(120);
     connect(volumeSlider, &QSlider::valueChanged, this, &MediaViewerPanel::onVolumeChanged);
-    
-    volumeLayout->addWidget(muteButton);
-    volumeLayout->addWidget(volumeSlider);
-    
-    // Aktionen zur Toolbar hinzufügen
-    mediaToolBar->addAction(playPauseAction);
-    mediaToolBar->addAction(stopAction);
+
+    // Add to toolbar
+    mediaToolBar->addWidget(playPauseBtn);
+    mediaToolBar->addSeparator();
+    mediaToolBar->addAction(prevAct);
+    mediaToolBar->addAction(nextAct);
+    mediaToolBar->addSeparator();
+    mediaToolBar->addWidget(loopBtn);
+    mediaToolBar->addWidget(muteButton);
+    mediaToolBar->addWidget(volumeSlider);
     mediaToolBar->addSeparator(); // Trenner für bessere Gruppierung
-    mediaToolBar->addAction(prevAction);
-    mediaToolBar->addAction(nextAction);
-    mediaToolBar->addSeparator(); // Trenner für bessere Gruppierung
-    
-    // Eigener Button für Loop mit besserer Sichtbarkeit
-    QToolButton* loopButton = new QToolButton();
-    loopButton->setDefaultAction(loopAction);
-    loopButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    loopButton->setMinimumWidth(80); // Breiter machen für bessere Sichtbarkeit
-    loopButton->setStyleSheet("QToolButton { padding: 5px; border: 1px solid #aaa; border-radius: 3px; } "
-                            "QToolButton:checked { background-color: #88c0d0; color: white; font-weight: bold; }");
-    
-    mediaToolBar->addWidget(loopButton);
-    
-    mediaToolBar->addSeparator(); // Trenner für bessere Gruppierung
-    mediaToolBar->addAction(screenshotAction);
-    mediaToolBar->addWidget(volumeWidget);
-    
+
     // StackedWidget für Bild/Video
     stackedWidget = new QStackedWidget(this);
     
@@ -243,6 +241,7 @@ void MediaViewerPanel::setupUI(double volumeValue) {
 }
 
 void MediaViewerPanel::loadFile(const QString& filePath) {
+    clearMedia();
     QFileInfo fileInfo(filePath);
     if (!fileInfo.exists()) return;
     
@@ -382,25 +381,18 @@ void MediaViewerPanel::onMediaStateChanged(QMediaPlayer::PlaybackState state) {
     }
     // Aktualisiere das Play/Pause-Icon basierend auf dem Wiedergabestatus
     if (state == QMediaPlayer::PlayingState) {
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause));
+        //playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause));
     } else {
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
+        //playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
     }
 }
 
 void MediaViewerPanel::onPlayPause() {
-    if (mediaPlayer->playbackState() == QMediaPlayer::PlayingState) {
-        mediaPlayer->pause();
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
-    } else {
-        mediaPlayer->play();
-        playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPause));
-    }
+    // Nicht mehr benötigt
 }
 
 void MediaViewerPanel::onStop() {
-    mediaPlayer->stop();
-    playPauseAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
+    // Nicht mehr benötigt
 }
 
 void MediaViewerPanel::onCopyImage() {

@@ -6,8 +6,12 @@
 #include <QPainter>
 #include <QDebug>
 
-ThumbnailDelegate::ThumbnailDelegate(QObject* parent) : QStyledItemDelegate(parent), m_generatingThumbnails(false) {
-}
+ThumbnailDelegate::ThumbnailDelegate(int maxLength, QObject* parent)
+    : QStyledItemDelegate(parent), m_generatingThumbnails(false), m_maxLength(maxLength) {}
+
+ThumbnailDelegate::ThumbnailDelegate(QObject* parent)
+    : ThumbnailDelegate(10, parent) {}
+
 
 void ThumbnailDelegate::setGeneratingThumbnails(bool generating) {
     m_generatingThumbnails = generating;
@@ -26,19 +30,7 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
         return;
     }
     
-    // Wenn Thumbnails generiert werden, zeige keine Standard-Icons für Dateien
-    if (m_generatingThumbnails) {
-        // Vollständig leerer Style ohne Icons und Dekorationen
-        QStyleOptionViewItem emptyOption = option;
-        emptyOption.icon = QIcon(); // Leeres Icon
-        emptyOption.features &= ~QStyleOptionViewItem::HasDecoration; // Dekorationselement (Icon) entfernen
-        emptyOption.decorationSize = QSize(0, 0); // Keine Größe für Dekoration
-        
-        // Zeichne nur den Text und Selektionsrahmen
-        QStyledItemDelegate::paint(painter, emptyOption, index);
-        
-        return;
-    }
+
     
     // Thumbnail-Pfad berechnen
     QString thumbPath = QCoreApplication::applicationDirPath() + "/thumbnails/" + 
@@ -48,6 +40,9 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
         // Thumbnail laden
         QPixmap originalThumb(thumbPath);
         
+        if (originalThumb.isNull()) {
+            qDebug() << "[ThumbnailDelegate] PNG existiert, aber QPixmap konnte NICHT geladen werden:" << thumbPath;
+        }
         if (!originalThumb.isNull()) {
             if (VERBOSE_DEBUG) {
                 qDebug() << "Thumbnails für" << info.fileName() << "gefunden und geladen";
@@ -72,9 +67,9 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
             QRect iconRect;
             
             // Größe und Position für das Thumbnail berechnen
-            iconRect.setWidth(qMin(option.rect.width() - 10, 64)); // Max 64px breit, mit Rand
-            iconRect.setHeight(qMin(option.rect.width() - 10, 64)); // Quadratisch, aber nicht zu groß
-            
+            int thumbMax = option.decorationSize.width(); // Nutze die vom View vorgegebene Größe
+            iconRect.setWidth(thumbMax);
+            iconRect.setHeight(thumbMax);
             // Zentrieren im verfügbaren Bereich
             iconRect.moveLeft(option.rect.left() + (option.rect.width() - iconRect.width()) / 2);
             
@@ -88,10 +83,10 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
                                                       Qt::KeepAspectRatio, 
                                                       Qt::SmoothTransformation);
             
-            // Graue Box ohne Rahmen als Hintergrund für das Thumbnail - breiter machen
-            QRect widerBgRect = iconRect;
-            widerBgRect.adjust(-10, -10, 10, 10); // Deutlich größere Box
-            painter->fillRect(widerBgRect, QColor(240, 240, 240, 200)); // Hellgrau mit leichter Transparenz
+            // Graue Box ohne Rahmen als Hintergrund für das Thumbnail - minimaler Rand
+            QRect bgRect = iconRect;
+            bgRect.adjust(-2, -2, 2, 2); // Nur 2px Rand
+            painter->fillRect(bgRect, QColor(240, 240, 240, 200)); // Hellgrau mit leichter Transparenz
             
             // Zentrierte Position berechnen für das skalierte Thumbnail
             QRect centeredRect = iconRect;
@@ -114,16 +109,16 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
             textRect.setLeft(option.rect.left());
             textRect.setRight(option.rect.right());
             
-            // Dateinamen zeichnen - auf 10 Zeichen begrenzen, mit "..." für längere Namen
+            // Dateinamen zeichnen - auf maximale Länge begrenzen (vom Konstruktor übergeben)
             painter->setPen(Qt::black);
             QFont font = painter->font();
             font.setPointSize(8); // Kleinere Schrift
             painter->setFont(font);
             
-            // Dateiname auf 10 Zeichen begrenzen
             QString displayName = info.fileName();
-            if (displayName.length() > 10) {
-                displayName = displayName.left(10) + "...";
+            int maxLength = m_maxLength;
+            if (displayName.length() > maxLength) {
+                displayName = displayName.left(maxLength) + "...";
             }
             
             painter->drawText(textRect, Qt::AlignHCenter | Qt::AlignTop, displayName);

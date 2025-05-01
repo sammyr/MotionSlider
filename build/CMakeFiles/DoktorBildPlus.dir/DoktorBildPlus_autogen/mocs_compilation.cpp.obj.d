@@ -384,11 +384,13 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlistview.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractitemview.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qitemselectionmodel.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -460,14 +462,10 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsplitter.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QToolBar \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtoolbar.h \
- D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qbasictimer.h \
@@ -477,6 +475,25 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qelapsedtimer.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qnativeinterface.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QFileInfo \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QDir \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h \
+ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QCoreApplication \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
@@ -548,13 +565,6 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QClipboard \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qclipboard.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtmochelpers.h \

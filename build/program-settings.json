@@ -1,16 +1,16 @@
 {
-    "NameMaxLength": 10,
+    "NameMaxLength": 20,
     "externalPrograms": {
         "imageEditor": "D:/_SOFTWARE/_VIDEO AUDIO/HONEYVIEW-PORTABLE/Honeyview32.exe",
         "resizeProgram": "C:/Program Files/Topaz Labs LLC/Topaz Gigapixel AI/Topaz Gigapixel AI.exe",
         "videoPlayer": "C:/Program Files/MPC-HC/mpc-hc64.exe"
     },
     "fileInfoUrlBase": "https://fetlife.com/",
-    "iconSize": 64,
-    "muted": true,
+    "iconSize": 84,
+    "muted": false,
     "screenshotsPath": "D:/___SYSTEM/Desktop",
     "scrollSplitPercent": 70,
-    "sortOrder": "name",
+    "sortOrder": "date",
     "supportedImageTypes": [
         ".jpg",
         ".png",
@@ -32,6 +32,10 @@
         ".m4a",
         ".mpg"
     ],
+    "thumbnailHeight": 192,
+    "thumbnailSize": 96,
+    "thumbnailSpacing": 80,
+    "thumbnailWidth": 192,
     "videoLoop": true,
-    "volume": 0.12
+    "volume": 0.46
 }

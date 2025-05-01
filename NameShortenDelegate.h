@@ -62,6 +62,8 @@ protected:
         }
         return QStyledItemDelegate::helpEvent(event, view, option, index);
     }
+public:
+    int getMaxLength() const { return maxLength; }
 private:
     int maxLength;
 };

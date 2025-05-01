@@ -22,6 +22,7 @@ class MediaViewerPanel : public QWidget {
 public:
     explicit MediaViewerPanel(QWidget* parent = nullptr);
     ~MediaViewerPanel();
+    void clearMedia();
     
     // Dateityp ermitteln und entsprechenden Viewer anzeigen
     void loadFile(const QString& filePath);

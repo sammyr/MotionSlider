@@ -1,5 +1,7 @@
 #include "ThumbnailGenerator.h"
 #include "ThumbnailDelegate.h"
+#include "SettingsManager.h"
+#include <QJsonObject>
 #include <QDir>
 #include <QMimeDatabase>
 #include <QFile>
@@ -16,6 +18,11 @@
 //=== ThumbnailWorker Implementierung ===//
 
 ThumbnailWorker::ThumbnailWorker() : m_stopRequested(false) {
+    // Thumbnail-Größe aus Einstellungen laden
+    QJsonObject settings = SettingsManager::readProgramSettings();
+    thumbnailWidth = settings.value("thumbnailWidth").toInt(120); // Fallback auf 120
+    thumbnailHeight = settings.value("thumbnailHeight").toInt(110); // Fallback auf 110
+    
 }
 
 ThumbnailWorker::~ThumbnailWorker() {
@@ -30,6 +37,7 @@ void ThumbnailWorker::stopProcessing() {
 }
 
 void ThumbnailWorker::processThumbnails(const QString& folderPath, QStringList filePaths) {
+    // qDebug entfernt "[ThumbnailWorker] processThumbnails gestartet für Ordner:" << folderPath << ", Dateien:" << filePaths.size();
     m_stopRequested = false;
     
     // Sicherstellen, dass das Thumbnails-Verzeichnis existiert
@@ -42,12 +50,16 @@ void ThumbnailWorker::processThumbnails(const QString& folderPath, QStringList f
     int current = 0;
     
     for (const QString& filePath : filePaths) {
+        // qDebug entfernt "[ThumbnailWorker] Versuche Thumbnail für:" << filePath;
+
         if (m_stopRequested) {
             break;
         }
         
         // Thumbnail generieren
-        if (generateThumbnailForFile(filePath)) {
+        bool success = generateThumbnailForFile(filePath);
+        // qDebug entfernt "[ThumbnailWorker] Ergebnis generateThumbnailForFile(" << filePath << ") : " << success;
+        if (success) {
             emit thumbnailGenerated(filePath);
         }
         
@@ -63,6 +75,7 @@ void ThumbnailWorker::processThumbnails(const QString& folderPath, QStringList f
 }
 
 bool ThumbnailWorker::generateThumbnailForFile(const QString& filePath) {
+    // qDebug entfernt "[ThumbnailWorker] generateThumbnailForFile aufgerufen für:" << filePath;
     QFileInfo info(filePath);
     if (!info.exists() || !info.isFile() || info.suffix().isEmpty()) {
         return false;
@@ -81,21 +94,25 @@ bool ThumbnailWorker::generateThumbnailForFile(const QString& filePath) {
     QMimeType type = db.mimeTypeForFile(info.filePath());
     
     if (type.name().startsWith("image/")) {
-        // Bildthumbnail generieren
+        
         QPixmap pix(info.filePath());
         if (!pix.isNull()) {
-            QPixmap thumb = pix.scaled(QSize(120, 110), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            return thumb.save(thumbPath, "PNG");
+            QPixmap thumb = pix.scaled(QSize(thumbnailWidth, thumbnailHeight), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            bool ok = thumb.save(thumbPath, "PNG");
+            
+            return ok;
+        } else {
+            
         }
     } else if (type.name().startsWith("video/") || getVideoExtensions().contains(ext)) {
-        // Videothumbnail generieren
-        return generateVideoThumbnail(info, thumbPath);
+        
+        return generateVideoThumbnail(info, thumbPath, QSize(thumbnailWidth, thumbnailHeight));
     }
     
     return false;
 }
 
-bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QString& thumbPath) {
+bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QString& thumbPath, const QSize& size) {
     // Pfad zum FFmpeg-Binary
     QString ffmpegPath = QCoreApplication::applicationDirPath() + "/ffmpeg.exe";
     if (!QFile::exists(ffmpegPath)) {
@@ -126,7 +143,7 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
                 QPixmap extractedFrame(tempImagePath);
                 if (!extractedFrame.isNull()) {
                     // Frame skalieren und für Thumbnail verwenden
-                    QPixmap videoThumb = extractedFrame.scaled(120, 110, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    QPixmap videoThumb = extractedFrame.scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
                     success = videoThumb.save(thumbPath, "PNG");
                     QFile::remove(tempImagePath); // Temporäre Datei löschen
                 }
@@ -138,7 +155,7 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
     
     // Fallback: Bei Fehler generisches Thumbnail erzeugen
     if (!success) {
-        QPixmap videoThumb(120, 110);
+        QPixmap videoThumb(size);
         videoThumb.fill(Qt::black);
         
         QPainter painter(&videoThumb);
@@ -148,7 +165,7 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
         QColor bgColor;
         bgColor.setHsv(nameHash % 360, 200, 150);
         
-        QLinearGradient gradient(0, 0, 120, 110);
+        QLinearGradient gradient(0, 0, size.width(), size.height());
         gradient.setColorAt(0, bgColor.lighter(120));
         gradient.setColorAt(1, bgColor.darker(140));
         painter.fillRect(0, 0, 120, 110, gradient);
@@ -157,7 +174,12 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
         painter.setPen(Qt::NoPen);
         painter.setBrush(Qt::white);
         painter.setRenderHint(QPainter::Antialiasing);
-        QPointF points[3] = { QPointF(40, 30), QPointF(40, 80), QPointF(90, 55) };
+        // Play-Symbol dynamisch platzieren
+        QPointF points[3] = {
+            QPointF(size.width() * 0.33, size.height() * 0.27),
+            QPointF(size.width() * 0.33, size.height() * 0.73),
+            QPointF(size.width() * 0.75, size.height() * 0.5)
+        };
         painter.drawPolygon(points, 3);
         
         // Dateiname
@@ -171,13 +193,13 @@ bool ThumbnailWorker::generateVideoThumbnail(const QFileInfo& info, const QStrin
             shortName = shortName.left(13) + "...";
         }
         
-        QRect textRect(5, 85, 110, 20);
+        QRect textRect(5, size.height() - 30, size.width() - 10, 20);
         painter.fillRect(textRect, QColor(0, 0, 0, 160));
         painter.drawText(textRect, Qt::AlignCenter, shortName);
         
         // Dateigröße
         QString sizeInfo = QString::number(info.size() / (1024*1024.0), 'f', 1) + " MB";
-        painter.drawText(QRect(80, 5, 35, 15), Qt::AlignRight, sizeInfo);
+        painter.drawText(QRect(size.width() - 45, 5, 40, 15), Qt::AlignRight, sizeInfo);
         
         if (painter.isActive()) {
             painter.end();
@@ -221,6 +243,8 @@ ThumbnailGenerator::~ThumbnailGenerator() {
 }
 
 void ThumbnailGenerator::startThumbnailGeneration(QListView* folderView, QFileSystemModel* folderModel, ThumbnailDelegate* delegate) {
+    // qDebug entfernt "[ThumbnailGenerator] startThumbnailGeneration aufgerufen.";
+
     if (m_isGenerating || !folderView || !folderModel || !delegate) {
         return;
     }
@@ -241,6 +265,8 @@ void ThumbnailGenerator::startThumbnailGeneration(QListView* folderView, QFileSy
     
     QDir dir(folderPath);
     if (!dir.exists()) {
+        // qDebug entfernt "[ThumbnailGenerator] Verzeichnis existiert nicht:" << folderPath;
+
         onGenerationFinished();
         return;
     }
@@ -248,26 +274,48 @@ void ThumbnailGenerator::startThumbnailGeneration(QListView* folderView, QFileSy
     // Dateiliste erstellen
     dir.setFilter(QDir::Files | QDir::NoDotAndDotDot);
     QStringList filePaths;
+    // Sicherstellen, dass der Thumbnail-Ordner existiert
+    QString thumbDirPath = QCoreApplication::applicationDirPath() + "/thumbnails";
+    QDir thumbDir(thumbDirPath);
+    if (!thumbDir.exists()) {
+        bool ok = thumbDir.mkpath(thumbDirPath);
+        // qDebug entfernt "[ThumbnailGenerator] Thumbnail-Ordner erstellt:" << ok << thumbDirPath;
+    }
+    // Unterstützte Bild- und Video-Formate
+    QStringList supportedExtensions = {"jpg", "jpeg", "png", "bmp", "gif", "tiff", "mp4", "avi", "mov", "mkv", "wmv", "flv", "webm", "mpg", "mpeg", "m4v", "3gp"};
+    // qDebug entfernt "[ThumbnailGenerator] --- ALLE Dateien im Ordner ---";
     for (const QFileInfo &info : dir.entryInfoList()) {
-        // Thumbnail-Pfad berechnen
         QString ext = info.suffix().toLower();
+        if (!supportedExtensions.contains(ext)) {
+            // qDebug entfernt "[ThumbnailGenerator] Ignoriere nicht unterstützten Dateityp:" << info.filePath();
+            continue;
+        }
+        // Thumbnail-Pfad berechnen
         QString thumbPath = QCoreApplication::applicationDirPath() + "/thumbnails/" + 
                          info.completeBaseName() + "_" + ext + "_thumb.png";
         
+        // qDebug entfernt "[ThumbnailGenerator] Datei gefunden:" << info.filePath();
         // Nur Dateien ohne vorhandenes Thumbnail hinzufügen
         if (!QFile::exists(thumbPath)) {
+            // qDebug entfernt "[ThumbnailGenerator] KEIN Thumbnail vorhanden für:" << info.filePath();
             filePaths.append(info.filePath());
+        } else {
+            // qDebug entfernt "[ThumbnailGenerator] Thumbnail existiert bereits für:" << info.filePath();
         }
     }
+    // qDebug entfernt "[ThumbnailGenerator] --- Dateien ohne Thumbnail (werden generiert): ---" << filePaths;
     
     if (filePaths.isEmpty()) {
-        // Keine Thumbnails zu generieren
+        // qDebug entfernt "[ThumbnailGenerator] Keine neuen Thumbnails zu generieren.";
+        m_isGenerating = false;
         onGenerationFinished();
         return;
     }
+    // qDebug entfernt "[ThumbnailGenerator] Zu generierende Dateien:" << filePaths.size();
     
     // Signal senden und Worker starten
     emit thumbnailGenerationStarted();
+    // qDebug entfernt "[ThumbnailGenerator] Worker wird gestartet.";
     QMetaObject::invokeMethod(m_worker, "processThumbnails", Qt::QueuedConnection,
                            Q_ARG(QString, folderPath),
                            Q_ARG(QStringList, filePaths));
@@ -291,6 +339,7 @@ int ThumbnailGenerator::currentProgress() const {
 }
 
 void ThumbnailGenerator::onThumbnailGenerated(const QString& filePath) {
+    // qDebug entfernt "[ThumbnailGenerator] onThumbnailGenerated für:" << filePath;
     // Ein Thumbnail wurde generiert, View aktualisieren
     if (m_folderView) {
         m_folderView->viewport()->update();
@@ -298,6 +347,7 @@ void ThumbnailGenerator::onThumbnailGenerated(const QString& filePath) {
 }
 
 void ThumbnailGenerator::onProgressUpdate(int current, int total) {
+    // qDebug entfernt "[ThumbnailGenerator] onProgressUpdate:" << current << "/" << total;
     if (total > 0) {
         // Prozentsatz berechnen (0-100)
         m_progress = qMin(100, (current * 100) / total);
@@ -306,14 +356,12 @@ void ThumbnailGenerator::onProgressUpdate(int current, int total) {
 }
 
 void ThumbnailGenerator::onGenerationFinished() {
+    // qDebug entfernt "[ThumbnailGenerator] onGenerationFinished aufgerufen.";
     // Status aktualisieren
     m_isGenerating = false;
     m_progress = 100;
     
-    // Dem Delegate mitteilen, dass die Generierung beendet ist
-    if (m_delegate) {
-        m_delegate->setGeneratingThumbnails(false);
-    }
+
     
     // View aktualisieren
     if (m_folderView) {
