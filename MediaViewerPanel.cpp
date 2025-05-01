@@ -16,6 +16,24 @@
 #include <QScrollBar>
 #include <QToolButton>
 
+#include <QApplication>
+#include <QMouseEvent>
+
+// Neuer Slider, der Klicks auf die Groove an Position springt
+class ClickableSlider : public QSlider {
+public:
+    using QSlider::QSlider;
+protected:
+    void mousePressEvent(QMouseEvent* ev) override {
+        if (ev->button() == Qt::LeftButton) {
+            int val = QStyle::sliderValueFromPosition(minimum(), maximum(), ev->pos().x(), width());
+            setValue(val);
+            emit sliderMoved(val);
+        }
+        QSlider::mousePressEvent(ev);
+    }
+};
+
 MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false), isPanning(false), mutedEnabled(false) {
     // Lade Lautstärke und Loop-Status aus der Konfigurationsdatei
     double volumeValue = 0.7; // Standardwert
@@ -200,7 +218,7 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     sliderLayout->setContentsMargins(10, 5, 10, 5); // Vertikaler Abstand
     
     // Playback-Position-Slider - größer und besser sichtbar
-    positionSlider = new QSlider(Qt::Horizontal, sliderContainer);
+    positionSlider = new ClickableSlider(Qt::Horizontal, sliderContainer);
     positionSlider->setRange(0, 1000); // Wir verwenden 0-1000 für Genauigkeit
     positionSlider->setMinimumHeight(20); // Höher machen
     
@@ -228,12 +246,22 @@ void MediaViewerPanel::setupUI(double volumeValue) {
         }
     });
     
+    // Slider-Position aktualisieren, wenn das Video läuft
+    connect(mediaPlayer, &QMediaPlayer::positionChanged, this, [this](qint64 pos) {
+        qint64 dur = mediaPlayer->duration();
+        if (dur > 0) positionSlider->setValue(int(pos * 1000 / dur));
+    });
+    // Slider zurücksetzen bei neuem Video
+    connect(mediaPlayer, &QMediaPlayer::durationChanged, this, [this](qint64) {
+        positionSlider->setValue(0);
+    });
+
     sliderLayout->addWidget(positionSlider);
     
-    // Layout zusammenbauen
+    // Layout zusammenbauen: Toolbar, Slider, Video/Image
     mainLayout->addWidget(mediaToolBar);
-    mainLayout->addWidget(stackedWidget);
     mainLayout->addWidget(sliderContainer);
+    mainLayout->addWidget(stackedWidget);
     
     // Anfangszustand: beide ausblenden
     imageLabel->hide();
@@ -285,10 +313,10 @@ void MediaViewerPanel::loadImage(const QString& imagePath) {
 void MediaViewerPanel::loadVideo(const QString& videoPath) {
     // Bild ausblenden
     imageLabel->hide();
-    
     mediaPlayer->setSource(QUrl::fromLocalFile(videoPath));
     videoWidget->show();
     stackedWidget->setCurrentIndex(1);
+    positionSlider->setValue(0);
     mediaPlayer->play();
 }
 
