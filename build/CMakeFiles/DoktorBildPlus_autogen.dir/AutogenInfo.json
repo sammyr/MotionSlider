@@ -369,7 +369,10 @@
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateTargets.cmake",
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateAdditionalTargetInfo.cmake",
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgetsPrivate/Qt6MultimediaWidgetsPrivateVersionlessAliasTargets.cmake",
-		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgets/Qt6MultimediaWidgetsVersionlessAliasTargets.cmake"
+		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgets/Qt6MultimediaWidgetsVersionlessAliasTargets.cmake",
+		"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/resources.qrc",
+		"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/program-settings.json",
+		"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/window-settings.json"
 	],
 	"CMAKE_SOURCE_DIR" : "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus",
 	"CROSS_CONFIG" : false,
@@ -378,9 +381,21 @@
 	"HEADERS" : 
 	[
 		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ContextMenuManager.h",
+			"Mu",
+			"EWIEGA46WW/moc_ContextMenuManager.cpp",
+			null
+		],
+		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.h",
 			"Mu",
 			"EWIEGA46WW/moc_ExternalTools.cpp",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/FileOperations.h",
+			"Mu",
+			"EWIEGA46WW/moc_FileOperations.cpp",
 			null
 		],
 		[
@@ -402,6 +417,18 @@
 			null
 		],
 		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollConfig.h",
+			"Mu",
+			"EWIEGA46WW/moc_ScrollConfig.cpp",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.h",
+			"Mu",
+			"EWIEGA46WW/moc_ScrollNavigator.cpp",
+			null
+		],
+		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.h",
 			"Mu",
 			"EWIEGA46WW/moc_SettingsManager.cpp",
@@ -418,6 +445,12 @@
 			"Mu",
 			"EWIEGA46WW/moc_ThumbnailGenerator.cpp",
 			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.h",
+			"Mu",
+			"EWIEGA46WW/moc_VideoGraphicsView.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -431,7 +464,6 @@
 		"QT_MULTIMEDIAWIDGETS_LIB",
 		"QT_MULTIMEDIA_LIB",
 		"QT_NETWORK_LIB",
-		"QT_NO_DEBUG",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -498,7 +530,17 @@
 	"SOURCES" : 
 	[
 		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ContextMenuManager.cpp",
+			"Mu",
+			null
+		],
+		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.cpp",
+			"Mu",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/FileOperations.cpp",
 			"Mu",
 			null
 		],
@@ -518,6 +560,16 @@
 			null
 		],
 		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollConfig.cpp",
+			"Mu",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.cpp",
+			"Mu",
+			null
+		],
+		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.cpp",
 			"Mu",
 			null
@@ -529,6 +581,11 @@
 		],
 		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.cpp",
+			"Mu",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp",
 			"Mu",
 			null
 		],

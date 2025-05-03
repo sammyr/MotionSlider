@@ -3,7 +3,8 @@
 #include <QWidget>
 #include <QLabel>
 #include <QMediaPlayer>
-#include <QVideoWidget>
+#include <QGraphicsScene>
+#include <QGraphicsVideoItem>
 #include <QStackedWidget>
 #include <QString>
 #include <QVBoxLayout>
@@ -16,6 +17,7 @@
 #include <QClipboard>
 #include <QGuiApplication>
 #include <QScrollArea> // Für Bild-Panning
+#include "VideoGraphicsView.h"
 
 class MediaViewerPanel : public QWidget {
     Q_OBJECT
@@ -36,7 +38,7 @@ public:
     // UI-Komponenten zurückgeben
     QStackedWidget* getStackedWidget() const { return stackedWidget; }
     QLabel* getImageLabel() const { return imageLabel; }
-    QVideoWidget* getVideoWidget() const { return videoWidget; }
+    VideoGraphicsView* getVideoView() const { return videoView; }
     QMediaPlayer* getMediaPlayer() const { return mediaPlayer; }
     
     // Zoom für Bilder
@@ -46,7 +48,9 @@ private:
     // UI-Komponenten
     QStackedWidget* stackedWidget = nullptr;
     QLabel* imageLabel = nullptr;
-    QVideoWidget* videoWidget = nullptr;
+    QGraphicsScene* videoScene = nullptr;
+    QGraphicsVideoItem* videoItem = nullptr;
+    VideoGraphicsView* videoView = nullptr;
     QMediaPlayer* mediaPlayer = nullptr;
     QAudioOutput* audioOutput = nullptr; // Für die Tonwiedergabe
     bool mutedEnabled = false; // Status für Stummschaltung
@@ -62,6 +66,7 @@ private:
     QSlider* volumeSlider = nullptr;
     QSlider* positionSlider = nullptr; // Für Video-Position
     QWidget* volumeWidget = nullptr; // Für Slider-Einbettung
+    QWidget* sliderContainer = nullptr; // Container für Timeline
     QScrollArea* imageScrollArea = nullptr; // Für Bild-Panning
 
     // Bilddaten
@@ -91,6 +96,8 @@ private slots:
     void onMediaStateChanged(QMediaPlayer::PlaybackState state);
 
 protected:
+    // Fenstergröße oder Splitter bewegt
+    void resizeEvent(QResizeEvent* event) override;
     // Zoomen des Bildes per Mausrad im rechten Panel
     void wheelEvent(QWheelEvent *event) override;
     // Panning per mittlere Maustaste
@@ -99,4 +106,10 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     // Panning-Event-Filter für ScrollArea-Viewport
     bool eventFilter(QObject *watched, QEvent *event) override;
+
+    // Passt Bild an Fenstergröße an und erhält das Seitenverhältnis
+    void fitImageToWindow();
+    // Passt Video an Fenstergröße an
+    void fitVideoToWindow();
+
 };

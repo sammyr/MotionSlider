@@ -2,4 +2,6 @@
 #include "EWIEGA46WW/moc_MainWindow.cpp"
 #include "EWIEGA46WW/moc_MediaViewerPanel.cpp"
 #include "EWIEGA46WW/moc_NameShortenDelegate.cpp"
+#include "EWIEGA46WW/moc_ScrollNavigator.cpp"
 #include "EWIEGA46WW/moc_ThumbnailGenerator.cpp"
+#include "EWIEGA46WW/moc_VideoGraphicsView.cpp"

@@ -487,6 +487,16 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\FileOperations.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qstring.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlist.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qwidget.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollNavigator.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ThumbnailDelegate.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QStyledItemDelegate \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
@@ -499,8 +509,6 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ThumbnailGenerator.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qstring.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdebug.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
@@ -517,11 +525,7 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qtsan_impl.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QQueue \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qqueue.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\SettingsManager.h \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qwidget.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
@@ -531,8 +535,6 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ExternalTools.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QStringList \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlist.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\MediaViewerPanel.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
@@ -544,7 +546,12 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
- C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QVideoWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsScene \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QGraphicsVideoItem \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qgraphicsvideoitem.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsitem.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
@@ -566,5 +573,34 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\VideoGraphicsView.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsView \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsview.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qsize.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollBar \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h

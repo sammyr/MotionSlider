@@ -15,7 +15,6 @@
 #include <QTreeView>
 #include <QFileSystemModel>
 #include <QHBoxLayout>
-#include <QWheelEvent>
 #include <QPushButton>
 #include <QDesktopServices>
 #include <QCloseEvent>
@@ -32,6 +31,8 @@
 #include <QMimeData>
 #include <QSpinBox>
 #include <QLabel>
+#include <QDebug>
+#include "ScrollConfig.h"
 
 #include "NameShortenDelegate.h"
 #include "ThumbnailDelegate.h"
@@ -39,6 +40,10 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QFile>
+#include "ContextMenuManager.h"
+#include "FileOperations.h"
+#include "ScrollNavigator.h"
+#include <QImageReader>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -48,6 +53,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    setWindowIcon(QIcon(":/icons/appicon.ico")); // Icon aus Qt-Resource setzen
+
+    // Initialisiere optionale Views
+    folderContentView = nullptr;
+    folderContentModel = nullptr;
+
     progressBar = new QProgressBar(this);
     progressBar->setMinimum(0);
     progressBar->setMaximum(100);
@@ -74,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Toolbar: Laufwerksauswahl + Pfad + Up-Button
     QHBoxLayout *toolbarLayout = new QHBoxLayout;
+
     // Padding links
     toolbarLayout->addSpacing(5);
     backButton = new QToolButton;
@@ -232,7 +244,7 @@ MainWindow::MainWindow(QWidget *parent)
     folderModel = new QFileSystemModel(this);
     folderModel->setRootPath("");
     folderView->setModel(folderModel);
-    folderView->viewport()->installEventFilter(this); // Event-Filter für Mausrad: Bei Scroll im rechten Bereich der linken Liste Auswahl ändern
+    m_scrollNav = new ScrollNavigator(folderView, folderModel);
     // Zeige Bild im rechten Panel auch bei Tastatur-Navigation
     connect(folderView->selectionModel(), &QItemSelectionModel::currentChanged,
             this, &MainWindow::onFolderSelected);
@@ -322,17 +334,23 @@ MainWindow::MainWindow(QWidget *parent)
         generateThumbnailsForCurrentFolder();
     }
 
-
+    if (!pathEdit->text().isEmpty()) {
+        folderModel->setRootPath(pathEdit->text());
+        QModelIndex rootIndex = folderModel->index(pathEdit->text());
+        folderView->setRootIndex(rootIndex);
+        generateThumbnailsForCurrentFolder();
+        // Initiale Auswahl auf erstes Element setzen
+        if (folderModel->rowCount(rootIndex) > 0) {
+            QModelIndex firstChild = folderModel->index(0, 0, rootIndex);
+            folderView->setCurrentIndex(firstChild);
+        }
+    }
 
     // Rechtes Panel: Neue MediaViewerPanel-Komponente
     mediaPanel = new MediaViewerPanel();
 
     // Toolbar für rechtes Panel (unten über der Statusbar)
-    QToolBar* rightToolBar = new QToolBar();
-    rightToolBar->setMovable(false);
-    rightToolBar->setFloatable(false);
-    rightToolBar->setIconSize(QSize(32,32));
-    
+
     // Lade externe Programme aus den Einstellungen
     QString imageEditorPath = "C:/Program Files/IrfanView/i_view64.exe";
     QString videoPlayerPath = "C:/Program Files/MPC-HC/mpc-hc64.exe";
@@ -359,61 +377,9 @@ MainWindow::MainWindow(QWidget *parent)
             
         configFile2.close();
     }
-    
     // Erstelle Actions für externe Programme
-    QAction* openInIrfanView = new QAction(QIcon::fromTheme("image-x-generic"), "In Honeyview öffnen", this);
-    QAction* openInMpcHc = new QAction(QIcon::fromTheme("video-x-generic"), "In MPC-HC öffnen", this);
-    QAction* openInBrowser = new QAction(QIcon::fromTheme("web-browser"), "Im Browser öffnen", this);
     QAction* openInFolder = new QAction(QIcon::fromTheme("folder-open"), "Im Explorer anzeigen", this);
-    
-    // Verbinde mit Slots zum Öffnen der externen Programme
-    connect(openInIrfanView, &QAction::triggered, this, [=]() {
-        QString filePath = folderModel->filePath(folderView->currentIndex());
-        if(!filePath.isEmpty() && QFile::exists(filePath)) {
-            QProcess::startDetached(imageEditorPath, QStringList() << filePath);
-        }
-    });
-    
-    connect(openInMpcHc, &QAction::triggered, this, [=]() {
-        QString filePath = folderModel->filePath(folderView->currentIndex());
-        if(!filePath.isEmpty() && QFile::exists(filePath)) {
-            QProcess::startDetached(videoPlayerPath, QStringList() << filePath);
-        }
-    });
-    
-    connect(openInBrowser, &QAction::triggered, this, [=]() {
-        QString filePath = folderModel->filePath(folderView->currentIndex());
-        if(!filePath.isEmpty() && QFile::exists(filePath)) {
-            QFileInfo fileInfo(filePath);
-            QString fileName = fileInfo.fileName();
-            
-            // Extrahiere den Teil nach dem letzten Unterstrich
-            QString idPart;
-            int lastUnderscorePos = fileName.lastIndexOf('_');
-            
-            if (lastUnderscorePos != -1 && lastUnderscorePos < fileName.length() - 1) {
-                // Extrahiere alles nach dem letzten Unterstrich
-                idPart = fileName.mid(lastUnderscorePos + 1);
-                
-                // Entferne die Dateiendung, falls vorhanden
-                int dotPos = idPart.lastIndexOf('.');
-                if (dotPos != -1) {
-                    idPart = idPart.left(dotPos);
-                }
-            } else {
-                // Wenn kein Unterstrich gefunden wurde, verwende den ganzen Dateinamen ohne Endung
-                idPart = fileName;
-                int dotPos = idPart.lastIndexOf('.');
-                if (dotPos != -1) {
-                    idPart = idPart.left(dotPos);
-                }
-            }
-            
-            QString url = fileInfoUrlBase + idPart;
-            QDesktopServices::openUrl(QUrl(url));
-        }
-    });
-    
+
     connect(openInFolder, &QAction::triggered, this, [=]() {
         QString filePath = folderModel->filePath(folderView->currentIndex());
         if(!filePath.isEmpty() && QFile::exists(filePath)) {
@@ -422,25 +388,15 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
     
-    rightToolBar->addAction(openInIrfanView);
-    rightToolBar->addAction(openInMpcHc);
-    rightToolBar->addAction(openInBrowser);
-    rightToolBar->addAction(openInFolder);
-    // Container-Widget für die Toolbar am unteren Rand
-    QWidget* rightToolbarContainer = new QWidget();
-    QHBoxLayout* rightToolbarLayout = new QHBoxLayout(rightToolbarContainer);
-    rightToolbarLayout->setContentsMargins(0,0,0,0);
-    rightToolbarLayout->setSpacing(0);
-    rightToolbarLayout->addStretch();
-    rightToolbarLayout->addWidget(rightToolBar);
-    rightToolbarLayout->addStretch();
+
+
+
     // Haupt-Container für das rechte Panel
     QWidget* rightPanelContainer = new QWidget();
     QVBoxLayout* rightPanelLayout = new QVBoxLayout(rightPanelContainer);
     rightPanelLayout->setContentsMargins(10,10,10,10);
     rightPanelLayout->setSpacing(0);
     rightPanelLayout->addWidget(mediaPanel, 1); // MediaViewerPanel nimmt den ganzen Platz
-    rightPanelLayout->addWidget(rightToolbarContainer, 0);
 
 
 
@@ -461,11 +417,15 @@ MainWindow::MainWindow(QWidget *parent)
     mainSplitter->setCollapsible(1, false);
     mainSplitter->setSizes({220, 600});
     // Reagiere auf Panel-Resize
-    connect(mainSplitter, &QSplitter::splitterMoved, this, [this](int, int){ updateThumbnailGridSize(); });
+    connect(mainSplitter, &QSplitter::splitterMoved, this, [this](int pos, int index){
+        updateThumbnailGridSize();
+        // Speichere neue Splitter-Position
+        SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
+    });
 
     setCentralWidget(mainSplitter);
     statusBar();
-
+    
     // Fenster- und Splitter-Positionen erst jetzt laden
     SettingsManager::loadWindowSettings(this, mainSplitter, pathEdit);
     
@@ -559,12 +519,7 @@ void MainWindow::onUpButtonClicked() {
 void MainWindow::onFolderViewContextMenu(const QPoint &pos) {
     QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
     QMenu menu(this);
-    QAction *pasteAct = menu.addAction(tr("Einfügen"), this, &MainWindow::pasteItems);
-    if (!QApplication::clipboard()->mimeData()->hasUrls()) pasteAct->setEnabled(false);
-    menu.addAction(tr("Ausschneiden"), this, &MainWindow::cutItems);
-    menu.addAction(tr("Kopieren"), this, &MainWindow::copyItems);
-    menu.addAction(tr("Löschen"), this, &MainWindow::deleteItems);
-    menu.addAction(tr("Eigenschaften"), this, &MainWindow::showProperties);
+    ContextMenuManager::populateFolderContextMenu(&menu, sel, folderModel, this, folderView);
     menu.exec(folderView->viewport()->mapToGlobal(pos));
 }
 
@@ -582,62 +537,15 @@ void MainWindow::copyItems() {
 }
 
 void MainWindow::cutItems() {
-    // Bereite Cut-Operation vor: speichere Pfade, kopiere in Clipboard
-    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
-    cutPaths.clear();
-    for (auto &idx : sel) {
-        if (idx.column() != 0) continue;
-        cutPaths.append(folderModel->filePath(idx));
-    }
-    if (cutPaths.isEmpty()) return;
-    // Clipboard setzen
-    QMimeData *md = new QMimeData;
-    QList<QUrl> urls;
-    for (const QString &p : cutPaths) urls.append(QUrl::fromLocalFile(p));
-    md->setUrls(urls);
-    QApplication::clipboard()->setMimeData(md);
-    cutOperationActive = true;
+    FileOperations::cutItems(folderView, folderModel, cutPaths, cutOperationActive);
 }
 
 void MainWindow::deleteItems() {
-    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
-    QStringList paths;
-    for (auto &idx : sel) {
-        if (idx.column() != 0) continue;
-        paths << folderModel->filePath(idx);
-    }
-    if (paths.isEmpty()) return;
-    // Verschiebe in Papierkorb
-    for (const QString &p : paths) {
-        QFileInfo info(p);
-        auto moveToTrash = [&](const QString &path){
-            #ifdef Q_OS_WIN
-            SHFILEOPSTRUCT op = {0};
-            op.wFunc = FO_DELETE;
-            std::wstring from = QDir::toNativeSeparators(path).toStdWString();
-            from.push_back(0);
-            op.pFrom = from.c_str();
-            op.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION;
-            SHFileOperation(&op);
-            #else
-            QDir(path).removeRecursively();
-            #endif
-        };
-        moveToTrash(p);
-    }
-    folderView->update();
+    FileOperations::deleteItems(folderView, folderModel);
 }
 
 void MainWindow::showProperties() {
-    QModelIndexList sel = folderView->selectionModel()->selectedIndexes();
-    if (sel.isEmpty()) return;
-    QString p = folderModel->filePath(sel.first());
-    QFileInfo info(p);
-    QString details = tr("Pfad: %1\nGröße: %2 Bytes\nZuletzt geändert: %3").arg(
-        info.absoluteFilePath(),
-        QString::number(info.size()),
-        info.lastModified().toString());
-    QMessageBox::information(this, tr("Eigenschaften"), details);
+    FileOperations::showProperties(this, folderView, folderModel);
 }
 
 void MainWindow::onThumbnailSizeChanged(int size) {
@@ -702,8 +610,17 @@ void MainWindow::onFolderSelected(const QModelIndex &index) {
     QFileInfo info(filePath);
     if (!info.isDir()) {
         mediaPanel->loadFile(filePath);
+        // Statusleiste: Dateiname, Abmessungen und Größe
+        QString fileName = info.fileName();
+        double sizeMB = info.size() / (1024.0 * 1024.0);
+        QString sizeMbStr = QString::number(sizeMB, 'f', 2) + " MB";
+        QImageReader reader(filePath);
+        QSize imgSize = reader.size();
+        QString dimStr = imgSize.isValid() ? QString("%1×%2 px").arg(imgSize.width()).arg(imgSize.height()) : QString();
+        statusBar()->showMessage(QString("%1, %2, %3").arg(fileName, dimStr, sizeMbStr));
     } else {
         mediaPanel->clearMedia();
+        statusBar()->clearMessage();
     }
 }
 
@@ -728,58 +645,25 @@ void MainWindow::updateThumbnailGridSize() {
     folderView->setSpacing(thumbnailSpacing); // Abstand aus Settings
 }
 
-
-// Überschriebene Event-Handler
-bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
-    return QMainWindow::eventFilter(watched, event);
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    QMainWindow::resizeEvent(event);
+    updateThumbnailGridSize();
 }
 
 void MainWindow::wheelEvent(QWheelEvent *event) {
     QMainWindow::wheelEvent(event);
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event) {
-    QMainWindow::resizeEvent(event);
-    updateThumbnailGridSize();
-}
-
 void MainWindow::closeEvent(QCloseEvent *event) {
+    // Fenster- und Splitter-Einstellungen speichern
+    SettingsManager::saveWindowSettings(this, mainSplitter, pathEdit);
     QMainWindow::closeEvent(event);
 }
 
-// Rekursive Verzeichnis-Kopie
-static bool copyDirRec(const QString &src, const QString &dst) {
-    QDir srcDir(src);
-    if (!QDir().mkpath(dst)) return false;
-    for (const QString &d : srcDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
-        copyDirRec(srcDir.filePath(d), QDir(dst).filePath(d));
-    for (const QString &f : srcDir.entryList(QDir::Files))
-        QFile::copy(srcDir.filePath(f), QDir(dst).filePath(f));
-    return true;
+void MainWindow::pasteItems() {
+    FileOperations::pasteItems(folderView, folderModel, cutOperationActive, cutPaths);
 }
 
-void MainWindow::pasteItems() {
-    const QMimeData *md = QApplication::clipboard()->mimeData();
-    if (!md->hasUrls()) return;
-    QModelIndex root = folderView->rootIndex();
-    QString dest = folderModel->filePath(root);
-    for (const QUrl &url : md->urls()) {
-        QString src = url.toLocalFile();
-        QFileInfo info(src);
-        QString target = QDir(dest).filePath(info.fileName());
-        if (info.isDir()) copyDirRec(src, target);
-        else QFile::copy(src, target);
-    }
-    // Wenn vorher ausgeschnitten, Originale löschen
-    if (cutOperationActive) {
-        for (const QString &src : cutPaths) {
-            QFileInfo info(src);
-            if (info.isDir()) QDir(src).removeRecursively();
-            else QFile::remove(src);
-        }
-        cutPaths.clear();
-        cutOperationActive = false;
-        QApplication::clipboard()->clear();
-    }
-    folderView->update();
+bool MainWindow::eventFilter(QObject* watched, QEvent* event) {
+    return QMainWindow::eventFilter(watched, event);
 }

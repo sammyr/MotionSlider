@@ -396,7 +396,13 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
- C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QVideoWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsScene \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QGraphicsVideoItem \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qgraphicsvideoitem.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsitem.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
@@ -444,6 +450,37 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\VideoGraphicsView.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsView \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsview.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qsize.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollBar \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QMimeDatabase \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimedatabase.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qmimetype.h \
@@ -512,25 +549,4 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qeventpoint.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qvector2d.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qpointingdevice.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qinputdevice.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qobject.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qsize.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollBar \
- C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent

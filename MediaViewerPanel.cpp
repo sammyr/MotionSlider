@@ -15,6 +15,7 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QToolButton>
+#include <QResizeEvent> // Für resizeEvent override
 
 #include <QApplication>
 #include <QMouseEvent>
@@ -55,10 +56,11 @@ MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFacto
         configFile.close();
     }
     
-    // Erstelle MediaPlayer und AudioOutput vor UI, damit connects gültig sind
+    // Erstelle MediaPlayer und AudioOutput
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
     mediaPlayer->setAudioOutput(audioOutput);
+    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
     
     setupUI(volumeValue);
 }
@@ -72,7 +74,7 @@ void MediaViewerPanel::clearMedia() {
         mediaPlayer->stop();
         mediaPlayer->setSource(QUrl());
     }
-    if (videoWidget) videoWidget->hide();
+    if (videoView) videoView->hide();
     if (imageLabel) {
         imageLabel->clear();
         imageLabel->hide();
@@ -90,7 +92,8 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     mediaToolBar = new QToolBar(this);
     mediaToolBar->setMovable(false);
     mediaToolBar->setFloatable(false);
-    mediaToolBar->setIconSize(QSize(24,24));
+    // Größere Icons für Play/Pause und Frame-Navigation
+    mediaToolBar->setIconSize(QSize(32,32));
     mediaToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
     mediaToolBar->setStyleSheet("QToolBar { spacing:5px; }");
 
@@ -107,10 +110,10 @@ void MediaViewerPanel::setupUI(double volumeValue) {
         playPauseBtn->setChecked(st==QMediaPlayer::PlayingState);
     });
 
-    // Frame Navigation
-    QAction* prevAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSkipBackward),"",this);
+    // Frame Navigation mit präziseren Seek-Icons
+    QAction* prevAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSeekBackward),"",this);
     connect(prevAct, &QAction::triggered, this, &MediaViewerPanel::onPrev);
-    QAction* nextAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSkipForward),"",this);
+    QAction* nextAct = new QAction(QApplication::style()->standardIcon(QStyle::SP_MediaSeekForward),"",this);
     connect(nextAct, &QAction::triggered, this, &MediaViewerPanel::onNext);
 
     // Loop Button
@@ -144,6 +147,7 @@ void MediaViewerPanel::setupUI(double volumeValue) {
         muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolume));
     connect(muteButton, &QToolButton::toggled, this, [this, muteButton](bool muted) {
         audioOutput->setMuted(muted);
+        mutedEnabled = muted;
         if (muted)
             muteButton->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolumeMuted));
         else
@@ -160,11 +164,22 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     });
 
     // Lautstärke-Widget
-    volumeSlider = new QSlider(Qt::Horizontal, this);
+    volumeSlider = new ClickableSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
     volumeSlider->setValue(volumeValue * 100); // Wert aus der Konfigurationsdatei setzen
+    // Rechteckiger Lautstärke-Slider: Y-Skala 2× X-Skala
     volumeSlider->setFixedWidth(120);
+    volumeSlider->setMinimumHeight(48); // Noch größer
+    // Groove 6px, Handle 12×24px
+    volumeSlider->setStyleSheet(
+        "QSlider::groove:horizontal { height: 6px; background: #ccc; margin: 0px; }"
+        "QSlider::handle:horizontal { background: #007bff; width: 12px; height: 48px; margin: -9px 0; border-radius: 0px; }");
     connect(volumeSlider, &QSlider::valueChanged, this, &MediaViewerPanel::onVolumeChanged);
+    
+    // Initiale Lautstärke setzen
+    audioOutput->setVolume(volumeValue);
+    // Anwenden des gespeicherten Mute-Status statt automatischem Unmute
+    audioOutput->setMuted(mutedEnabled);
 
     // Add to toolbar
     mediaToolBar->addWidget(playPauseBtn);
@@ -201,30 +216,35 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     imageLabel->installEventFilter(this);
     imageLabel->setMouseTracking(true);
     
-    // Video-Anzeige mit Audio
-    videoWidget = new QVideoWidget;
-    mediaPlayer->setVideoOutput(videoWidget);
-    audioOutput->setVolume(volumeValue);
-    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
-    connect(mediaPlayer, &QMediaPlayer::playbackStateChanged, this, &MediaViewerPanel::onMediaStateChanged);
+    // Video-Anzeige mit QGraphicsView und QGraphicsVideoItem
+    videoScene = new QGraphicsScene(this);
+    videoItem = new QGraphicsVideoItem();
+    videoScene->addItem(videoItem);
+    videoView = new VideoGraphicsView(videoScene, this);
+    videoView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    videoView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    videoView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mediaPlayer->setVideoOutput(videoItem);
+    // Video initial an Fenster anpassen
+    fitVideoToWindow();
     
     // Widgets zum StackedWidget hinzufügen
     stackedWidget->addWidget(imageScrollArea); // Index 0: Bild mit Panning
-    stackedWidget->addWidget(videoWidget);     // Index 1: Video
+    stackedWidget->addWidget(videoView);       // Index 1: Video (GraphicsView)
     
     // Container für Playback-Slider
-    QWidget* sliderContainer = new QWidget(this);
+    sliderContainer = new QWidget(this);
     QHBoxLayout* sliderLayout = new QHBoxLayout(sliderContainer);
     sliderLayout->setContentsMargins(10, 5, 10, 5); // Vertikaler Abstand
     
-    // Playback-Position-Slider - größer und besser sichtbar
+    // Playback-Position-Slider - größer und rechteckig
     positionSlider = new ClickableSlider(Qt::Horizontal, sliderContainer);
-    positionSlider->setRange(0, 1000); // Wir verwenden 0-1000 für Genauigkeit
-    positionSlider->setMinimumHeight(20); // Höher machen
-    
-    // Style für den Slider
-    QString sliderStyle = "QSlider::groove:horizontal {height: 8px; background: #ccc; margin: 2px 0;} "
-                         "QSlider::handle:horizontal {background: #007bff; border: 1px solid #5c5c5c; width: 18px; margin: -5px 0; border-radius: 9px;}";
+    positionSlider->setRange(0, 1000); // Genauigkeit 0–1000
+    positionSlider->setMinimumHeight(60); // Doppelt so hoch
+    // Rechteckiger Style für Groove & Handle
+    QString sliderStyle =
+        "QSlider::groove:horizontal { height: 24px; background: #aaa; margin: 0; }"
+        "QSlider::handle:horizontal { background:rgb(35, 35, 35); width: 24px; height: 60px; margin: 0; border-radius: 0; }";
     positionSlider->setStyleSheet(sliderStyle);
     
     // Bei Klick im Slider sofort zur Position springen
@@ -263,9 +283,11 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     mainLayout->addWidget(sliderContainer);
     mainLayout->addWidget(stackedWidget);
     
+    // Hintergrund des Bild-/Videobereichs grau setzen
+    stackedWidget->setStyleSheet("background-color:rgb(74, 74, 74);");
     // Anfangszustand: beide ausblenden
     imageLabel->hide();
-    videoWidget->hide();
+    videoView->hide();
 }
 
 void MediaViewerPanel::loadFile(const QString& filePath) {
@@ -292,32 +314,34 @@ void MediaViewerPanel::loadFile(const QString& filePath) {
 void MediaViewerPanel::loadImage(const QString& imagePath) {
     // Video stoppen falls läuft
     mediaPlayer->stop();
-    videoWidget->hide();
+    videoView->hide();
+    mediaToolBar->hide();
+    sliderContainer->hide();
     
     // Bild laden
     originalPixmap.load(imagePath);
     if (originalPixmap.isNull()) return;
     
-    // Bild anzeigen
-    QSize scaledSize = originalPixmap.size() * zoomFactor;
-    QPixmap scaled = originalPixmap.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    imageLabel->setPixmap(scaled);
-    imageLabel->resize(scaled.size()); // Label anpassen für ScrollArea
-    imageLabel->show();
+    // Bild anzeigen (Skaliere auf Fenstergröße)
+    zoomFactor = 1.0; // Reset
     stackedWidget->setCurrentIndex(0);
-    
-    // Zoom zurücksetzen
-    zoomFactor = 1.0;
+    imageLabel->show();
+    fitImageToWindow();
 }
 
 void MediaViewerPanel::loadVideo(const QString& videoPath) {
     // Bild ausblenden
     imageLabel->hide();
+    mediaToolBar->show();
+    sliderContainer->show();
     mediaPlayer->setSource(QUrl::fromLocalFile(videoPath));
-    videoWidget->show();
+    audioOutput->setMuted(mutedEnabled); // Anwenden des gespeicherten Mute-Status für Video
+    videoView->show();
     stackedWidget->setCurrentIndex(1);
     positionSlider->setValue(0);
     mediaPlayer->play();
+    // Video anpassen
+    fitVideoToWindow();
 }
 
 void MediaViewerPanel::zoomImage(double factor) {
@@ -345,35 +369,17 @@ void MediaViewerPanel::zoomImage(double factor) {
 }
 
 void MediaViewerPanel::onVolumeChanged(int value) {
-    double volume = value / 100.0;
-    audioOutput->setVolume(volume);
-    
-    // Speichere die Lautstärke in der Konfigurationsdatei
-    QFile configFile("build/program-settings.json");
-    if(configFile.open(QIODevice::ReadOnly)) {
-        QJsonDocument configDoc = QJsonDocument::fromJson(configFile.readAll());
-        QJsonObject configObj = configDoc.object();
-        
-        // Aktualisiere den Lautstärkewert
-        configObj["volume"] = volume;
-        
-        // Erstelle ein neues QJsonDocument mit dem aktualisierten Objekt
-        QJsonDocument updatedDoc(configObj);
-        
-        configFile.close();
-        
-        // Schreibe die aktualisierte Konfiguration zurück
-        if(configFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-            // Verwende QJsonDocument::Indented für besser lesbares JSON
-            configFile.write(updatedDoc.toJson(QJsonDocument::Indented));
-            configFile.close();
-            
-            qDebug() << "Lautstärke gespeichert:" << volume;
-        } else {
-            qDebug() << "Fehler beim Öffnen der Konfigurationsdatei zum Schreiben";
-        }
-    } else {
-        qDebug() << "Fehler beim Öffnen der Konfigurationsdatei zum Lesen";
+    double vol = value / 100.0;
+    audioOutput->setVolume(vol);
+    // muteEnabled bleibt erhalten, kein automatisches Un-Muten
+    // Speichere Lautstärke in Config
+    QFile cfg("build/program-settings.json");
+    if (cfg.open(QIODevice::ReadWrite)) {
+        QJsonObject obj = QJsonDocument::fromJson(cfg.readAll()).object();
+        obj["volume"] = vol;
+        cfg.resize(0);
+        cfg.write(QJsonDocument(obj).toJson());
+        cfg.close();
     }
 }
 
@@ -434,7 +440,7 @@ void MediaViewerPanel::onCopyImage() {
         }
     } else {
         // Video-Modus
-        screenshot = videoWidget->grab();
+        screenshot = videoView->grab();
     }
     
     if (!screenshot.isNull()) {
@@ -488,7 +494,7 @@ void MediaViewerPanel::onScreenshot() {
         }
     } else {
         // Video-Modus
-        QPixmap screenshot = videoWidget->grab();
+        QPixmap screenshot = videoView->grab();
         if (!screenshot.isNull()) {
             screenshot.save(fullPath, "PNG");
             QMessageBox::information(this, "Screenshot", "Screenshot gespeichert als:\n" + fullPath);
@@ -513,6 +519,7 @@ void MediaViewerPanel::wheelEvent(QWheelEvent *event) {
         }
         event->accept();
     } else {
+        // Video-Zoom wird von VideoGraphicsView behandelt
         QWidget::wheelEvent(event);
     }
 }
@@ -535,7 +542,7 @@ bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
         if (type == QEvent::MouseButtonPress || type == QEvent::MouseMove || type == QEvent::MouseButtonRelease) {
             auto *me = static_cast<QMouseEvent*>(event);
             QPoint vpPos = imageScrollArea->viewport()->mapFromGlobal(me->globalPosition().toPoint());
-            if (type == QEvent::MouseButtonPress && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton)) {
+            if (type == QEvent::MouseButtonPress && me->button() == Qt::MiddleButton) {
                 isPanning = true;
                 lastPanPoint = vpPos;
                 imageScrollArea->viewport()->setCursor(Qt::ClosedHandCursor);
@@ -550,7 +557,7 @@ bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
                     imageScrollArea->verticalScrollBar()->value() - delta.y());
                 return true;
             }
-            if (type == QEvent::MouseButtonRelease && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton) && isPanning) {
+            if (type == QEvent::MouseButtonRelease && me->button() == Qt::MiddleButton && isPanning) {
                 isPanning = false;
                 imageScrollArea->viewport()->setCursor(Qt::ArrowCursor);
                 return true;
@@ -558,6 +565,37 @@ bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
         }
     }
     return QWidget::eventFilter(watched, event);
+}
+
+// Reagiere auf Größenänderungen (Fenster oder Splitter) und passe Bild an
+void MediaViewerPanel::resizeEvent(QResizeEvent* event) {
+    QWidget::resizeEvent(event);
+    if (stackedWidget->currentIndex() == 0) {
+        fitImageToWindow();
+    } else if (stackedWidget->currentIndex() == 1) {
+        fitVideoToWindow();
+    }
+}
+
+// Bild skaliert auf verfügbare Viewport-Größe bei Erhalt des Seitenverhältnisses
+void MediaViewerPanel::fitImageToWindow() {
+    if (originalPixmap.isNull()) return;
+    QSize avail = imageScrollArea->viewport()->size();
+    // Berechne Zoom-Faktor basierend auf Fenstergröße
+    double factorW = double(avail.width()) / originalPixmap.width();
+    double factorH = double(avail.height()) / originalPixmap.height();
+    zoomFactor = qMin(factorW, factorH);
+    QSize scaledSize = originalPixmap.size() * zoomFactor;
+    QPixmap scaled = originalPixmap.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    imageLabel->setPixmap(scaled);
+    imageLabel->resize(scaled.size());
+}
+
+// Passt Video im GraphicsView an Fenstergröße und erhält Seitenverhältnis
+void MediaViewerPanel::fitVideoToWindow() {
+    if (!videoItem || !videoView) return;
+    QRectF rect = videoItem->boundingRect();
+    videoView->fitInView(rect, Qt::KeepAspectRatio);
 }
 
 // Stub-Implementierungen, um fehlende vtable-Einträge zu erfüllen

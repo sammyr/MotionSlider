@@ -16,6 +16,8 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QSpinBox>
+#include "FileOperations.h"
+#include "ScrollNavigator.h"
 
 // Unsere eigenen Klassen einbinden
 #include "ThumbnailDelegate.h"
@@ -33,8 +35,8 @@ public:
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override; // Für Qt MOC notwendig (Stubs)
     void closeEvent(QCloseEvent *event) override;
-    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
     void openFile();
@@ -50,7 +52,7 @@ private:
     
     // Fenstereinstellungen werden jetzt über den SettingsManager verwaltet
 
-private slots:
+public slots:
     void onFolderViewContextMenu(const QPoint& pos);
     void cutItems();
     void copyItems();
@@ -80,6 +82,7 @@ private:
     // Cut-Paste Unterstützung
     QStringList cutPaths;    // Zu verschiebende Dateien
     bool cutOperationActive; // Flag, ob aktuell ausgeschnitten wurde
+    ScrollNavigator* m_scrollNav; // Event-Filter für Mausrad-Navigation ausgelagert
 
     // Navigation
     void onFolderDoubleClicked(const QModelIndex &index);
@@ -91,8 +94,10 @@ private:
     // Panel für Ordnerinhalt (rechts)
     QListView *folderContentView;
     QFileSystemModel *folderContentModel;
+    // Scrollbereich für Mausrad-gestützte Navigation (unteres 25% im linken Panel)
+    QWidget *wheelArea;
 
-private slots:
+public slots:
     void onFolderSelected(const QModelIndex &index);
     void clearAllThumbnails();
     

@@ -68,10 +68,20 @@ include CMakeFiles/DoktorBildPlus.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/DoktorBildPlus.dir/flags.make
 
+qrc_resources.cpp: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/resources.qrc
+qrc_resources.cpp: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/icons/icons8-image-64.png
+qrc_resources.cpp: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/icons/icons8-wallpaper-48.png
+qrc_resources.cpp: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/icons/icons8-wallpaper-96.png
+qrc_resources.cpp: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/icons/appicon.ico
+qrc_resources.cpp: resources.qrc.depends
+qrc_resources.cpp: C:/Qt/6.9.0/mingw_64/bin/rcc.exe
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating qrc_resources.cpp"
+	C:\Qt\6.9.0\mingw_64\bin\rcc.exe --no-zstd --name resources --output D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/qrc_resources.cpp D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/resources.qrc
+
 DoktorBildPlus_autogen/timestamp: C:/Qt/6.9.0/mingw_64/bin/moc.exe
 DoktorBildPlus_autogen/timestamp: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target DoktorBildPlus"
-	"C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/DoktorBildPlus_autogen.dir/AutogenInfo.json ""
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Automatic MOC for target DoktorBildPlus"
+	"C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/DoktorBildPlus_autogen.dir/AutogenInfo.json Debug
 	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/timestamp
 
 CMakeFiles/DoktorBildPlus.dir/codegen:
@@ -81,7 +91,7 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: C
 CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: DoktorBildPlus_autogen/mocs_compilation.cpp
 CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\DoktorBildPlus_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\DoktorBildPlus_autogen\mocs_compilation.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\mocs_compilation.cpp
 
 CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.i: cmake_force
@@ -96,7 +106,7 @@ CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.
 CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp
 CMakeFiles/DoktorBildPlus.dir/main.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DoktorBildPlus.dir/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DoktorBildPlus.dir/main.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/main.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\main.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\main.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\main.cpp
 
 CMakeFiles/DoktorBildPlus.dir/main.cpp.i: cmake_force
@@ -111,7 +121,7 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: CMakeFiles/DoktorBildPlus.dir/
 CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.cpp
 CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\MainWindow.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\MainWindow.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\MainWindow.cpp
 
 CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.i: cmake_force
@@ -126,7 +136,7 @@ CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj: CMakeFiles/DoktorBild
 CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.cpp
 CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\NameShortenDelegate.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\NameShortenDelegate.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\NameShortenDelegate.cpp
 
 CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.i: cmake_force
@@ -141,7 +151,7 @@ CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj: CMakeFiles/DoktorBildPl
 CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.cpp
 CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ThumbnailDelegate.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ThumbnailDelegate.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ThumbnailDelegate.cpp
 
 CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.i: cmake_force
@@ -156,7 +166,7 @@ CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj: CMakeFiles/DoktorBildP
 CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.cpp
 CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ThumbnailGenerator.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ThumbnailGenerator.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ThumbnailGenerator.cpp
 
 CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.i: cmake_force
@@ -171,7 +181,7 @@ CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj: CMakeFiles/DoktorBildPlus
 CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.cpp
 CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\SettingsManager.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\SettingsManager.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\SettingsManager.cpp
 
 CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.i: cmake_force
@@ -186,7 +196,7 @@ CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj: CMakeFiles/DoktorBildPlus.d
 CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.cpp
 CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ExternalTools.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ExternalTools.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ExternalTools.cpp
 
 CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.i: cmake_force
@@ -201,7 +211,7 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: CMakeFiles/DoktorBildPlu
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.cpp
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\MediaViewerPanel.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\MediaViewerPanel.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\MediaViewerPanel.cpp
 
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.i: cmake_force
@@ -211,6 +221,101 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.i: cmake_force
 CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\MediaViewerPanel.cpp -o CMakeFiles\DoktorBildPlus.dir\MediaViewerPanel.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\VideoGraphicsView.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\VideoGraphicsView.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\VideoGraphicsView.cpp
+
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\VideoGraphicsView.cpp > CMakeFiles\DoktorBildPlus.dir\VideoGraphicsView.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\VideoGraphicsView.cpp -o CMakeFiles\DoktorBildPlus.dir\VideoGraphicsView.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ContextMenuManager.cpp
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ContextMenuManager.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ContextMenuManager.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ContextMenuManager.cpp
+
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ContextMenuManager.cpp > CMakeFiles\DoktorBildPlus.dir\ContextMenuManager.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ContextMenuManager.cpp -o CMakeFiles\DoktorBildPlus.dir\ContextMenuManager.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollConfig.cpp
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ScrollConfig.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ScrollConfig.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollConfig.cpp
+
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollConfig.cpp > CMakeFiles\DoktorBildPlus.dir\ScrollConfig.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollConfig.cpp -o CMakeFiles\DoktorBildPlus.dir\ScrollConfig.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/FileOperations.cpp
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\FileOperations.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\FileOperations.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\FileOperations.cpp
+
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\FileOperations.cpp > CMakeFiles\DoktorBildPlus.dir\FileOperations.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\FileOperations.cpp -o CMakeFiles\DoktorBildPlus.dir\FileOperations.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.cpp
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\ScrollNavigator.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\ScrollNavigator.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollNavigator.cpp
+
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollNavigator.cpp > CMakeFiles\DoktorBildPlus.dir\ScrollNavigator.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollNavigator.cpp -o CMakeFiles\DoktorBildPlus.dir\ScrollNavigator.cpp.s
+
+CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/appicon.rc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building RC object CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj"
+	C:\Qt\Tools\mingw1310_64\bin\windres.exe -O coff $(RC_DEFINES) $(RC_INCLUDES) $(RC_FLAGS) D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\appicon.rc CMakeFiles\DoktorBildPlus.dir\appicon.rc.obj
+
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: qrc_resources.cpp
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\qrc_resources.cpp
+
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\qrc_resources.cpp > CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\qrc_resources.cpp -o CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.s
 
 # Object files for target DoktorBildPlus
 DoktorBildPlus_OBJECTS = \
@@ -222,7 +327,14 @@ DoktorBildPlus_OBJECTS = \
 "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj" \
 "CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj" \
 "CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj" \
-"CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj"
+"CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj" \
+"CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
 
 # External object files for target DoktorBildPlus
 DoktorBildPlus_EXTERNAL_OBJECTS =
@@ -236,6 +348,13 @@ DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/build.make
 DoktorBildPlus.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6MultimediaWidgets.a
 DoktorBildPlus.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Widgets.a
@@ -246,7 +365,7 @@ DoktorBildPlus.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Core.a
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/linkLibs.rsp
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/objects1.rsp
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable DoktorBildPlus.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable DoktorBildPlus.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DoktorBildPlus.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -258,6 +377,7 @@ CMakeFiles/DoktorBildPlus.dir/clean:
 .PHONY : CMakeFiles/DoktorBildPlus.dir/clean
 
 CMakeFiles/DoktorBildPlus.dir/depend: DoktorBildPlus_autogen/timestamp
+CMakeFiles/DoktorBildPlus.dir/depend: qrc_resources.cpp
 	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles\DoktorBildPlus.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/DoktorBildPlus.dir/depend
 

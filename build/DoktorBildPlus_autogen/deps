@@ -46,6 +46,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QMutex \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+	C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QQueue \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
@@ -218,6 +219,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QGuiApplication \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QHelpEvent \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform \
@@ -243,6 +245,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qkeysequence.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+	C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qpalette.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qpicture.h \
@@ -277,11 +280,15 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
+	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QGraphicsVideoItem \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QVideoWidget \
+	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qgraphicsvideoitem.h \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
 	C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsScene \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsView \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLineEdit \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QListView \
@@ -289,6 +296,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollArea \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QScrollBar \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSlider \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSpinBox \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QSplitter \
@@ -310,6 +318,9 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsitem.h \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicsview.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h \
@@ -321,6 +332,7 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qrubberband.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollarea.h \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qslider.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qspinbox.h \
@@ -831,23 +843,36 @@ DoktorBildPlus_autogen/timestamp: \
 	C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
 	C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/CMakeLists.txt \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ContextMenuManager.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ContextMenuManager.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ExternalTools.h \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/FileOperations.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/FileOperations.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MainWindow.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/MediaViewerPanel.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/NameShortenDelegate.h \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollConfig.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollConfig.h \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.cpp \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeCXXCompiler.cmake \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeRCCompiler.cmake \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeSystem.cmake \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/moc_predefs.h \
 	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/program-settings.json \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/resources.qrc \
+	D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/window-settings.json \
 	C:/Program\ Files/CMake/bin/cmake.exe

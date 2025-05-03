@@ -1,22 +1,35 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/ExternalTools.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/NameShortenDelegate.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/SettingsManager.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj"
   "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/DoktorBildPlus_autogen.dir/ParseCache.txt"
   "DoktorBildPlus_autogen"
@@ -26,9 +39,10 @@ file(REMOVE_RECURSE
   "DoktorBildPlus_autogen/mocs_compilation.cpp"
   "DoktorBildPlus_autogen/timestamp"
   "libDoktorBildPlus.dll.a"
+  "qrc_resources.cpp"
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang CXX RC)
   include(CMakeFiles/DoktorBildPlus.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

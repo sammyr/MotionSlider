@@ -70,7 +70,7 @@ CMakeFiles/DoktorBildPlus_autogen: DoktorBildPlus_autogen/timestamp
 DoktorBildPlus_autogen/timestamp: C:/Qt/6.9.0/mingw_64/bin/moc.exe
 DoktorBildPlus_autogen/timestamp: CMakeFiles/DoktorBildPlus_autogen.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target DoktorBildPlus"
-	"C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/DoktorBildPlus_autogen.dir/AutogenInfo.json ""
+	"C:\Program Files\CMake\bin\cmake.exe" -E cmake_autogen D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/DoktorBildPlus_autogen.dir/AutogenInfo.json Debug
 	"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autogen/timestamp
 
 CMakeFiles/DoktorBildPlus_autogen.dir/codegen:
