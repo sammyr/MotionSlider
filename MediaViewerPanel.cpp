@@ -16,9 +16,15 @@
 #include <QScrollBar>
 #include <QToolButton>
 #include <QResizeEvent> // Für resizeEvent override
-
-#include <QApplication>
-#include <QMouseEvent>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QMenu>
+#include <QProcess>
+#include <QFileInfo>
+#include <QContextMenuEvent>
+#include <QCursor>
+#include <QLabel> // Hinzugefügt
+#include <QGraphicsVideoItem> // Hinzugefügt
 
 // Neuer Slider, der Klicks auf die Groove an Position springt
 class ClickableSlider : public QSlider {
@@ -38,30 +44,31 @@ protected:
 MediaViewerPanel::MediaViewerPanel(QWidget* parent) : QWidget(parent), zoomFactor(1.0), videoLoopEnabled(false), isPanning(false), mutedEnabled(false) {
     // Lade Lautstärke und Loop-Status aus der Konfigurationsdatei
     double volumeValue = 0.7; // Standardwert
-    
     QFile configFile("build/program-settings.json");
     if(configFile.open(QIODevice::ReadOnly)) {
         QJsonDocument configDoc = QJsonDocument::fromJson(configFile.readAll());
         QJsonObject configObj = configDoc.object();
-        
-        if(configObj.contains("volume"))
-            volumeValue = configObj["volume"].toDouble();
-            
-        if(configObj.contains("videoLoop"))
-            videoLoopEnabled = configObj["videoLoop"].toBool();
-            
-        if(configObj.contains("muted"))
-            mutedEnabled = configObj["muted"].toBool();
-            
+        if(configObj.contains("volume")) volumeValue = configObj["volume"].toDouble();
+        if(configObj.contains("videoLoop")) videoLoopEnabled = configObj["videoLoop"].toBool();
+        if(configObj.contains("muted")) mutedEnabled = configObj["muted"].toBool();
         configFile.close();
     }
-    
+    // Lade Pfade für externe Programme aus program-settings.json
+    QFile rootCfg("program-settings.json");
+    if(rootCfg.open(QIODevice::ReadOnly)) {
+        QJsonObject rootObj = QJsonDocument::fromJson(rootCfg.readAll()).object();
+        if(rootObj.contains("externalPrograms")) {
+            QJsonObject ext = rootObj["externalPrograms"].toObject();
+            externalVideoPlayerPath = ext.value("videoPlayer").toString();
+            externalImageEditorPath = ext.value("imageEditor").toString();
+        }
+        rootCfg.close();
+    }
     // Erstelle MediaPlayer und AudioOutput
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
     mediaPlayer->setAudioOutput(audioOutput);
     connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged, this, &MediaViewerPanel::onMediaStatusChanged);
-    
     setupUI(volumeValue);
 }
 
@@ -88,6 +95,12 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     
+    // Overlay für Dateigröße
+    sizeOverlay = new QLabel(this);
+    sizeOverlay->setStyleSheet("background-color: rgba(0,0,0,128); color: white; padding: 4px; border-radius: 4px;");
+    sizeOverlay->setAttribute(Qt::WA_TransparentForMouseEvents);
+    sizeOverlay->hide();
+
     // Toolbar erstellen
     mediaToolBar = new QToolBar(this);
     mediaToolBar->setMovable(false);
@@ -215,6 +228,8 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     imageScrollArea->viewport()->setMouseTracking(true);
     imageLabel->installEventFilter(this);
     imageLabel->setMouseTracking(true);
+    imageScrollArea->viewport()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(imageScrollArea->viewport(), &QWidget::customContextMenuRequested, this, &MediaViewerPanel::showContextMenu);
     
     // Video-Anzeige mit QGraphicsView und QGraphicsVideoItem
     videoScene = new QGraphicsScene(this);
@@ -225,6 +240,9 @@ void MediaViewerPanel::setupUI(double volumeValue) {
     videoView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     videoView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     mediaPlayer->setVideoOutput(videoItem);
+    videoView->installEventFilter(this); // Klick auf Video toggelt Play/Pause
+    videoView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(videoView, &QWidget::customContextMenuRequested, this, &MediaViewerPanel::showContextMenu);
     // Video initial an Fenster anpassen
     fitVideoToWindow();
     
@@ -312,6 +330,7 @@ void MediaViewerPanel::loadFile(const QString& filePath) {
 }
 
 void MediaViewerPanel::loadImage(const QString& imagePath) {
+    currentFilePath = imagePath;
     // Video stoppen falls läuft
     mediaPlayer->stop();
     videoView->hide();
@@ -327,9 +346,11 @@ void MediaViewerPanel::loadImage(const QString& imagePath) {
     stackedWidget->setCurrentIndex(0);
     imageLabel->show();
     fitImageToWindow();
+    updateSizeOverlay();
 }
 
 void MediaViewerPanel::loadVideo(const QString& videoPath) {
+    currentFilePath = videoPath;
     // Bild ausblenden
     imageLabel->hide();
     mediaToolBar->show();
@@ -342,6 +363,7 @@ void MediaViewerPanel::loadVideo(const QString& videoPath) {
     mediaPlayer->play();
     // Video anpassen
     fitVideoToWindow();
+    updateSizeOverlay();
 }
 
 void MediaViewerPanel::zoomImage(double factor) {
@@ -526,6 +548,22 @@ void MediaViewerPanel::wheelEvent(QWheelEvent *event) {
 
 // Event-Filter für Panning in ScrollArea und Label
 bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
+    if(event->type()==QEvent::ContextMenu && (watched==videoView || watched==imageScrollArea->viewport())) {
+        auto *cme = static_cast<QContextMenuEvent*>(event);
+        QMenu menu;
+        QAction* openFolder = menu.addAction("Im Ordner öffnen");
+        QAction* openPlayer = menu.addAction("Im Player öffnen");
+        QAction* act = menu.exec(cme->globalPos());
+        if(act==openFolder) {
+            // Explorer öffnen und Datei auswählen
+            QString native = QDir::toNativeSeparators(currentFilePath);
+            QProcess::startDetached("explorer", QStringList() << "/select," + native);
+        } else if(act==openPlayer) {
+            QString prog = (stackedWidget->currentIndex()==1) ? externalVideoPlayerPath : externalImageEditorPath;
+            if(!prog.isEmpty()) QProcess::startDetached(prog, QStringList{currentFilePath});
+        }
+        return true;
+    }
     // Wheel-Event für Zoom (kein Scroll)
     if (event->type() == QEvent::Wheel && stackedWidget->currentIndex() == 0) {
         auto *we = static_cast<QWheelEvent*>(event);
@@ -539,29 +577,37 @@ bool MediaViewerPanel::eventFilter(QObject *watched, QEvent *event) {
     // Handle panning only on mouse events
     if ((watched == imageScrollArea || watched == imageScrollArea->viewport() || watched == imageLabel)) {
         QEvent::Type type = event->type();
+        // only handle press, move, release
         if (type == QEvent::MouseButtonPress || type == QEvent::MouseMove || type == QEvent::MouseButtonRelease) {
             auto *me = static_cast<QMouseEvent*>(event);
             QPoint vpPos = imageScrollArea->viewport()->mapFromGlobal(me->globalPosition().toPoint());
-            if (type == QEvent::MouseButtonPress && me->button() == Qt::MiddleButton) {
+            if (type == QEvent::MouseButtonPress && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton)) {
                 isPanning = true;
                 lastPanPoint = vpPos;
                 imageScrollArea->viewport()->setCursor(Qt::ClosedHandCursor);
                 return true;
-            }
-            if (type == QEvent::MouseMove && isPanning) {
+            } else if (type == QEvent::MouseMove && isPanning) {
                 QPoint delta = vpPos - lastPanPoint;
                 lastPanPoint = vpPos;
-                imageScrollArea->horizontalScrollBar()->setValue(
-                    imageScrollArea->horizontalScrollBar()->value() - delta.x());
-                imageScrollArea->verticalScrollBar()->setValue(
-                    imageScrollArea->verticalScrollBar()->value() - delta.y());
+                imageScrollArea->horizontalScrollBar()->setValue(imageScrollArea->horizontalScrollBar()->value() - delta.x());
+                imageScrollArea->verticalScrollBar()->setValue(imageScrollArea->verticalScrollBar()->value() - delta.y());
                 return true;
-            }
-            if (type == QEvent::MouseButtonRelease && me->button() == Qt::MiddleButton && isPanning) {
+            } else if (type == QEvent::MouseButtonRelease && (me->button() == Qt::MiddleButton || me->button() == Qt::LeftButton) && isPanning) {
                 isPanning = false;
                 imageScrollArea->viewport()->setCursor(Qt::ArrowCursor);
                 return true;
             }
+        }
+    }
+    // Klick auf Video-View
+    if (watched == videoView && event->type() == QEvent::MouseButtonPress) {
+        auto *me = static_cast<QMouseEvent*>(event);
+        if (me->button() == Qt::LeftButton) {
+            if (mediaPlayer->playbackState() == QMediaPlayer::PlayingState)
+                mediaPlayer->pause();
+            else
+                mediaPlayer->play();
+            return true;
         }
     }
     return QWidget::eventFilter(watched, event);
@@ -575,6 +621,7 @@ void MediaViewerPanel::resizeEvent(QResizeEvent* event) {
     } else if (stackedWidget->currentIndex() == 1) {
         fitVideoToWindow();
     }
+    if(sizeOverlay) updateSizeOverlay();
 }
 
 // Bild skaliert auf verfügbare Viewport-Größe bei Erhalt des Seitenverhältnisses
@@ -609,4 +656,47 @@ void MediaViewerPanel::mouseMoveEvent(QMouseEvent *event) {
 
 void MediaViewerPanel::mouseReleaseEvent(QMouseEvent *event) {
     QWidget::mouseReleaseEvent(event);
+}
+
+void MediaViewerPanel::showContextMenu(const QPoint &pos) {
+    Q_UNUSED(pos)
+    QPoint globalPos = QCursor::pos();
+    QMenu menu;
+    QAction* openFolder = menu.addAction("Im Ordner öffnen");
+    QAction* openPlayer = menu.addAction("Im Player öffnen");
+    QAction* act = menu.exec(globalPos);
+    if (act == openFolder) {
+        // Explorer öffnen und Datei auswählen
+        QString native = QDir::toNativeSeparators(currentFilePath);
+        QProcess::startDetached("explorer", QStringList() << "/select," + native);
+    } else if (act == openPlayer) {
+        QString prog = (stackedWidget->currentIndex() == 1) ? externalVideoPlayerPath : externalImageEditorPath;
+        if (!prog.isEmpty())
+            QProcess::startDetached(prog, QStringList{currentFilePath});
+    }
+}
+
+// Fügt Dateigröße-Overlay hinzu bzw. aktualisiert es
+typedef long long ll;
+void MediaViewerPanel::updateSizeOverlay() {
+    if(currentFilePath.isEmpty() || !sizeOverlay) return;
+    QFileInfo fi(currentFilePath);
+    ll bytes = fi.size();
+    double kb = bytes/1024.0;
+    QString sizeText = (kb<1024) ? QString("%1 KB").arg(kb,0,'f',1) : QString("%1 MB").arg(kb/1024.0,0,'f',1);
+    // Auflösung ermitteln
+    QSize res;
+    if (stackedWidget->currentIndex() == 0) res = originalPixmap.size();
+    else if (videoItem) res = static_cast<QGraphicsVideoItem*>(videoItem)->size().toSize();
+    // Kombiniertes Info-Text: Größe, Pfad, Auflösung
+    QString info = QString("%1\n%2\n%3 x %4 px").arg(sizeText).arg(fi.absoluteFilePath()).arg(res.width()).arg(res.height());
+    sizeOverlay->setText(info);
+    sizeOverlay->adjustSize();
+    QWidget* pw = (stackedWidget->currentIndex() == 0) ? imageScrollArea->viewport() : videoView;
+    sizeOverlay->setParent(pw);
+    sizeOverlay->raise();
+    int x = pw->width() - sizeOverlay->width() - 10;
+    int y = 10;
+    sizeOverlay->move(x, y);
+    sizeOverlay->show();
 }

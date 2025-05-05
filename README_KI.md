@@ -1,15 +1,15 @@
-# DoktorBildPlus – KI-freundliche Projektdokumentation
+# Bildblick – KI-freundliche Projektdokumentation
 
 ## Projektüberblick
 
-**DoktorBildPlus** ist eine C++/Qt-Anwendung zum Anzeigen von Bildern und Videos. Sie verwendet Qt6 (Widgets, Multimedia, MultimediaWidgets) und ist für Windows 10 mit MinGW 13.1.0 gebaut. Die Anwendung unterstützt Datei-Öffnen-Dialoge und zeigt Medien direkt im Hauptfenster an.
+**Bildblick** ist eine C++/Qt-Anwendung zum Anzeigen von Bildern und Videos. Sie verwendet Qt6 (Widgets, Multimedia, MultimediaWidgets) und ist für Windows 10 mit MinGW 13.1.0 gebaut. Die Anwendung unterstützt Datei-Öffnen-Dialoge und zeigt Medien direkt im Hauptfenster an.
 
 ---
 
 ## Projektstruktur (Dateiübersicht)
 
 ```
-DoktorBildPlus/
+Bildblick/
 │
 ├── build/                    # Build-Ordner, enthält die lauffähige EXE & alle DLLs/Plugins
 ├── main.cpp                  # Einstiegspunkt, startet QApplication und MainWindow
@@ -28,12 +28,12 @@ DoktorBildPlus/
 - **CMakeLists.txt**: Legt Projekt, Qt6-Abhängigkeiten, Build-Optionen und Automoc fest. Beispiel:
   ```cmake
   cmake_minimum_required(VERSION 3.5)
-  project(DoktorBildPlus LANGUAGES CXX)
+  project(Bildblick LANGUAGES CXX)
   set(CMAKE_CXX_STANDARD 17)
   find_package(Qt6 COMPONENTS Widgets Multimedia MultimediaWidgets REQUIRED)
   set(CMAKE_AUTOMOC ON)
-  add_executable(DoktorBildPlus main.cpp MainWindow.cpp)
-  target_link_libraries(DoktorBildPlus Qt6::Widgets Qt6::Multimedia Qt6::MultimediaWidgets)
+  add_executable(Bildblick main.cpp MainWindow.cpp)
+  target_link_libraries(Bildblick Qt6::Widgets Qt6::Multimedia Qt6::MultimediaWidgets)
   ```
 
 ---
@@ -59,13 +59,13 @@ DoktorBildPlus/
 
 4. **Qt-Deployment (DLLs & Plugins kopieren)**
    ```powershell
-   & "C:\Qt\6.9.0\mingw_64\bin\windeployqt.exe" "D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus.exe"
+   & "C:\Qt\6.9.0\mingw_64\bin\windeployqt.exe" "D:\___SYSTEM\Desktop\_NPM\Doktor_Video\Bildblick\build\Bildblick.exe"
    ```
    - Kopiert alle nötigen DLLs und Qt-Plugins (wie qwindows.dll) automatisch in den Build-Ordner.
 
 5. **Starten**
    ```powershell
-   .\build\DoktorBildPlus.exe
+   .\build\Bildblick.exe
    ```
 
 ---

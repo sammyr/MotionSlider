@@ -33,8 +33,9 @@ void ThumbnailDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
 
     
     // Thumbnail-Pfad berechnen
-    QString thumbPath = QCoreApplication::applicationDirPath() + "/thumbnails/" + 
-                      info.completeBaseName() + "_" + info.suffix().toLower() + "_thumb.png";
+    QString appDir = QCoreApplication::applicationDirPath() + "/thumbnails/";
+    uint pathHash = qHash(info.absoluteFilePath());
+    QString thumbPath = appDir + info.completeBaseName() + '_' + QString::number(pathHash) + '_' + info.suffix().toLower() + "_thumb.png";
     
     if (QFile::exists(thumbPath)) {
         // Thumbnail laden

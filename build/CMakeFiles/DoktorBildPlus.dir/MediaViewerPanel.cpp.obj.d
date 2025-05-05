@@ -549,4 +549,15 @@ CMakeFiles/DoktorBildPlus.dir/MediaViewerPanel.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QUrl \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qurl.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMenu \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmenu.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QContextMenuEvent \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QCursor \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h

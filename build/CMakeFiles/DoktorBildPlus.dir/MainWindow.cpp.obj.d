@@ -643,6 +643,9 @@ CMakeFiles/DoktorBildPlus.dir/MainWindow.cpp.obj: \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollConfig.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QtGlobal \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qglobal.h \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\about.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\NameShortenDelegate.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/QVideoWidget \
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \

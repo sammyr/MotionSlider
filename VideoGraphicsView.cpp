@@ -2,6 +2,7 @@
 #include <QWheelEvent>
 #include <cmath>
 #include <QCursor>
+#include <QMouseEvent>
 
 VideoGraphicsView::VideoGraphicsView(QGraphicsScene* scene, QWidget* parent)
     : QGraphicsView(scene, parent)
@@ -21,7 +22,7 @@ void VideoGraphicsView::wheelEvent(QWheelEvent* event) {
 }
 
 void VideoGraphicsView::mousePressEvent(QMouseEvent* event) {
-    if (event->button() == Qt::MiddleButton) {
+    if (event->button() == Qt::MiddleButton || event->button() == Qt::LeftButton) {
         isPanning = true;
         lastPanPoint = event->pos();
         setCursor(Qt::ClosedHandCursor);
@@ -32,7 +33,7 @@ void VideoGraphicsView::mousePressEvent(QMouseEvent* event) {
 }
 
 void VideoGraphicsView::mouseMoveEvent(QMouseEvent* event) {
-    if (isPanning && (event->buttons() & Qt::MiddleButton)) {
+    if (isPanning && (event->buttons() & (Qt::MiddleButton | Qt::LeftButton))) {
         QPoint delta = event->pos() - lastPanPoint;
         lastPanPoint = event->pos();
         horizontalScrollBar()->setValue(horizontalScrollBar()->value() - delta.x());
@@ -44,7 +45,7 @@ void VideoGraphicsView::mouseMoveEvent(QMouseEvent* event) {
 }
 
 void VideoGraphicsView::mouseReleaseEvent(QMouseEvent* event) {
-    if (event->button() == Qt::MiddleButton && isPanning) {
+    if ((event->button() == Qt::MiddleButton || event->button() == Qt::LeftButton) && isPanning) {
         isPanning = false;
         setCursor(Qt::ArrowCursor);
         event->accept();

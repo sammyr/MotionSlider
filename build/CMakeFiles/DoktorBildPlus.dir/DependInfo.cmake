@@ -57,6 +57,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailDelegate.cpp" "CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/ThumbnailDelegate.cpp.obj.d"
   "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.cpp" "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj.d"
   "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp" "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj.d"
+  "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp" "CMakeFiles/DoktorBildPlus.dir/about.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/about.cpp.obj.d"
   "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/main.cpp" "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj.d"
   "D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/qrc_resources.cpp" "CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj" "gcc" "CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj.d"
   )

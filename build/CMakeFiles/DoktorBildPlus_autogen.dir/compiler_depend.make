@@ -290,6 +290,7 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsView \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
@@ -870,6 +871,8 @@ DoktorBildPlus_autogen/timestamp: C:/Program\ Files/CMake/bin/cmake.exe \
   D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h \
   D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp \
   D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.h \
+  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp \
+  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.h \
   CMakeFiles/4.0.1/CMakeCXXCompiler.cmake \
   CMakeFiles/4.0.1/CMakeRCCompiler.cmake \
   CMakeFiles/4.0.1/CMakeSystem.cmake \
@@ -1854,8 +1857,6 @@ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qscrollbar.h:
 
-C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateDependencies.cmake:
-
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6/QtPublicSbomFileHelpers.cmake:
@@ -1885,6 +1886,8 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QGifPluginConfig.cmake:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Core/Qt6CoreConfigVersionImpl.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaWidgets/Qt6MultimediaWidgetsConfigVersionImpl.cmake:
 
@@ -1933,6 +1936,8 @@ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractitemview.h:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Gui/Qt6QMinimalIntegrationPluginTargets-relwithdebinfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractspinbox.h:
+
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h:
 
@@ -2203,6 +2208,8 @@ C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginConfig.cmake:
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateAdditionalTargetInfo.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateConfigVersionImpl.cmake:
+
+C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateDependencies.cmake:
 
 C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6MultimediaPrivate/Qt6MultimediaPrivateVersionlessAliasTargets.cmake:
 
@@ -2627,6 +2634,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ScrollNavigator.cpp:
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/SettingsManager.cpp:
 
 D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp:
+
+D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp:
 
 CMakeFiles/4.0.1/CMakeCXXCompiler.cmake:
 

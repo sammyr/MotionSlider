@@ -291,6 +291,7 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h
  C:/Qt/6.9.0/mingw_64/include/QtMultimediaWidgets/qvideowidget.h
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsScene
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsView
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel
@@ -871,6 +872,8 @@ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/DoktorBildPlus_autog
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/ThumbnailGenerator.h
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.h
+ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp
+ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.h
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeCXXCompiler.cmake
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeRCCompiler.cmake
  D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/build/CMakeFiles/4.0.1/CMakeSystem.cmake

@@ -1,8 +1,8 @@
-# Dokumentation: Thumbnail-Generierung in DoktorBildPlus
+# Dokumentation: Thumbnail-Generierung in Bildblick
 
 ## Überblick
 
-Die Thumbnail-Generierung ist ein zentraler Bestandteil der DoktorBildPlus Anwendung. Sie ermöglicht das Anzeigen von Vorschaubildern für Bild- und Videodateien in der Dateiliste. Diese Dokumentation erklärt detailliert, wie der Prozess funktioniert.
+Die Thumbnail-Generierung ist ein zentraler Bestandteil der Bildblick Anwendung. Sie ermöglicht das Anzeigen von Vorschaubildern für Bild- und Videodateien in der Dateiliste. Diese Dokumentation erklärt detailliert, wie der Prozess funktioniert.
 
 ## Architektur und Klassendesign
 

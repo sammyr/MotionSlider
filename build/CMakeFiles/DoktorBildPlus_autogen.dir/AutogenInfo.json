@@ -451,6 +451,12 @@
 			"Mu",
 			"EWIEGA46WW/moc_VideoGraphicsView.cpp",
 			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.h",
+			"Mu",
+			"EWIEGA46WW/moc_about.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -586,6 +592,11 @@
 		],
 		[
 			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/VideoGraphicsView.cpp",
+			"Mu",
+			null
+		],
+		[
+			"D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp",
 			"Mu",
 			null
 		],

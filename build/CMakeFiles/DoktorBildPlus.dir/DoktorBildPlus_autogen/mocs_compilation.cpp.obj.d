@@ -617,4 +617,8 @@ CMakeFiles/DoktorBildPlus.dir/DoktorBildPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtooltip.h \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_ScrollNavigator.cpp \
  D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_ThumbnailGenerator.cpp \
- D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_VideoGraphicsView.cpp
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_VideoGraphicsView.cpp \
+ D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\DoktorBildPlus_autogen\EWIEGA46WW/moc_about.cpp \
+ D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h

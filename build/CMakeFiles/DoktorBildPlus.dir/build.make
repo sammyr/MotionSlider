@@ -297,16 +297,31 @@ CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\ScrollNavigator.cpp -o CMakeFiles\DoktorBildPlus.dir\ScrollNavigator.cpp.s
 
+CMakeFiles/DoktorBildPlus.dir/about.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
+CMakeFiles/DoktorBildPlus.dir/about.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
+CMakeFiles/DoktorBildPlus.dir/about.cpp.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/about.cpp
+CMakeFiles/DoktorBildPlus.dir/about.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/DoktorBildPlus.dir/about.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/about.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\about.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\about.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\about.cpp
+
+CMakeFiles/DoktorBildPlus.dir/about.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DoktorBildPlus.dir/about.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\about.cpp > CMakeFiles\DoktorBildPlus.dir\about.cpp.i
+
+CMakeFiles/DoktorBildPlus.dir/about.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DoktorBildPlus.dir/about.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\about.cpp -o CMakeFiles\DoktorBildPlus.dir\about.cpp.s
+
 CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
 CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj: D:/___SYSTEM/Desktop/_NPM/Doktor_Video/DoktorBildPlus/appicon.rc
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building RC object CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building RC object CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj"
 	C:\Qt\Tools\mingw1310_64\bin\windres.exe -O coff $(RC_DEFINES) $(RC_INCLUDES) $(RC_FLAGS) D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\appicon.rc CMakeFiles\DoktorBildPlus.dir\appicon.rc.obj
 
 CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/flags.make
 CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/includes_CXX.rsp
 CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: qrc_resources.cpp
 CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj: CMakeFiles/DoktorBildPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj -MF CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.obj.d -o CMakeFiles\DoktorBildPlus.dir\qrc_resources.cpp.obj -c D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\qrc_resources.cpp
 
 CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.i: cmake_force
@@ -333,6 +348,7 @@ DoktorBildPlus_OBJECTS = \
 "CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj" \
 "CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj" \
 "CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj" \
+"CMakeFiles/DoktorBildPlus.dir/about.cpp.obj" \
 "CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj" \
 "CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj"
 
@@ -353,6 +369,7 @@ DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ContextMenuManager.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ScrollConfig.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/FileOperations.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/ScrollNavigator.cpp.obj
+DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/about.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/qrc_resources.cpp.obj
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/build.make
@@ -365,7 +382,7 @@ DoktorBildPlus.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Core.a
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/linkLibs.rsp
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/objects1.rsp
 DoktorBildPlus.exe: CMakeFiles/DoktorBildPlus.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable DoktorBildPlus.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\___SYSTEM\Desktop\_NPM\Doktor_Video\DoktorBildPlus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable DoktorBildPlus.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DoktorBildPlus.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

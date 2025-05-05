@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoktorBildPlus.dir/ThumbnailGenerator.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/VideoGraphicsView.cpp.obj.d"
+  "CMakeFiles/DoktorBildPlus.dir/about.cpp.obj"
+  "CMakeFiles/DoktorBildPlus.dir/about.cpp.obj.d"
   "CMakeFiles/DoktorBildPlus.dir/appicon.rc.obj"
   "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj"
   "CMakeFiles/DoktorBildPlus.dir/main.cpp.obj.d"

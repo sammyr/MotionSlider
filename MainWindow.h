@@ -41,6 +41,8 @@ protected:
 private slots:
     void openFile();
 
+private slots:
+    void showAboutDialog();
 private:
     QSplitter* mainSplitter;
     MediaViewerPanel* mediaPanel; // Neue Medien-Anzeige-Komponente

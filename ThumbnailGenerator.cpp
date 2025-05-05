@@ -82,8 +82,9 @@ bool ThumbnailWorker::generateThumbnailForFile(const QString& filePath) {
     }
     
     QString ext = info.suffix().toLower();
-    QString thumbPath = QCoreApplication::applicationDirPath() + "/thumbnails/" + 
-                      info.completeBaseName() + "_" + ext + "_thumb.png";
+    QString appDir = QCoreApplication::applicationDirPath() + "/thumbnails/";
+    uint pathHash = qHash(info.absoluteFilePath());
+    QString thumbPath = appDir + info.completeBaseName() + '_' + QString::number(pathHash) + '_' + ext + "_thumb.png";
     
     // Überprüfen, ob das Thumbnail bereits existiert
     if (QFile::exists(thumbPath)) {
@@ -291,8 +292,9 @@ void ThumbnailGenerator::startThumbnailGeneration(QListView* folderView, QFileSy
             continue;
         }
         // Thumbnail-Pfad berechnen
-        QString thumbPath = QCoreApplication::applicationDirPath() + "/thumbnails/" + 
-                         info.completeBaseName() + "_" + ext + "_thumb.png";
+        QString appDir = QCoreApplication::applicationDirPath() + "/thumbnails/";
+        uint pathHash = qHash(info.absoluteFilePath());
+        QString thumbPath = appDir + info.completeBaseName() + '_' + QString::number(pathHash) + '_' + ext + "_thumb.png";
         
         // qDebug entfernt "[ThumbnailGenerator] Datei gefunden:" << info.filePath();
         // Nur Dateien ohne vorhandenes Thumbnail hinzufügen

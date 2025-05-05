@@ -33,6 +33,7 @@
 #include <QLabel>
 #include <QDebug>
 #include "ScrollConfig.h"
+#include "about.h"
 
 #include "NameShortenDelegate.h"
 #include "ThumbnailDelegate.h"
@@ -54,6 +55,14 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setWindowIcon(QIcon(":/icons/appicon.ico")); // Icon aus Qt-Resource setzen
+    setWindowTitle("Bildblick");
+
+    // Menüleiste: Datei-Menü zuerst, Hilfe-Menü an zweiter Stelle
+    QMenu* fileMenu = menuBar()->addMenu(tr("&Datei"));
+    fileMenu->addAction(tr("&Öffnen..."), this, &MainWindow::openFile);
+    QMenu* helpMenu = menuBar()->addMenu(tr("&Hilfe"));
+    QAction* aboutAction = helpMenu->addAction(tr("Über ..."));
+    connect(aboutAction, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
     // Initialisiere optionale Views
     folderContentView = nullptr;
@@ -68,9 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     progressBar->setVisible(false);
     statusBar()->addPermanentWidget(progressBar);
     historyIndex = -1;
-    // Menü
-    QMenu *fileMenu = menuBar()->addMenu(tr("&Datei"));
-    fileMenu->addAction(tr("&Öffnen..."), this, &MainWindow::openFile);
+    // Menü bleibt: Datei zuerst, Hilfe danach.
 
     // QStyle nur einmal deklarieren
     QStyle *style = QApplication::style();
@@ -107,8 +114,8 @@ MainWindow::MainWindow(QWidget *parent)
     upButton->setIcon(style->standardIcon(QStyle::SP_FileDialogToParent));
     upButton->setToolTip("Nach oben");
     upButton->setAutoRaise(true);
-    upButton->setIconSize(QSize(32,32));
-    upButton->setFixedSize(36,36);
+    upButton->setIconSize(QSize(40,40));
+    upButton->setFixedSize(50,50);
     toolbarLayout->addWidget(upButton);
     connect(upButton, &QToolButton::clicked, this, &MainWindow::onUpButtonClicked);
     driveComboBox = new QComboBox;
@@ -629,6 +636,9 @@ void MainWindow::generateThumbnailsForCurrentFolder() {
     QModelIndex rootIdx = folderView->rootIndex();
     QString path = folderModel->filePath(rootIdx);
     if (m_thumbnailGenerator && m_thumbnailDelegate) {
+        if (m_thumbnailGenerator->isGenerating()) {
+            m_thumbnailGenerator->stopThumbnailGeneration();
+        }
         m_thumbnailGenerator->startThumbnailGeneration(folderView, folderModel, m_thumbnailDelegate);
     }
 }
@@ -666,4 +676,9 @@ void MainWindow::pasteItems() {
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event) {
     return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::showAboutDialog() {
+    AboutDialog dlg(this);
+    dlg.exec();
 }

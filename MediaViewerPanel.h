@@ -45,6 +45,9 @@ public:
     void zoomImage(double factor);
     
 private:
+    // Overlay für die Dateigröße
+    QLabel* sizeOverlay = nullptr;
+
     // UI-Komponenten
     QStackedWidget* stackedWidget = nullptr;
     QLabel* imageLabel = nullptr;
@@ -76,12 +79,20 @@ private:
     bool videoLoopEnabled = false; // Status für Loop-Funktion
     bool isPanning = false;
     QPoint lastPanPoint;
+    QString externalVideoPlayerPath; // Pfad zum externen Video-Player aus program-settings.json
+    QString externalImageEditorPath; // Pfad zum externen Bild-Editor aus program-settings.json
 
     // UI initialisieren
     void setupUI(double volumeValue = 0.7);
     void setupVideoToolbar();
     void setupImageToolbar();
     void clearToolbar();
+
+    // Aktualisiert Position und Größe des Overlays
+    void updateSizeOverlay();
+
+signals:
+    void customContextMenuRequested(const QPoint &pos);
 
 private slots:
     void onLoopToggled(bool checked);
@@ -94,6 +105,7 @@ private slots:
     void onCopyImage();
     void onVolumeChanged(int value);
     void onMediaStateChanged(QMediaPlayer::PlaybackState state);
+    void showContextMenu(const QPoint &pos);  // Rechtsklick-Menü
 
 protected:
     // Fenstergröße oder Splitter bewegt

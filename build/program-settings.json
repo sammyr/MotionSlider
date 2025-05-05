@@ -7,16 +7,15 @@
     },
     "fileInfoUrlBase": "https://fetlife.com/",
     "iconSize": 164,
-    "lastDirectory": "F:/",
+    "lastDirectory": "F:/__MIDI COMPOSING",
     "lastDrive": "D:/",
-    "muted": false,
     "screenshotsPath": "D:/___SYSTEM/Desktop",
     "scrollSplitPercent": 70,
     "sortDirection": "desc",
-    "sortOrder": "size",
+    "sortOrder": "date",
     "splitter": [
-        682,
-        884
+        671,
+        895
     ],
     "supportedImageTypes": [
         ".jpg",
@@ -39,13 +38,13 @@
         ".m4a",
         ".mpg"
     ],
-    "thumbnailSpacing": 24,
+    "thumbnailSpacing": 14,
     "videoLoop": true,
     "volume": 0,
     "window": {
         "height": 952,
         "width": 1586,
-        "x": 784,
-        "y": 316
+        "x": 1015,
+        "y": 360
     }
 }
